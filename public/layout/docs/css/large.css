@@ -1,0 +1,51 @@
+
+#nomeInicial{
+    font-size:50px;
+}
+
+
+table{
+    text-align:center;
+    margin-left:-1%;
+    width:101%;
+    height:63.8em;
+}
+
+
+table h1 {
+    font-size:90px;
+}
+
+table h2 {
+    font-size:50px;
+}
+ table h3{
+    color:black;
+}
+
+tr td{
+    font-family: 'Anton', sans-serif;
+    color:#0000FF;
+
+
+}
+
+
+.bordaSuperior {
+    width:100%;
+    padding: 2.0%;
+    background-color: #0174DF;
+    color: #FFFFFF;
+    font-size: 250%;
+    border-bottom: 0.1px solid black;
+    
+    }
+
+
+
+    
+#botaoTelaNormal{
+    margin-left:90%;
+    margin-top:-4%;
+
+}
