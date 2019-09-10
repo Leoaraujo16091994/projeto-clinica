@@ -60,16 +60,34 @@
           <th>Total de Faltas </th>
           <th>Total de Sessões</th>
         </tr>
-
-        <tr>
+<!--
+        <tr>   
         @foreach($paciente as $pac)
           <td> {{$pac->nome_completo}} </td>
-          @foreach($paciente as $pac)
-          <td>{{ \Carbon\Carbon::parse($pac->created_at)->format('d/m/Y')}}  </td>
-          @endforeach
+            @foreach($paciente as $pac)
+              <td>{{ \Carbon\Carbon::parse($pac->created_at)->format('d/m/Y')}}  </td> 
+              
+            @endforeach 
         </tr>
-        @endforeach          
-    </table>
+          @endforeach
+    </table>    
+-->
+
+
+        <tr>   
+          @foreach($paciente as $pac)
+            <td> {{$pac->nome_completo}} </td>
+            @foreach($paciente as $pac)
+              
+                  <td>{{ \Carbon\Carbon::parse($pac->created_at)->format('d/m/Y')}}  </td> 
+                @endforeach         
+        </tr>
+        @endforeach
+    </table>    
+
+
+  
+
 
           {{$totalSessoes}}
     
