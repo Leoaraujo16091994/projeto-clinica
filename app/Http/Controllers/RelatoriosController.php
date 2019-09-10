@@ -104,8 +104,7 @@ class RelatoriosController extends Controller
      
         
         $totalSessoes= count($paciente);
-
-        dd($paciente);
+        
                                 
     return view ('/relatorioPronto', ['paciente' => $paciente],
                                      ['totalSessoes' => $totalSessoes]
