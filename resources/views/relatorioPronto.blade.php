@@ -80,7 +80,7 @@
             @foreach($paciente as $pac)
               
                   <td>{{ \Carbon\Carbon::parse($pac->created_at)->format('d/m/Y')}}  </td> 
-                @endforeach         
+                  @endforeach         
         </tr>
         @endforeach
     </table>    
