@@ -89,27 +89,42 @@ class RelatoriosController extends Controller
 
         $dataInicial = $request-> dataInicial;
         $dataFinal = $request-> dataFinal;
-    /*    $paciente = Chamada::select('nome_completo','created_at')
-                            ->groupBy('nome_completo')
-                            ->whereBetween('created_at',array($dataInicial,$dataFinal))
-                            ->get();
-*/
+      
 
-        $paciente = Chamada::select('nome_completo','created_at')
-                                ->groupBy('nome_completo','created_at')
-                                ->whereBetween('created_at',array($dataInicial,$dataFinal))
-                                ->where('nome_completo','Leonardo Amancio de Araujo')
-                                ->get();
+        $resultado = [];
+        foreach (Pacientes::all() as $key => $paciente) {
+            $datasChamadas = Chamada::select('created_at')
+                                    ->where('nome_completo',$paciente->nome_completo)
+                                    ->whereBetween('created_at',array($dataInicial, $dataFinal))
+                                    ->groupBy('created_at')
+                                    ->orderBy('created_at')
+                                    ->get();
 
-     
+
+                                    
+            for($i = 1 ; $i <= cal_days_in_month(CAL_GREGORIAN, 9,2019);$i++) {
+                if ($i) {
+
+                }
+            }
         
-        $totalSessoes= count($paciente);
-        
-                                
-    return view ('/relatorioPronto', ['paciente' => $paciente],
-                                     ['totalSessoes' => $totalSessoes]
-                                    );
+            if(count($datasChamadas) > 0 ){
+                array_push($resultado, [
+                    'nome_paciente' => $paciente->nome_completo,
+                    'datas' => $datasChamadas
+                    ]);
 
+            }
+        }
+       
+
+
+        $mes = date('m');
+        $ano = date('Y');
+
+
+        return view ('/relatorioPronto',['pacientes'=> $resultado],compact('mes','ano'));
 
     }
+
 }

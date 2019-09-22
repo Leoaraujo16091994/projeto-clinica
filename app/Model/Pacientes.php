@@ -6,8 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pacientes extends Model
 {
-   protected $table = 'pacientes';
-    protected  $fillable =[
+  protected $table = 'pacientes';
+
+  protected  $fillable =[
       'nome_completo',
       'data_nascimento',
       'convenio_paciente',
@@ -21,4 +22,9 @@ class Pacientes extends Model
       'sabado'
 
   ];
+
+  public function chamadas()
+  {
+    return $this->hasMany('App\Model\Chamada', 'nome_completo', 'nome_completo');
+  }
 }
