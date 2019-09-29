@@ -17,8 +17,6 @@
 
 
 
-
-
 <table class="table table-bordered">
   <thead>
     <th>Nome</th>
