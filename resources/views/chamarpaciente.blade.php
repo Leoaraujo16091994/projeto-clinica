@@ -30,6 +30,12 @@
           <input type="text" class="form-control" placeholder="Número da Sala" id="sala"  name = "sala" required><br>
 
         <br>
+        
+
+<label>Tipo </label><br>
+
+<input type = "checkbox" name ="chamada" value = 'T'> Troca 
+<input type = "checkbox" name ="chamada" value = 'E'> Extra 	<br>
       </form>       
         
           
@@ -53,6 +59,41 @@
     }
 
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <table class="table table-bordered">
+        <thead>
+            <caption>Monthly savings</caption>
+              <th>Nome</th>
+              <th> Chegou</th>
+              <th> Chamado  </th>
+              <th> Ação  </th>
+        </thead>
+        
+        <tbody>
+              @foreach($pacientes as $paciente)
+              <tr>
+                <td>{{$paciente->nome_completo}}</td>
+              </tr>
+              @endforeach
+        <tbody>
+    </table>
 
 
 
@@ -94,6 +135,7 @@
     margin-top:-50%;
   }
 
+  
 
 </style>
 

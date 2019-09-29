@@ -116,19 +116,6 @@
 
                 @endif
             
-<!--
-
-                <label>  Status Do Paciente  </label>   <br>
-                    <input type="checkbox"> Em Tratamento       <br>
-                    <input type="checkbox"> Obito               <br>
-                    <input type="checkbox" > Trânsito           <br>
-                    <input type="checkbox" > Abandono           <br>
-                    <input type="checkbox" > Transferido        <br>
-                    <input type="checkbox" > Internado          <br>
-                    <input type="checkbox" > Recuperou Função   <br>
-    -->   
-
-           
 
         <div id ="botaovoltar">
             <form action = "consultarpaciente">
@@ -136,6 +123,15 @@
             <form>
         </div>
         
+        <div id ="botaoEditar">
+            <form action = "">
+                <button class="btn btn-info btn-lg" >   Voltar	</button>
+            <form>
+        </div>
+        
+
+
+
        
            </div>
     </div>

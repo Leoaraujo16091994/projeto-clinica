@@ -16,6 +16,7 @@ class Chamada extends Migration
         Schema::create('chamada', function (Blueprint $table) {
             $table->string('nome_completo');
             $table->string('sala');            
+            $table->string('status');
             $table->timestamps();
         });
     }

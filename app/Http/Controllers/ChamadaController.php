@@ -9,18 +9,14 @@ use App\Model\Pacientes;
 
 class ChamadaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {/*
+
+    public function create()
+    {
         date_default_timezone_set('America/Fortaleza');
         $diaSemana = null;
         switch (date('w')) {
             case '0':
-                $diaSemana = 'domingo';
+                $diaSemana = 'segunda_feira';
                 break;
             case '1':
                 $diaSemana = 'segunda_feira';
@@ -42,36 +38,45 @@ class ChamadaController extends Controller
                 break;
         }
 
-        $pacientesPresentes = Pacientes::select('id', 'nome_completo')->where($diaSemana, 'on')->get();
+
+
+        $pacientesPresentes = Pacientes::select('id', 'nome_completo')
+                                        ->where($diaSemana, 'on')
+                                        ->get();
+
+
+        $chegaram = Chegada::select('nome_completo')
+                            ->where('nome_completo',$pacientesPresentes)
+                            ->get();
+
+
         return view ('chamarpaciente',['pacientes'=> $pacientesPresentes]);
-        return view ('chamarpaciente');
-        */
+        
+
+
+
+
+       
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view ('chamarpaciente');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+  
     public function store(Request $request)
     {
         $nome = $request -> nomeCompleto;
         $sala = $request -> sala;
+        $atend = $request -> chamada;
+
+
+
+       if($atend == NULL)
+            $atend = 'P';
+
+
 
         $paciente = new Chamada([
             'nome_completo' => $nome,
             'sala' => $sala,
+            'status' => $atend,
             
             ]);
 
@@ -81,60 +86,16 @@ class ChamadaController extends Controller
      
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-   
    
     public function exibirpainel(Request $request)
     {
-       // $count = Chamada::all()->count();   
+
         $paciente = Chamada::select('nome_completo','sala')
                             ->orderByRaw('created_at DESC')
                             ->get();
 
         return view('/painel',compact('paciente'));
+
     }
 
     
@@ -142,7 +103,6 @@ class ChamadaController extends Controller
     
     public function paineltelacheia()
     {
-        //$count = Chamada::all()->count();   
         $paciente = Chamada::select('nome_completo','sala')
                             -> orderByRaw('created_at DESC')
                             ->get();

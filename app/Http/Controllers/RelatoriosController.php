@@ -101,7 +101,15 @@ class RelatoriosController extends Controller
                                     ->get();
 
 
-                                    
+            $status = Chamada::select('status')
+                                ->where('nome_completo',$paciente->nome_completo)
+                                ->whereBetween('created_at',array($dataInicial, $dataFinal))
+                                ->groupBy('created_at')
+                                ->orderBy('created_at')
+                                ->get();
+
+
+
             for($i = 1 ; $i <= cal_days_in_month(CAL_GREGORIAN, 9,2019);$i++) {
                 if ($i) {
 
@@ -111,13 +119,13 @@ class RelatoriosController extends Controller
             if(count($datasChamadas) > 0 ){
                 array_push($resultado, [
                     'nome_paciente' => $paciente->nome_completo,
-                    'datas' => $datasChamadas
+                    'datas' => $datasChamadas,
+                    'status' => $status
                     ]);
 
             }
         }
-       
-
+      
 
         $mes = date('m');
         $ano = date('Y');

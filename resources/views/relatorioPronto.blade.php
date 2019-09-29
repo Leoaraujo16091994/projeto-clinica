@@ -26,7 +26,7 @@
       <th>{{$i}}</th>
     @endfor
 
-    <th> Total de Extras</th>
+          <th> Total de Extras</th>
           <th>Total de Faltas </th>
           <th>Total de Sessões</th>
         </tr>
@@ -35,51 +35,44 @@
     
     <tbody>
 
-      
     @foreach($pacientes as $paciente)
           <tr>
             <td>
               {{$paciente['nome_paciente']}}
             </td>
             
-
-              @for($i = 1 ; $i <= cal_days_in_month(CAL_GREGORIAN,$mes,$ano);$i++)
+          @for($i = 1 ,$x= 0 ,$f=0, $e = 0 ; $i <= cal_days_in_month(CAL_GREGORIAN,$mes,$ano);$i++)
                   @foreach($paciente['datas'] as $data)
-                      
                       @if( Carbon\Carbon::parse($data->created_at)->format('d') == $i )
-                          <td> P </td>
-                        <?php   $i++    ?>
+                          <?php 
+                              if($paciente['status'][$x]->status == 'F' ){
+                                  $f++;
+                            }  elseif ($paciente['status'][$x]->status == 'E') {
+                                $e++;
+                            }
+                          ?>
+
+                          <td>    {{  $paciente['status'][$x]->status }}  </td>     
+                          <?php   $i++    ?>
+                          <?php   $x++    ?>
+
                       @endif
                   @endforeach
+                       
+                @if($i <= cal_days_in_month(CAL_GREGORIAN,$mes,$ano))
                     <td>  </td>
-              @endfor
+                @endif
+            @endfor
 
-              <td>  </td>
-              <td>  </td>
-              <td> {{ count($paciente['datas'])}} </td>
-            
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
+        <td> {{ $e }} </td>
+        <td> {{ $f }} </td>
+        <td> {{ count($paciente['datas'])}} </td>
          
           </tr>
-          @endforeach
+    @endforeach
 
     <tbody>
  </table>
-
-
-
-    <tbody>
- </table>
-  
 
     
 </body>
