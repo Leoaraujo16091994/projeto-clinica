@@ -13,7 +13,6 @@
 </div>
 <br>
 
-
 <div class='resultado'>
 
 @if(count($paciente) == 0)
@@ -77,6 +76,10 @@
         </div>
 
 
+        
+
+
+
         <div class="resultado">    
             <div class="status">
                 <label>  Status Do Paciente  </label>   <br>
@@ -117,29 +120,33 @@
                 @endif
             
 
-        <div id ="botaovoltar">
-            <form action = "consultarpaciente">
-                <button class="btn btn-info btn-lg" >   Voltar	</button>
-            <form>
+
+        <div id="botaoVoltar">
+            <form action = "/pacientes">
+                <button class="btn btn-primary btn-lg"> Voltar	</button>
+            </form>        
         </div>
-        
-        <div id ="botaoEditar">
-            <form action = "">
-                <button class="btn btn-info btn-lg" >   Voltar	</button>
-            <form>
+
+
+        <div id="botaoEditar">
+            <form action = "pacientes/{{$pac->id}}/edit">
+                <button class="btn btn-info btn-lg"> Editar	</button>
+            </form>        
         </div>
-        
-
-
-
        
            </div>
     </div>
+  
+        
+    
+
 
 @endforeach
 @endif
 
-   
+     
+
+
 
 
 
@@ -181,6 +188,12 @@
         margin-left: 2rem;
         margin-top:25rem;
 
-}
+    }
+
+    #botaoEditar{
+        margin-left: -160%;
+        margin-top:-21%;
+
+    }
     
     </style>

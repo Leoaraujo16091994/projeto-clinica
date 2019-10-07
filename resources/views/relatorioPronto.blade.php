@@ -39,7 +39,7 @@
               {{$paciente['nome_paciente']}}
             </td>
             
-          @for($i = 1 ,$x= 0 ,$f=0, $e = 0 ; $i <= cal_days_in_month(CAL_GREGORIAN,$mes,$ano);$i++)
+          @for($i = 1 ,$x= 0 ,$f=0, $e = 0 ,$p = 0; $i <= cal_days_in_month(CAL_GREGORIAN,$mes,$ano);$i++)
                   @foreach($paciente['datas'] as $data)
                       @if( Carbon\Carbon::parse($data->created_at)->format('d') == $i )
                           <?php 
@@ -48,6 +48,8 @@
                             }  elseif ($paciente['status'][$x]->status == 'E') {
                                 $e++;
                             }
+                            elseif($paciente['status'][$x]->status == 'P')
+                                $p++;
                           ?>
 
                           <td>    {{  $paciente['status'][$x]->status }}  </td>     
@@ -64,7 +66,7 @@
 
         <td> {{ $e }} </td>
         <td> {{ $f }} </td>
-        <td> {{ count($paciente['datas'])}} </td>
+        <td> {{ $p+$e  }} </td>
          
           </tr>
     @endforeach

@@ -37,8 +37,9 @@ if(nome ==""){
 
 
     <div id="dados">
-        <form method = 'get' action='/resultadopaciente' name ="formulario">
+       <form method = 'get' action='/resultadopaciente' name ="formulario"> 
             @csrf
+
 
             <label for="validationnomeCompleto"> Nome Completo </label>
             <input type="text" class="form-control" placeholder="Nome Completo" id="nomeCompleto"  name = "nomeCompleto" ><br>
@@ -63,6 +64,7 @@ if(nome ==""){
 
     
     </div>
+
 
 @endsection
 
