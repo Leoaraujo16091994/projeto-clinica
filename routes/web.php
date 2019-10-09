@@ -14,17 +14,9 @@ Route::group(['middleware' => 'auth'], function () {
     
     //PacientesController
     Route::resource('/pacientes','PacientesController');
-    Route::match (['get', 'post'],'/consultarpaciente','PacientesController@consultar');
     Route::get ('/resultadopaciente','PacientesController@resultadoconsulta');
+    Route::get('/deletar','ChamadaController@deletar');
 
-
-
-    Route::match (['get', 'post'],'/editarpaciente','PacientesController@editar');
-
-
-
-    
-    
     //ChegadaController
     Route::resource ('/chegada','ChegadaController');
     

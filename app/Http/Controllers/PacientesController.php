@@ -9,7 +9,11 @@ use Illuminate\Http\Request;
 
 class PacientesController extends Controller
 {
-    private $teste;
+
+    public function inicio(){
+        return view('paginainicial');
+    }
+    
 
     public function index ()
     {
@@ -74,12 +78,8 @@ class PacientesController extends Controller
         return view('/resultadoconsultapaciente', ['paciente' => $paciente]);
                     
                     
-                }              
+    }              
   
-
-
-
-
 
   
     public function edit($id)
@@ -95,63 +95,45 @@ class PacientesController extends Controller
     }
 
 
-
-
-
-
     public function update(Request $request, $id)
     {
+        $nome = $request-> nomeCompleto;
+        $data = $request-> dataNascimento;
+        $convenio = $request-> convenio;
+        $tsanguineo = $request-> tpSanguineo;
+        $status = $request-> status;
+        $segunda = $request-> segundaFeira;
+        $terca = $request-> tercaFeira;
+        $quarta = $request-> quartaFeira;
+        $quinta = $request-> quintaFeira;
+        $sexta = $request-> sextaFeira;
+        $sabado = $request-> sabado;
 
-     
+       
+        $pac = Pacientes::find($id);
+                
+        $paciente = $pac->update([
+            'nome_completo' => $nome,
+            'data_nascimento' => $data,
+            'convenio_paciente' => $convenio,
+            'soro_positivo' =>  $tsanguineo,
+            'status_paciente' => $status,
+            'segunda_feira'=>  $segunda,
+            'terca_feira' =>  $terca,
+            'quarta_feira' =>  $quarta,
+            'quinta_feira' =>  $quinta,
+            'sexta_feira'  =>  $sexta,
+            'sabado' =>    $sabado,
+            'convenio_paciente'=>    $convenio ,
+            'soro_positivo' => $tsanguineo,
+        ]);
 
-
-  $nome = $request-> nomeCompleto;
-  $data = $request-> dataNascimento;
-  $convenio = $request-> convenio;
-  $tsanguineo = $request-> tpSanguineo;
-  $status = $request-> status;
-  $segunda = $request-> segundaFeira;
-  $terca = $request-> tercaFeira;
-  $quarta = $request-> quartaFeira;
-  $quinta = $request-> quintaFeira;
-  $sexta = $request-> sextaFeira;
-  $sabado = $request-> sabado;
-
-
-  
-  $pac = Pacientes::find($id);
-  
-  
-  $teste = $pac->update([
-    'nome_completo' => $nome,
-    'data_nascimento' => $data,
-    'convenio_paciente' => $convenio,
-    'soro_positivo' =>  $tsanguineo,
-    'status_paciente' => $status,
-    'segunda_feira'=>  $segunda,
-    'terca_feira' =>  $terca,
-    'quarta_feira' =>  $quarta,
-    'quinta_feira' =>  $quinta,
-    'sexta_feira'  =>  $sexta,
-    'sabado' =>    $sabado,
-    'convenio_paciente'=>    $convenio ,
-    'soro_positivo' => $tsanguineo,
-]);
-
-      
-
-  
-  return redirect('consultarpaciente');
+        //return redirect('consultarpaciente');
+        return view('consultarpaciente');
    
     }
 
-    
-    
-    
-    
-    public function consultar(){
-        return view('consultarpaciente');
-    }
+
 
 
     public function resultadoconsulta(Request $request){
@@ -168,13 +150,5 @@ class PacientesController extends Controller
     }        
    
 
-
-    public function inicio(){
-        return view('paginainicial');
-    }
-    
-
-    
-   
 
  }

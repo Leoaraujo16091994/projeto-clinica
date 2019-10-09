@@ -110,7 +110,29 @@ class ChamadaController extends Controller
         return view('/paineltelacheia',compact('paciente'));
     }
 
+    public function destroy()
+    {
 
+    }
+
+
+    public function deletar()
+    {
+        $id = Chamada::max('id');
+            
+        $var = Chamada::find($id);
+        $var->delete();
+        
+        /*
+
+        if($var)
+            return "Ultimo Paciente Removido";
+        else
+            return "Erro ao remover ultimo paciente";
+        */
+        
+        return redirect('chamarpainel/create');
+    }
 
 
 }

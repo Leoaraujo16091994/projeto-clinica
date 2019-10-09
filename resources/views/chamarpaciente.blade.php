@@ -38,7 +38,26 @@
         
      
         <button type="submit" id="botaoLembrar" class="btn btn-info"   onClick="lembrarSom()"> Chamar Novamente </button>
-        <button type="submit" id="botaoCorrigr" class="btn btn-danger" onClick="corrigir()"> Corrigir </button>
+
+
+
+
+
+
+      <div id = "botaoCorrigir">
+
+
+
+
+        <form action = '/deletar'method='get'>
+        <input type="hidden" name="_method" >
+
+            <button type="submit" id="botaoCorrigr" class="btn btn-danger" onClick="corrigir()"> Corrigir </button>
+        </form>
+
+
+
+
 
 
 <script>
@@ -60,13 +79,10 @@
 
 
     function lembrarSom(){
-      const form= document.querySelector('form');
-      const audio = new Audio('/alerta.mp3');
-
-    
-      console.log('som');
-      audio.play();
-     
+        const form= document.querySelector('form');
+        const audio = new Audio('/alerta.mp3');    
+        console.log('som');
+        audio.play();
     }
 
 
@@ -153,6 +169,7 @@ overflow: auto;
 .table-wrapper-scroll-y {
 display: block;
 }
+
 
 
 </style>

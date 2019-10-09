@@ -14,6 +14,7 @@ class Chamada extends Migration
     public function up()
     {
         Schema::create('chamada', function (Blueprint $table) {
+	        $table->increments('id');
             $table->string('nome_completo');
             $table->string('sala');            
             $table->string('status');
