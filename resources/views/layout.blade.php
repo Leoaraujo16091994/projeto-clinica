@@ -79,7 +79,7 @@
                     <ul class="nav child_menu">
                       <li><a href="/pacientes/create">Novo Paciente</a></li>
                       <li><a href="/chegada/create">Informar Chegada </a></li>
-                      <li><a href="/consultarpaciente">Consultar Paciente </a></li>
+                      <li><a href="/pacientes">Consultar Paciente </a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-desktop"></i> Painel <span class="fa fa-chevron-down"></span></a>
@@ -112,6 +112,13 @@
                 <a id="menu_toggle"><i class="fa fa-bars"></i></a>
               </div>
               <ul class="nav navbar-nav navbar-right">
+              @if (Route::has('register'))
+                      <li class="nav-item">
+                          <a class="nav-link" href="{{ route('register') }}">{{ __('Cadastrar') }}</a>
+                      </li>
+                            @endif
+
+
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                     {{ Auth::user()->name }}

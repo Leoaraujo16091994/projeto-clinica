@@ -128,7 +128,6 @@ class PacientesController extends Controller
             'soro_positivo' => $tsanguineo,
         ]);
 
-        //return redirect('consultarpaciente');
         return view('consultarpaciente');
    
     }

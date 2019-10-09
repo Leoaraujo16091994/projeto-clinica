@@ -9,7 +9,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
-
+    
+    Route::get('/register', ['as' => 'register', 'uses' => 'Auth\RegisterController@showRegistrationForm']);
+    Route::post('/register', ['uses' => 'Auth\RegisterController@register']);
+    
     Route::get ('/paginainicial','PacientesController@inicio');
     
     //PacientesController
