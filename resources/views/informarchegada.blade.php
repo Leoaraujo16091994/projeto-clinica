@@ -42,38 +42,34 @@ function validar(){
          
               
         <div class="row">
-          <div class="col-sm-9 col-md-15 col-lg-30">
-            <div id="botaoConcluir">
-                <button type="button" class="btn btn-primary btn-lg" alt="botaoConcluir" onclick="validar()">  Concluir </button> 
+            <div class="col-sm-9 col-md-15 col-lg-30">
+                <div id="botaoConcluir">
+                    <button type="button" class="btn btn-primary btn-lg" alt="botaoConcluir" onclick="validar()">  Concluir </button> 
+                </div>
             </div>
-            </div>
-            </div>           
+        </div>           
         </form>   
 
         <div class="row">
-          <div class="col-sm-9">
-    <div id="botaoCancelar">
-        <form action = "/paginainicial">
-            <button type="submit" class="btn btn-info btn-lg" alt="botaoCancelar" > Cancelar	</button>
-        </form>        
-    </div>
-    </div>
-    </div>
+            <div class="col-sm-9">
+                <div id="botaoCancelar">
+                    <form action = "/paginainicial">
+                        <button type="submit" class="btn btn-info btn-lg" alt="botaoCancelar" > Cancelar	</button>
+                    </form>        
+                </div>
+            </div>
+        </div>
 
 </div>
 
 @endsection
 
 <style>
-/*
-    button{
-        height:8%;
-        width:10%;
-    }
-  */  
+
    #botaoConcluir{
         margin-top:;
     }
+
     #botaoCancelar{
         margin-top: -6.5rem;
         margin-left:15rem;

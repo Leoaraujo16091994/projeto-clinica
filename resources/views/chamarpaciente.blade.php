@@ -16,11 +16,11 @@
 
 
   <div id="dados">
-      <form method='post' id="chamarPainel" action ='/chamarpainel'>
+      <form name ="chamarPainel" method='post' id="chamarPainel" action ='/chamarpainel' >
       @csrf
 
           <label for="validationnomeCompleto"> Nome Completo </label>
-              <input name="nomeCompleto" id="nomeCompleto" class="form-control" placeholder="Nome">
+              <input name="nomeCompleto" id="nomeCompleto" class="form-control" placeholder="Nome" >
             
           <label> Sala </label>
               <input type="text" class="form-control" placeholder="Número da Sala" id="sala"  name = "sala" required><br>
@@ -45,16 +45,11 @@
 
 
       <div id = "botaoCorrigir">
-
-
-
-
-        <form action = '/deletar'method='get'>
-        <input type="hidden" name="_method" >
-
-            <button type="submit" id="botaoCorrigr" class="btn btn-danger" onClick="corrigir()"> Corrigir </button>
-        </form>
-
+          <form action = '/deletar'method='get'>
+              <input type="hidden" name="_method" >
+                <button type="submit" id="botaoCorrigr" class="btn btn-danger" onClick="corrigir()"> Corrigir </button>
+          </form>
+      </div>
 
 
 
@@ -62,6 +57,17 @@
 
 <script>
     function som(){
+        var nome = chamarPainel.nomeCompleto.value;
+        var sala = chamarPainel.sala.value;
+        
+        if(nome ==""){
+            alert("Informe o Nome Completo");
+            return 0;
+        } else if(sala == ""){
+            alert("Informe a Sala");
+            return 0;
+         } else{
+
       const form= document.querySelector('form');
       const audio = new Audio('/alerta.mp3');
 
@@ -71,8 +77,9 @@
       setTimeout(() => {
         console.log('submete');
         document.getElementById('chamarPainel').submit();
-      }, 3000);
+      }, 4000);
     }
+  }
 
 
 
@@ -93,29 +100,23 @@
 
 
 <div class="table-wrapper-scroll-y my-custom-scrollbar">
-
-<table class="table table-bordered table-striped mb-0">
-  <thead>
-    <tr>
-      <th scope="col">  Nome Completo </th>
-      <th scope="col">  Chegou  </th>
-      <th scope="col">  Chamado </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-    @foreach($pacientes as $paciente)
+    <table class="table table-bordered table-striped mb-0">
+      <thead>
         <tr>
-            <td>{{$paciente->nome_completo}}</td>
-            <td></td>
-            <td></td>
+          <th scope="col">  Nome Completo </th>
         </tr>
-    @endforeach
-     
-    </tr>
-  </tbody>
-</table>
-
+      </thead>
+      <tbody>
+        <tr>
+        @foreach($pacientes as $paciente)
+            <tr>
+                <td>{{$paciente->nome_completo}}</td>
+            </tr>
+        @endforeach
+      
+        </tr>
+      </tbody>
+    </table>
 </div>
 
 
@@ -127,18 +128,16 @@
 
 <style>
   #dados{
-      width:50%;
-      margin-top:2%;
-      margin-left:3%;
-      font-size:130%;
+    width:50%;
+    margin-top:2%;
+    margin-left:3%;
+    font-size:130%;
   }
 
   button{
     height:8%;
     width:29%;
   }
-
- 
 
   #painel{
     width:500px;
@@ -157,20 +156,34 @@
 
   #botaoLembrar{
     height:8%;
-    width:20%;
+    width:27%;
     margin-left:3%;
   }
 
   .my-custom-scrollbar {
-position: relative;
-height: 200px;
-overflow: auto;
-}
-.table-wrapper-scroll-y {
-display: block;
-}
+    position: relative;
+    height: 70%;
+    width:60%;
+    margin-left:60%;
+    margin-top:-38%;
+    overflow: auto;
+    background-color:#ffffff;
+  }
+
+  .table-wrapper-scroll-y {
+    display: block;
+  }
 
 
+  #botaoCorrigir{
+    width:76%;
+    margin-top:-4.1em;
+    margin-left:31%;
+  }
+
+  td{
+    color:#000000;
+  }
 
 </style>
 

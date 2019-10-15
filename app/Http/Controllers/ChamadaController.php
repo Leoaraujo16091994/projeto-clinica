@@ -39,24 +39,16 @@ class ChamadaController extends Controller
         }
 
 
-
-        $pacientesPresentes = Pacientes::select('id', 'nome_completo')
-                                        ->where($diaSemana, 'on')
-                                        ->get();
-
-
-        $chegaram = Chegada::select('nome_completo')
-                            ->where('nome_completo',$pacientesPresentes)
-                            ->get();
-
+        $pacientesPresentes = \DB::table('pacientes as p')->select('p.id', 'p.nome_completo')
+            -> join('chegada as c', 'c.nome_completo', '=', 'p.nome_completo')
+            -> join('chamada as chamada', 'chamada.nome_completo','!=','c.nome_completo')
+            -> where('p.'.$diaSemana, 'on')
+            -> whereRaw("date(c.created_at) = '".date('Y-m-d')."'")
+            -> whereRaw("date(chamada.created_at) = '".date('Y-m-d')."'")
+            -> get();
 
         return view ('chamarpaciente',['pacientes'=> $pacientesPresentes]);
-        
-
-
-
-
-       
+    
     }
 
   
@@ -110,10 +102,7 @@ class ChamadaController extends Controller
         return view('/paineltelacheia',compact('paciente'));
     }
 
-    public function destroy()
-    {
-
-    }
+  
 
 
     public function deletar()

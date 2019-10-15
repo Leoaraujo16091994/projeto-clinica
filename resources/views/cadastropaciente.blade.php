@@ -59,11 +59,9 @@
                 <input type = "checkbox" name ="convenio" value = 'Sus'> Sus 	<br>
 
 
-            <div id = 'segundaParte'>
-            
+    <div id = 'segundaParte'>            
         <div class="row">
           <div class="col-md-18">
-
 
                 <label> Dias da Semana </label>  <br>
                     <input type = "checkbox" name ="segundaFeira" > Segunda-Feira  <br>
@@ -82,16 +80,16 @@
 
 <br>
      
-                    <label>Status do Paciente </label> <br>
-                        <select name="status">
-                            <option value="Em Tratamento" selected >Em Tratamento </option> 
-                            <option value="Obito" >Obito</option>
-                            <option value="Trânsito"> Trânsito</option>
-                            <option value="Abandono"  >Abandono</option> 
-                            <option value="Transferido" >Transferido</option>
-                            <option value="Internado"> Internado</option>
-                            <option value="Recuperou Função"> Recuperou Função</option>
-                        </select>
+                <label>Status do Paciente </label> <br>
+                    <select name="status">
+                        <option value="Em Tratamento" selected >Em Tratamento </option> 
+                        <option value="Obito" >Obito</option>
+                        <option value="Trânsito"> Trânsito</option>
+                        <option value="Abandono"  >Abandono</option> 
+                        <option value="Transferido" >Transferido</option>
+                        <option value="Internado"> Internado</option>
+                        <option value="Recuperou Função"> Recuperou Função</option>
+                    </select>
 
 <br><br>
             </div>
@@ -110,7 +108,7 @@
                 <button type="submit" class="btn btn-info btn-lg" alt="botaoCancelar"> Cancelar	</button>
             </form>        
 
-            </div>
+        </div>
     
     </div>
 
@@ -152,4 +150,5 @@
     }
 
 </style>
+
     @endsection

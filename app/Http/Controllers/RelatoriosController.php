@@ -28,61 +28,6 @@ class RelatoriosController extends Controller
         return view('relatorio');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 
     public function relatorio(Request $request)
     {
@@ -108,7 +53,8 @@ class RelatoriosController extends Controller
                                 ->orderBy('created_at')
                                 ->get();
 
-
+            $sangue = $paciente->soro_positivo;
+                
 
             for($i = 1 ; $i <= cal_days_in_month(CAL_GREGORIAN, 9,2019);$i++) {
                 if ($i) {
@@ -120,7 +66,8 @@ class RelatoriosController extends Controller
                 array_push($resultado, [
                     'nome_paciente' => $paciente->nome_completo,
                     'datas' => $datasChamadas,
-                    'status' => $status
+                    'status' => $status,
+                    'sp' => $sangue
                     ]);
 
             }
@@ -129,7 +76,6 @@ class RelatoriosController extends Controller
 
         $mes = date('m');
         $ano = date('Y');
-
 
         return view ('/relatorioPronto',['pacientes'=> $resultado],compact('mes','ano'));
 

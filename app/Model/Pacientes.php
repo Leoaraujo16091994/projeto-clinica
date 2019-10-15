@@ -27,4 +27,9 @@ class Pacientes extends Model
   {
     return $this->hasMany('App\Model\Chamada', 'nome_completo', 'nome_completo');
   }
+
+  public function carasDoDia($var)
+  {
+    # code...
+  }
 }

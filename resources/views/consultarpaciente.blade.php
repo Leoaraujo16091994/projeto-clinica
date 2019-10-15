@@ -40,12 +40,11 @@ if(nome ==""){
        <form method = 'get' action='/resultadopaciente' name ="formulario"> 
             @csrf
 
-
             <label for="validationnomeCompleto"> Nome Completo </label>
-            <input type="text" class="form-control" placeholder="Nome Completo" id="nomeCompleto"  name = "nomeCompleto" ><br>
+                <input type="text" class="form-control" placeholder="Nome Completo" id="nomeCompleto"  name = "nomeCompleto" ><br>
 
             <label for="validationdataNascimento">Data de Nascimento </label>
-            <input	type="date" class="form-control" placeholder=" Data" id="dataNascimento" name ="dataNascimento" >
+                <input	type="date" class="form-control" placeholder=" Data" id="dataNascimento" name ="dataNascimento" >
 
             <br> <br>
 
@@ -61,7 +60,6 @@ if(nome ==""){
                 <button class="btn btn-info btn-lg" alt="botaoCancelar"> Cancelar	</button>
             </form>        
         </div>
-
     
     </div>
 

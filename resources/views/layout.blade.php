@@ -38,7 +38,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-home"></i> <span> Prontorim !</span></a>
+              <a href="index.html" class="site_title"><i class="fa fa-home"></i> <span> Grupo Pronefrom</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -131,7 +131,7 @@
                         <span> Configurações </span>
                       </a>
                     </li>
-                    <li><a href="javascript:;">Ajuda</a></li>     -->''
+                    <li><a href="javascript:;">Ajuda</a></li>     -->
                      
                   <li><a href="{{ route('logout') }}"
                       onclick="event.preventDefault();

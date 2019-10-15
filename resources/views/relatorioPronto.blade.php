@@ -15,14 +15,19 @@
 </head>
 <body>
 
+<?php   $totalExtra = 0    ?>
+<?php   $totalFalta= 0   ?>
+<?php   $totalSessoes = 0     ?>
+
+
 
 
 <table class="table table-bordered">
   <thead>
     <th>Nome</th>
-    @for($i = 1 ; $i <= cal_days_in_month(CAL_GREGORIAN,$mes,$ano);$i++)
-      <th>{{$i}}</th>
-    @endfor
+        @for($i = 1 ; $i <= cal_days_in_month(CAL_GREGORIAN,$mes,$ano);$i++)
+            <th>{{$i}}</th>
+        @endfor
 
           <th> Total de Extras</th>
           <th>Total de Faltas </th>
@@ -30,15 +35,17 @@
         </tr>
 
     </thead>
-    
     <tbody>
 
     @foreach($pacientes as $paciente)
+        @if( $paciente['sp'] == "SIM")
           <tr>
             <td>
-              {{$paciente['nome_paciente']}}
+              <font color="red">
+                  {{$paciente['nome_paciente']}}  
+              </font>                     
             </td>
-            
+
           @for($i = 1 ,$x= 0 ,$f=0, $e = 0 ,$p = 0; $i <= cal_days_in_month(CAL_GREGORIAN,$mes,$ano);$i++)
                   @foreach($paciente['datas'] as $data)
                       @if( Carbon\Carbon::parse($data->created_at)->format('d') == $i )
@@ -66,13 +73,91 @@
 
         <td> {{ $e }} </td>
         <td> {{ $f }} </td>
-        <td> {{ $p+$e  }} </td>
-         
+        <td> {{ $p }} </td>
+
+        <?php   $totalExtra = $totalExtra + $e    ?>
+        <?php   $totalFalta= $totalFalta + $f   ?>
+        <?php   $totalSessoes = $totalSessoes + $p     ?>
+
+
+
+
           </tr>
+            
+
+
+
+
+    @else
+          
+              
+          
+          <tr>
+            <td>
+              {{$paciente['nome_paciente']}}  
+                           
+            </td>
+
+          @for($i = 1 ,$x= 0 ,$f=0, $e = 0 ,$p = 0; $i <= cal_days_in_month(CAL_GREGORIAN,$mes,$ano);$i++)
+                  @foreach($paciente['datas'] as $data)
+                      @if( Carbon\Carbon::parse($data->created_at)->format('d') == $i )
+                          <?php 
+                              if($paciente['status'][$x]->status == 'F' ){
+                                  $f++;
+                            }  elseif ($paciente['status'][$x]->status == 'E') {
+                                $e++;
+                            }
+                            elseif($paciente['status'][$x]->status == 'P')
+                                $p++;
+                          ?>
+
+                          <td>    {{  $paciente['status'][$x]->status }}  </td>     
+                          <?php   $i++    ?>
+                          <?php   $x++    ?>
+
+                      @endif
+                  @endforeach
+                       
+                @if($i <= cal_days_in_month(CAL_GREGORIAN,$mes,$ano))
+                    <td>  </td>
+                @endif
+            @endfor
+
+        <td> {{ $e }} </td>
+        <td> {{ $f }} </td>
+        <td> {{ $p }} </td>
+
+        <?php   $totalExtra = $totalExtra + $e    ?>
+        <?php   $totalFalta= $totalFalta + $f   ?>
+        <?php   $totalSessoes = $totalSessoes + $p     ?>
+
+
+
+
+          </tr>
+          @endif      
+
     @endforeach
 
     <tbody>
  </table>
+
+
+
+ <table class="table table-bordered">
+  <thead>
+      <th> Total de Extras</th>
+          <td> {{ $totalExtra }} </td>
+      <th>Total de Faltas </th>
+          <td> {{ $totalFalta }}</td>
+      <th>Total de Sessões</th>
+        <td> {{ $totalSessoes}}</td>
+
+     
+
+
+</thead>
+</table>
 
     
 </body>
