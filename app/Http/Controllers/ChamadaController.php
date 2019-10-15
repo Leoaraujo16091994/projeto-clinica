@@ -45,8 +45,8 @@ class ChamadaController extends Controller
             -> where('p.'.$diaSemana, 'on')
             -> whereRaw("date(c.created_at) = '".date('Y-m-d')."'")
             -> whereRaw("date(chamada.created_at) = '".date('Y-m-d')."'")
-            -> get();
-
+            -> get();    
+ 
         return view ('chamarpaciente',['pacientes'=> $pacientesPresentes]);
     
     }
