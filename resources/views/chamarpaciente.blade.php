@@ -109,11 +109,15 @@
       <tbody>
         <tr>
         @foreach($pacientes as $paciente)
+          @if($paciente == NULL || $paciente == 'NULL')
+            {{vazio}}
+          @else
             <tr>
                 <td>{{$paciente->nome_completo}}</td>
             </tr>
+        @endif
         @endforeach
-      
+        
         </tr>
       </tbody>
     </table>

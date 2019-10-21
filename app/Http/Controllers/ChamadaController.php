@@ -39,14 +39,13 @@ class ChamadaController extends Controller
         }
 
 
-        $pacientesPresentes = \DB::table('pacientes as p')->select('p.id', 'p.nome_completo')
-            -> join('chegada as c', 'c.nome_completo', '=', 'p.nome_completo')
-            -> join('chamada as chamada', 'chamada.nome_completo','!=','c.nome_completo')
-            -> where('p.'.$diaSemana, 'on')
+        $pacientesPresentes = \DB::table('chegada as c')->select('c.nome_completo')
+            -> whereRaw("NOT EXISTS (select 1 from chamada as chamada where chamada.nome_completo = c.nome_completo and date(chamada.created_at) = '".date('Y-m-d')."')")
             -> whereRaw("date(c.created_at) = '".date('Y-m-d')."'")
-            -> whereRaw("date(chamada.created_at) = '".date('Y-m-d')."'")
-            -> get();    
- 
+            -> get();
+
+
+
         return view ('chamarpaciente',['pacientes'=> $pacientesPresentes]);
     
     }
@@ -86,7 +85,25 @@ class ChamadaController extends Controller
                             ->orderByRaw('created_at DESC')
                             ->get();
 
-        return view('/painel',compact('paciente'));
+                            $qtdPacientes;
+
+                            if($paciente ->isEmpty()){
+                                $qtdPacientes = 0 ;    
+                            } 
+                            else if (count($paciente) == 1){
+                                $qtdPacientes = 1 ;
+                            }
+                            else if (count($paciente) == 2){
+                                $qtdPacientes = 2 ; 
+                            }
+                            else {
+                                $qtdPacientes = 3 ;
+                            }    
+        
+
+
+
+   return view('/painel',compact('paciente'),compact ('qtdPacientes'));
 
     }
 
@@ -99,7 +116,24 @@ class ChamadaController extends Controller
                             -> orderByRaw('created_at DESC')
                             ->get();
 
-        return view('/paineltelacheia',compact('paciente'));
+
+        
+        $qtdPacientes;
+
+        if($paciente ->isEmpty()){
+            $qtdPacientes = 0 ;    
+        } 
+        else if (count($paciente) == 1){
+            $qtdPacientes = 1 ;
+        }
+        else if (count($paciente) == 2){
+            $qtdPacientes = 2 ; 
+        }
+        else {
+            $qtdPacientes = 3 ;
+        }    
+
+        return view('/paineltelacheia',compact('paciente'),compact ('qtdPacientes'));
     }
 
   

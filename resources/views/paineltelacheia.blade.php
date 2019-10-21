@@ -126,6 +126,91 @@
         </div>
     </div>
 
+
+
+
+
+    @if($qtdPacientes == 0 )
+            <table border = "5px">
+                <tr>            
+                        <td rowspan="3">
+                            <h3>Paciente: </h3>
+                                {{'Sem pacientes cadastrados'}}
+                        </td>    
+                    </tr>
+                    </table>
+
+        @elseif ($qtdPacientes == 1 ) 
+                <table class="tabela">
+                <tr>
+                    <td rowspan="3" class="painel atualChamado">
+                        <h3>Paciente: </h3>
+                        <h1> {{$paciente[0]->nome_completo}} </h1>
+                        <h3>Sala:</h3>
+                        <h1> {{$paciente[0]->sala}} </h1>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="painel ultimoChamado">
+                        <h3>Paciente: </h3>
+                        <h2> {{"Vazio"}} </h2>
+                        <h3>Sala:</h3>
+                        <h2> {{"Vazio"}} </h2>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="painel ultimoChamado">
+                        <h3>Paciente: </h3>
+                        <h2> {{"Vazio"}} </h2>
+                        <h3>Sala:</h3>
+                        <h2> {{"Vazio"}} </h2>
+                    </td>
+                </tr>
+
+
+            </table>
+
+             
+       
+        @elseif ($qtdPacientes == 2 )
+            <table class="tabela">
+                <tr>
+                    <td rowspan="3" class="painel atualChamado">
+                        <h3>Paciente: </h3>
+                        <h1> {{$paciente[0]->nome_completo}} </h1>
+                        <h3>Sala:</h3>
+                        <h1> {{$paciente[0]->sala}} </h1>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="painel ultimoChamado">
+                        <h3>Paciente: </h3>
+                        <h2> {{$paciente[1]->nome_completo}} </h2>
+                        <h3>Sala:</h3>
+                        <h2> {{$paciente[1]->sala}} </h2>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="painel ultimoChamado">
+                        <h3>Paciente: </h3>
+                        <h2> {{"Vazio"}} </h2>
+                        <h3>Sala:</h3>
+                        <h2> {{"Vazio"}} </h2>
+                    </td>
+                </tr>
+
+
+            </table>
+
+
+        @else 
+
     <table class="tabela">
         <tr>
             <td rowspan="3" class="painel atualChamado">
@@ -157,6 +242,7 @@
 
 
     </table>
+    @endif
 </body>
 
 </html>

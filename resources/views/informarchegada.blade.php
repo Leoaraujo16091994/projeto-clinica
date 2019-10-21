@@ -16,14 +16,14 @@ function validar(){
     if(nome == ""){
         alert("Você Deve Informar Um Nome");
     } else {
-        alert("Informada");
+        alert("Chegada Informada");
         document.formulario.submit();
         return true;
-
     }
 
 }
 </script>
+
 
 <div id = "titulopagina">
        <h1> Informar Chegada </h1>                

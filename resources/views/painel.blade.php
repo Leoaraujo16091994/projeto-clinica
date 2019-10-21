@@ -30,7 +30,89 @@
         <div class="col-sm-1 col-md-100 col-lg-50" >
             <div class= "form-group">
 
+        @if($qtdPacientes == 0 )
+            <table border = "5px">
+                <tr>            
+                        <td rowspan="3">
+                            <h3>Paciente: </h3>
+                                {{'Sem pacientes cadastrados'}}
+                        </td>    
+                    </tr>
+                    </table>
+
+        @elseif ($qtdPacientes == 1 ) 
+            <table border = "5px">
+                            <tr>            
+                                <td rowspan="3">
+                                    <h3>Paciente: </h3>
+                                        {{$paciente[0]->nome_completo}}
+                                    <h3>Sala:</h3>
+                                        {{$paciente[0]->sala}}        
+                                </td>    
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <h3>Paciente: </h3>
+                                        {{"Vazio"}}
+                                    <h3>Sala:</h3>
+                                        {{"Vazio"}}
+                                </td>
+                            </tr>
+                            
+                            
+                            <tr>
+                                <td>
+                                    <h3>Paciente: </h3>
+                                        {{"Vazio"}}
+                                    <h3>Sala:</h3>
+                                        {{"Vazio"}}  
+                                </td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+        @elseif($qtdPacientes == 2 )
                 <table border = "5px">
+                            <tr>            
+                                <td rowspan="3">
+                                    <h3>Paciente: </h3>
+                                        {{$paciente[0]->nome_completo}}
+                                    <h3>Sala:</h3>
+                                        {{$paciente[0]->sala}}        
+                                </td>    
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <h3>Paciente: </h3>
+                                        {{$paciente[1]->nome_completo}}
+                                    <h3>Sala:</h3>
+                                        {{$paciente[1]->sala}}
+                                </td>
+                            </tr>
+                            
+                            
+                            <tr>
+                                <td>
+                                    <h3>Paciente: </h3>
+                                        {{"Vazio"}}
+                                    <h3>Sala:</h3>
+                                        {{"Vazio"}}  
+                                </td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+    
+    @else
+            <table border = "5px">
                     <tr>            
                         <td rowspan="3">
                             <h3>Paciente: </h3>
@@ -64,7 +146,7 @@
         </div>
     </div>
 
-   
+   @endif
 @endsection
 
 <style>
