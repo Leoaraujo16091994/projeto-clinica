@@ -44,9 +44,10 @@ class ChamadaController extends Controller
             -> whereRaw("date(c.created_at) = '".date('Y-m-d')."'")
             -> get();
 
+$cont = count($pacientesPresentes);
 
 
-        return view ('chamarpaciente',['pacientes'=> $pacientesPresentes]);
+        return view ('chamarpaciente',['pacientes'=> $pacientesPresentes],['contador'=> $cont]);
     
     }
 

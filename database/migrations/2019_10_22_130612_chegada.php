@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Presenca extends Migration
+class Chegada extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class Presenca extends Migration
      */
     public function up()
     {
-        Schema::create('presenca', function (Blueprint $table) {
+        Schema::create('chegada', function (Blueprint $table) {
             $table->string('nome_completo');
             $table->timestamps();
         });
@@ -24,7 +24,7 @@ class Presenca extends Migration
 
     public function down()
     {
-        Schema::drop('presenca');
+        Schema::drop('chegada');
     }
 }
 
