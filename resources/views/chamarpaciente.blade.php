@@ -114,13 +114,12 @@
       </tr>
 
     @else
-        @foreach($pacientes as $paciente)
-     
+        @foreach($pacientes as $paciente)     
             <tr>
                 <td>{{$paciente->nome_completo}}</td>
             </tr>
         @endforeach
-        @endif
+  @endif
         
         </tr>
       </tbody>
