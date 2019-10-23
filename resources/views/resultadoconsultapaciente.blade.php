@@ -18,7 +18,7 @@
 @if(count($paciente) == 0)
         <h3> Não Foi encontrado Ninguem </h3>
         <div id ="segundoBotaoVoltar">
-            <form action = "consultarpaciente">
+            <form action = "/pacientes">
                 <button class="btn btn-info btn-lg" >   Voltar	</button>
             <form>
         </div>
@@ -136,7 +136,7 @@
        
            </div>
     </div>
-  
+   
         
     
 

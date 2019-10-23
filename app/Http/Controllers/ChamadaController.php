@@ -46,6 +46,16 @@ class ChamadaController extends Controller
 
 $cont = count($pacientesPresentes);
 
+/*
+$teste = \DB::table('pacientes as pac')->select('nome_completo')
+-> whereRaw("NOT EXISTS (select 1 from chamada as chamada where chamada.nome_completo = pac.nome_completo 
+                        and date(chamada.created_at) = '".date('Y-m-d')."')")
+//-> whereRaw("date($diaSemana) = '".date('Y-m-d')."'")
+-> toSql();
+
+dd($teste);
+
+*/
 
         return view ('chamarpaciente',['pacientes'=> $pacientesPresentes],['contador'=> $cont]);
     
