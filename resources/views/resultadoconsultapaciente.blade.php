@@ -121,7 +121,7 @@
             
 
 
-        <div id="botaoVoltar">
+        <div id="voltar">
             <form action = "/pacientes">
                 <button class="btn btn-primary btn-lg"> Voltar	</button>
             </form>        
@@ -179,7 +179,7 @@
         background-color:#ffffff;
     }
    
-   #botaoVoltar{
+   #voltar{
         margin-left: -60rem;
         margin-top:25rem;
    }
