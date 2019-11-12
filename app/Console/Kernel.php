@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Comands/faltaPacientes::class,
+        
     ];
 
     /**
@@ -23,12 +23,13 @@ class Kernel extends ConsoleKernel
      * @return void
      */
     protected function schedule(Schedule $schedule)
-    {     $schedule->command('faltaPacientes')
-                  //->dailyAt('21:00');
-                  ->everyMinute();
-                
+    { 
+        $schedule->command('faltaPacientes')
+        //->dailyAt('21:00');
+        ->everyMinute();
+        
+        /*
                   
-/*
     $schedule->call(function (){
         DB::table('pacientes as pac')->select('pac.nome_completo')
         -> whereRaw("NOT EXISTS (select 1 from chamada as chamada where chamada.nome_completo = c.nome_completo and date(chamada.created_at) = '".date('Y-m-d')."')")

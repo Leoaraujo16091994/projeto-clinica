@@ -22,10 +22,13 @@
             return 0;
         } else if(status == "") {
                 alert("Você deve escolher um Status");
-        } else if(tpSangue.checked == false) {
-                alert("Você deve escolher um Tipo Sanguineo");
-        } else if(convenio.checked == false) {
+                return 0;
+        } else if(convenio == "") {
                 alert("Você deve escolher um Convênio");
+        } else if(tpSangue == "") {
+                alert("Você deve escolher um Tipo Sanguineo");
+                return 0;
+                
         }else {
             alert("Paciente Cadastrado Sucesso!!!");
             document.formulario.submit();
@@ -55,8 +58,8 @@
 
             <label> Convênio do Paciente </label><br>
 
-                <input type = "checkbox" name ="convenio" value = 'Particular'> Particular
-                <input type = "checkbox" name ="convenio" value = 'Sus'> Sus 	<br>
+                <input type = "radio" name ="convenio" value = 'Particular'> Particular
+                <input type = "radio" name ="convenio" value = 'Sus'> Sus 	<br>
 
 
     <div id = 'segundaParte'>            
@@ -74,8 +77,8 @@
                     <br>
 
                 <label> Paciente é Soro Positivo? </label> <br>
-                    <input type = "checkbox" name ="tpSanguineo" value ="SIM"> SIM  
-                    <input type = "checkbox" name ="tpSanguineo" value ="nao"> Não  <br>
+                    <input type = "radio" id = "tpSanguineo" name ="tpSanguineo" value ="SIM"> SIM  
+                    <input type = "radio" id = "tpSaguineo" name ="tpSanguineo" value ="nao"> Não  <br>
 
 
 <br>

@@ -57,6 +57,10 @@
                             }
                             elseif($paciente['status'][$x]->status == 'P')
                                 $p++;
+                            elseif($paciente['status'][$x]->status == 'T')
+                                $p++;
+
+
                           ?>
 
                           <td>    {{  $paciente['status'][$x]->status }}  </td>     
@@ -108,6 +112,8 @@
                                 $e++;
                             }
                             elseif($paciente['status'][$x]->status == 'P')
+                                $p++;
+                            elseif($paciente['status'][$x]->status == 'T')
                                 $p++;
                           ?>
 

@@ -34,11 +34,11 @@
 
         <label> Convênio do Paciente </label><br>
             @if( $pac->convenio_paciente == "Particular")
-                <input type = "checkbox" name ="convenio" value = 'Particular' checked > Particular
-                <input type = "checkbox" name ="convenio" value = 'Sus' > Sus 	<br>
+                <input type = "radio" name ="convenio" value = 'Particular' checked > Particular
+                <input type = "radio" name ="convenio" value = 'Sus' > Sus 	<br>
             @else
-            <input type = "checkbox" name ="convenio" value = 'Particular'> Particular
-                <input type = "checkbox" name ="convenio" value = 'Sus'  checked > Sus 	<br>
+                <input type = "radio" name ="convenio" value = 'Particular'> Particular
+                <input type = "radio" name ="convenio" value = 'Sus'  checked > Sus 	<br>
             @endif
 
 
@@ -69,11 +69,11 @@
 
                 <label> Paciente é Soro Positivo? </label> <br>
                     @if( $pac->soro_positivo == 'SIM')  
-                        <input type = "checkbox" name = "tpSanguineo" value ="SIM"  checked> SIM  
-                        <input type = "checkbox" name ="tpSanguineo" value ="nao" > Não  <br>
+                        <input type = "radio" name = "tpSanguineo" value ="SIM"  checked> SIM  
+                        <input type = "radio" name ="tpSanguineo" value ="nao" > Não  <br>
                     @else
-                        <input type = "checkbox" name = "tpSanguineo" value ="SIM"  > SIM 
-                        <input type = "checkbox" name ="tpSanguineo" value ="nao" checked> Não  <br>
+                        <input type = "radio" name = "tpSanguineo" value ="SIM"  > SIM 
+                        <input type = "radio" name ="tpSanguineo" value ="nao" checked> Não  <br>
                     @endif
 
 <br>

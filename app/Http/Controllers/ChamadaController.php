@@ -44,19 +44,10 @@ class ChamadaController extends Controller
             -> whereRaw("date(c.created_at) = '".date('Y-m-d')."'")
             -> get();
 
-$cont = count($pacientesPresentes);
+        
+        $cont = count($pacientesPresentes);
 
-/*
-$teste = \DB::table('pacientes as pac')->select('nome_completo')
--> whereRaw("NOT EXISTS (select 1 from chamada as chamada where chamada.nome_completo = pac.nome_completo 
-                        and date(chamada.created_at) = '".date('Y-m-d')."')")
-//-> whereRaw("date($diaSemana) = '".date('Y-m-d')."'")
--> toSql();
-
-dd($teste);
-
-*/
-
+    
         return view ('chamarpaciente',['pacientes'=> $pacientesPresentes],['contador'=> $cont]);
     
     }
@@ -68,12 +59,8 @@ dd($teste);
         $sala = $request -> sala;
         $atend = $request -> chamada;
 
-
-
        if($atend == NULL)
             $atend = 'P';
-
-
 
         $paciente = new Chamada([
             'nome_completo' => $nome,
@@ -112,9 +99,7 @@ dd($teste);
                             }    
         
 
-
-
-   return view('/painel',compact('paciente'),compact ('qtdPacientes'));
+       return view('/painel',compact('paciente'),compact ('qtdPacientes'));
 
     }
 
@@ -127,8 +112,6 @@ dd($teste);
                             -> orderByRaw('created_at DESC')
                             ->get();
 
-
-        
         $qtdPacientes;
 
         if($paciente ->isEmpty()){
@@ -166,6 +149,61 @@ dd($teste);
         */
         
         return redirect('chamarpainel/create');
+    }
+
+
+
+    public function pacientesFaltaram(){
+        $dia = date('w');
+
+// Pacientes que faltaram de Segunda a Sabado
+    if ($dia == 1){
+        $pacFaltaram = \DB::table('pacientes as pac')->select('pac.nome_completo')
+                        -> where ('pac.segunda_feira','on')
+                        -> whereRaw("NOT EXISTS (select 1 from chamada as chamada where chamada.nome_completo = pac.nome_completo 
+                                    and 'chamada.created_at' = '".date('Y-m-d')."')")
+                        ->get();
+
+    } else if($dia == 2){
+        $pacFaltaram = \DB::table('pacientes as pac')->select('pac.nome_completo')
+                        -> where ('pac.terca_feira','on')
+                        -> whereRaw("NOT EXISTS (select 1 from chamada as chamada where chamada.nome_completo = pac.nome_completo 
+                                    and 'chamada.created_at' = '".date('Y-m-d')."')")
+                        ->get();
+
+    } else if($dia == 3){
+        $pacFaltaram = \DB::table('pacientes as pac')->select('pac.nome_completo')
+                        -> where ('pac.quarta_feira','on')
+                        -> whereRaw("NOT EXISTS (select 1 from chamada as chamada where chamada.nome_completo = pac.nome_completo 
+                                    and 'chamada.created_at' = '".date('Y-m-d')."')")
+                        ->get();
+
+    } else if($dia == 4){
+        $pacFaltaram = \DB::table('pacientes as pac')->select('pac.nome_completo')
+                        -> where ('pac.quinta_feira','on')
+                        -> whereRaw("NOT EXISTS (select 1 from chamada as chamada where chamada.nome_completo = pac.nome_completo 
+                                    and 'chamada.created_at' = '".date('Y-m-d')."')")
+                        ->get();
+
+    } else if($dia == 5){
+        $pacFaltaram = \DB::table('pacientes as pac')->select('pac.nome_completo')
+                        -> where ('pac.sexta_feira','on')
+                        -> whereRaw("NOT EXISTS (select 1 from chamada as chamada where chamada.nome_completo = pac.nome_completo 
+                                    and 'chamada.created_at' = '".date('Y-m-d')."')")
+                        ->get();
+
+    } else if($dia == 6){
+        $pacFaltaram = \DB::table('pacientes as pac')->select('pac.nome_completo')
+                        -> where ('pac.sabado','on')
+                        -> whereRaw("NOT EXISTS (select 1 from chamada as chamada where chamada.nome_completo = pac.nome_completo 
+                                     and 'chamada.created_at' = '".date('Y-m-d')."')")
+                        ->get();
+
+    } 
+
+   
+
+
     }
 
 
