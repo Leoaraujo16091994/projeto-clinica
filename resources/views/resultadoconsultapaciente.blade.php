@@ -62,14 +62,21 @@
                     <input type="checkbox" checked> Sexta Feira    <br>
                     <input type="checkbox" > Sábado                <br>
                 
-                @else
+                @elseif ( $pac->terca_feira && $pac->quinta_feira && $pac->sabado == "on")
                     <input type="checkbox" > Segunda Feira          <br>
                     <input type="checkbox" checked> Terça Feira     <br>
                     <input type="checkbox" > Quarta Feira           <br>
                     <input type="checkbox" checked > Quinta Feira   <br>
                     <input type="checkbox" > Sexta Feira            <br>
                     <input type="checkbox" checked> Sábado          <br>
-                
+
+                @else
+                    <input type="checkbox" > Segunda Feira  <br>
+                    <input type="checkbox" > Terça Feira    <br>
+                    <input type="checkbox" > Quarta Feira   <br>
+                    <input type="checkbox" > Quinta Feira   <br>
+                    <input type="checkbox" > Sexta Feira    <br>
+                    <input type="checkbox" > Sábado         <br>
                 @endif
             </div>
 

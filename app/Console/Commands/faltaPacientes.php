@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use App\Model\Chamada;
 
 class faltaPacientes extends Command
 {
@@ -37,65 +38,62 @@ class faltaPacientes extends Command
      */
     public function handle()
     {
-        /*
+        $pacFaltaram = [];
         $dia = date('w');
 
         // Pacientes que faltaram de Segunda a Sabado
-            if ($dia == 1){
-                $pacFaltaram = \DB::table('pacientes as pac')->select('pac.nome_completo')
-                                -> where ('pac.segunda_feira','on')
-                                -> whereRaw("NOT EXISTS (select 1 from chamada as chamada where chamada.nome_completo = pac.nome_completo 
+        if ($dia == 1){
+            $pacFaltaram = \DB::table('pacientes as pac')->select('pac.nome_completo')
+                            -> where ('pac.segunda_feira','on')
+                            -> whereRaw("NOT EXISTS (select 1 from chamada as chamada where chamada.nome_completo = pac.nome_completo 
+                                        and 'chamada.created_at' = '".date('Y-m-d')."')")
+                            ->get();
+    
+        } else if($dia == 2){
+            $pacFaltaram = \DB::table('pacientes as pac')->select('pac.nome_completo')
+                            -> where ('pac.terca_feira','on')
+                            -> whereRaw("NOT EXISTS (select 1 from chamada as chamada where chamada.nome_completo = pac.nome_completo 
+                                        and 'chamada.created_at' = '".date('Y-m-d')."')")
+                            ->get();
+    
+        } else if($dia == 3){
+            $pacFaltaram = \DB::table('pacientes as pac')->select('pac.nome_completo')
+                            -> where ('pac.quarta_feira','on')
+                            -> whereRaw("NOT EXISTS (select 1 from chamada as chamada where chamada.nome_completo = pac.nome_completo 
+                                        and 'chamada.created_at' = '".date('Y-m-d')."')")
+                            ->get();
+    
+        } else if($dia == 4){
+            $pacFaltaram = \DB::table('pacientes as pac')->select('pac.nome_completo')
+                            -> where ('pac.quinta_feira','on')
+                            -> whereRaw("NOT EXISTS (select 1 from chamada as chamada where chamada.nome_completo = pac.nome_completo 
+                                        and 'chamada.created_at' = '".date('Y-m-d')."')")
+                            ->get();
+    
+        } else if($dia == 5){
+            $pacFaltaram = \DB::table('pacientes as pac')->select('pac.nome_completo')
+                            -> where ('pac.sexta_feira','on')
+                            -> whereRaw("NOT EXISTS (select 1 from chamada as chamada where chamada.nome_completo = pac.nome_completo 
+                                        and 'chamada.created_at' = '".date('Y-m-d')."')")
+                            ->get();
+    
+        } else if($dia == 6){
+            $pacFaltaram = \DB::table('pacientes as pac')->select('pac.nome_completo')
+                            -> where ('pac.sabado','on')
+                            -> whereRaw("NOT EXISTS (select 1 from chamada as chamada where chamada.nome_completo = pac.nome_completo 
                                             and 'chamada.created_at' = '".date('Y-m-d')."')")
-                                ->get();
-        
-            } else if($dia == 2){
-                $pacFaltaram = \DB::table('pacientes as pac')->select('pac.nome_completo')
-                                -> where ('pac.terca_feira','on')
-                                -> whereRaw("NOT EXISTS (select 1 from chamada as chamada where chamada.nome_completo = pac.nome_completo 
-                                            and 'chamada.created_at' = '".date('Y-m-d')."')")
-                                ->get();
-        
-            } else if($dia == 3){
-                $pacFaltaram = \DB::table('pacientes as pac')->select('pac.nome_completo')
-                                -> where ('pac.quarta_feira','on')
-                                -> whereRaw("NOT EXISTS (select 1 from chamada as chamada where chamada.nome_completo = pac.nome_completo 
-                                            and 'chamada.created_at' = '".date('Y-m-d')."')")
-                                ->get();
-        
-            } else if($dia == 4){
-                $pacFaltaram = \DB::table('pacientes as pac')->select('pac.nome_completo')
-                                -> where ('pac.quinta_feira','on')
-                                -> whereRaw("NOT EXISTS (select 1 from chamada as chamada where chamada.nome_completo = pac.nome_completo 
-                                            and 'chamada.created_at' = '".date('Y-m-d')."')")
-                                ->get();
-        
-            } else if($dia == 5){
-                $pacFaltaram = \DB::table('pacientes as pac')->select('pac.nome_completo')
-                                -> where ('pac.sexta_feira','on')
-                                -> whereRaw("NOT EXISTS (select 1 from chamada as chamada where chamada.nome_completo = pac.nome_completo 
-                                            and 'chamada.created_at' = '".date('Y-m-d')."')")
-                                ->get();
-        
-            } else if($dia == 6){
-                $pacFaltaram = \DB::table('pacientes as pac')->select('pac.nome_completo')
-                                -> where ('pac.sabado','on')
-                                -> whereRaw("NOT EXISTS (select 1 from chamada as chamada where chamada.nome_completo = pac.nome_completo 
-                                             and 'chamada.created_at' = '".date('Y-m-d')."')")
-                                ->get();
-        
-            } 
+                            ->get();
+    
+        } 
            
-// tenho salvar um a um
-    $pacientes = new Chamada([
-        'nome_completo' => $schedule,
-        'sala' => '-',
-        'status'=> 'F'
-
-    ]);
-    $pacientes->save();    
-
-
-    */
- 
-}
+        // tenho salvar um a um
+        foreach ($pacFaltaram as $key => $value) {
+            Chamada::create([
+                'nome_completo' => $value->nome_completo,
+                'sala' => '-',
+                'status'=> 'F'
+            ]);
+        }
+    
+    }
 }

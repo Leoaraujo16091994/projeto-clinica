@@ -58,12 +58,12 @@ class RelatoriosController extends Controller
 
             }
         }
-      
+     
 
         $mes = date('m');
         $ano = date('Y');
 
-        return view ('/relatorioPronto',['pacientes'=> $resultado],compact('mes','ano'));
+        return view ('/relatorioPronto',['pacientes'=> $resultado],compact('mes','ano','dataInicial'));
 
     }
 

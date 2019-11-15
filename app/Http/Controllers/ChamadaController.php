@@ -46,7 +46,6 @@ class ChamadaController extends Controller
 
         
         $cont = count($pacientesPresentes);
-
     
         return view ('chamarpaciente',['pacientes'=> $pacientesPresentes],['contador'=> $cont]);
     
@@ -55,6 +54,8 @@ class ChamadaController extends Controller
   
     public function store(Request $request)
     {
+        date_default_timezone_set('America/Fortaleza');
+
         $nome = $request -> nomeCompleto;
         $sala = $request -> sala;
         $atend = $request -> chamada;
@@ -98,12 +99,9 @@ class ChamadaController extends Controller
                                 $qtdPacientes = 3 ;
                             }    
         
-
-       return view('/painel',compact('paciente'),compact ('qtdPacientes'));
+    return view('/painel',compact('paciente'),compact ('qtdPacientes'));
 
     }
-
-    
 
     
     public function paineltelacheia()

@@ -19,13 +19,16 @@
 <?php   $totalFalta= 0   ?>
 <?php   $totalSessoes = 0     ?>
 
-
+<?php
+    $date= Carbon\Carbon::parse($dataInicial)->format('m');
+     $var = cal_days_in_month(CAL_GREGORIAN,$date,$ano);
+ ?>
 
 
 <table class="table table-bordered">
   <thead>
     <th>Nome</th>
-        @for($i = 1 ; $i <= cal_days_in_month(CAL_GREGORIAN,$mes,$ano);$i++)
+        @for($i = 1 ; $i <= $var;$i++)
             <th>{{$i}}</th>
         @endfor
 
@@ -46,7 +49,7 @@
               </font>                     
             </td>
 
-          @for($i = 1 ,$x= 0 ,$f=0, $e = 0 ,$p = 0; $i <= cal_days_in_month(CAL_GREGORIAN,$mes,$ano);$i++)
+          @for($i = 1 ,$x= 0 ,$f=0, $e = 0 ,$p = 0; $i <= $var;$i++)
                   @foreach($paciente['datas'] as $data)
                       @if( Carbon\Carbon::parse($data->created_at)->format('d') == $i )
                           <?php 
@@ -70,7 +73,7 @@
                       @endif
                   @endforeach
                        
-                @if($i <= cal_days_in_month(CAL_GREGORIAN,$mes,$ano))
+                @if($i <= $var)
                     <td>  </td>
                 @endif
             @endfor
@@ -84,25 +87,17 @@
         <?php   $totalSessoes = $totalSessoes + $p     ?>
 
 
-
-
-          </tr>
+    </tr>
             
 
-
-
-
     @else
-          
-              
-          
+                    
           <tr>
             <td>
-              {{$paciente['nome_paciente']}}  
-                           
+              {{$paciente['nome_paciente']}}                   
             </td>
 
-          @for($i = 1 ,$x= 0 ,$f=0, $e = 0 ,$p = 0; $i <= cal_days_in_month(CAL_GREGORIAN,$mes,$ano);$i++)
+          @for($i = 1 ,$x= 0 ,$f=0, $e = 0 ,$p = 0; $i <= $var;$i++)
                   @foreach($paciente['datas'] as $data)
                       @if( Carbon\Carbon::parse($data->created_at)->format('d') == $i )
                           <?php 
@@ -124,7 +119,7 @@
                       @endif
                   @endforeach
                        
-                @if($i <= cal_days_in_month(CAL_GREGORIAN,$mes,$ano))
+                @if($i <= $var)
                     <td>  </td>
                 @endif
             @endfor
@@ -136,8 +131,6 @@
         <?php   $totalExtra = $totalExtra + $e    ?>
         <?php   $totalFalta= $totalFalta + $f   ?>
         <?php   $totalSessoes = $totalSessoes + $p     ?>
-
-
 
 
           </tr>
@@ -158,9 +151,6 @@
           <td> {{ $totalFalta }}</td>
       <th>Total de Sessões</th>
         <td> {{ $totalSessoes}}</td>
-
-     
-
 
 </thead>
 </table>

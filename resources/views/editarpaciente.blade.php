@@ -6,6 +6,16 @@
 
 
 @section('body')
+<script>
+    function msg() {
+        alert("Paciente Alterado com Sucesso!!!");
+            document.formulario.submit();
+    }
+</script>
+
+
+
+
 
 <div id = "titulopagina">
        <h1> Editar Paciente </h1>                
@@ -96,7 +106,7 @@
 
 
         <div id="botaoConcluir">
-            <button type="submit"  class="btn btn-primary btn-lg" alt="botaoConcluir" >  Concluir </button>
+            <button type="button"  class="btn btn-primary btn-lg" alt="botaoConcluir" onclick="msg()" >  Concluir </button>
         </div>           
     </form>
 
