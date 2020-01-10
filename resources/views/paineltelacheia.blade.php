@@ -8,7 +8,7 @@
 
     <link rel="stylesheet" type="text/css" media="screend and(min-width: 1000px)" href="large.css" />
 
-    <meta http-equiv="refresh" content=10 ; url="/painel">
+    <meta http-equiv="refresh" content=5 ; url="/painel">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

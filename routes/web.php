@@ -6,6 +6,14 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+Route::post('/autocomplete/fetch', 'ChegadaController@fetch')->name('autocomplete.fetch');
+Route::post('/autocomp/fetch', 'ChamadaController@fetch')->name('autocomp.fetch');
+
+
+
+
+
+
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
@@ -22,7 +30,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     //ChegadaController
     Route::resource ('/chegada','ChegadaController');
-    
+    Route::post('/chegada/fetch', 'ChegadaController@fetch')->name('autocomplete.fetch');
     
     //ChamadaController
     Route::resource('/chamarpainel','ChamadaController');

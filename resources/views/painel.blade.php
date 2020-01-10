@@ -24,7 +24,7 @@
 <br>
 
 
-<meta http-equiv="refresh" content=10 ; url= "/painel">
+<meta http-equiv="refresh" content= 7 ; url= "/painel">
 
     <div class="row">
         <div class="col-sm-1 col-md-100 col-lg-50" >

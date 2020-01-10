@@ -8,23 +8,6 @@
 
 @section('body')
 
-
-<script>
-function validar(){
-    var nome = formulario.nomeCompleto.value;
-
-    if(nome == ""){
-        alert("Você Deve Informar Um Nome");
-    } else {
-        alert("Chegada Informada");
-        document.formulario.submit();
-        return true;
-    }
-
-}
-</script>
-
-
 <div id = "titulopagina">
        <h1> Informar Chegada </h1>                
 </div>
@@ -35,8 +18,8 @@ function validar(){
             @csrf
 
             <label for="validationnomeCompleto"> Nome Completo </label>
-            <input type="text" class="form-control" placeholder="Nome Completo" id="nomeCompleto"  name = "nomeCompleto" >
-
+            <input autocomplete= "off" type="text" class="form-control" placeholder="Nome Completo" id="nomeCompleto"  name = "nomeCompleto" >
+            <div id="lista" > </div>
             <br><br><br>
        
          
@@ -62,7 +45,54 @@ function validar(){
 
 </div>
 
+<script src="/js/jquery.min.js"></script>
+
+
+<script>
+
+function validar(){
+    var nome = formulario.nomeCompleto.value;
+
+    if(nome == ""){
+        alert("Você Deve Informar Um Nome");
+    } else {
+        alert("Chegada Informada");
+        document.formulario.submit();
+        return true;
+    }
+}
+
+
+$('#nomeCompleto').keyup(function(){
+    var query = $(this).val();
+    if(query != '') {
+        var _token = $('input[name="_token"]').val();
+        $.ajax({
+            url:"{{ route('autocomplete.fetch') }}",
+            method:"POST",
+            data:{query:query, _token:_token},
+            success:function(data){
+                $('#lista').fadeIn();  
+                $('#lista').html(data);
+            }
+        });
+    }
+});
+
+$('#lista').on('click', 'li', function(){  
+    $('#nomeCompleto').val($(this).text());  
+    $('#lista').fadeOut();  
+});
+
+</script>
+
+
 @endsection
+
+
+
+
+
 
 <style>
 

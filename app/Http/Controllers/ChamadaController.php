@@ -138,13 +138,6 @@ class ChamadaController extends Controller
         $var = Chamada::find($id);
         $var->delete();
         
-        /*
-
-        if($var)
-            return "Ultimo Paciente Removido";
-        else
-            return "Erro ao remover ultimo paciente";
-        */
         
         return redirect('chamarpainel/create');
     }
@@ -154,55 +147,76 @@ class ChamadaController extends Controller
     public function pacientesFaltaram(){
         $dia = date('w');
 
-// Pacientes que faltaram de Segunda a Sabado
-    if ($dia == 1){
-        $pacFaltaram = \DB::table('pacientes as pac')->select('pac.nome_completo')
-                        -> where ('pac.segunda_feira','on')
-                        -> whereRaw("NOT EXISTS (select 1 from chamada as chamada where chamada.nome_completo = pac.nome_completo 
-                                    and 'chamada.created_at' = '".date('Y-m-d')."')")
-                        ->get();
+        // Pacientes que faltaram de Segunda a Sabado
+            if ($dia == 1){
+                $pacFaltaram = \DB::table('pacientes as pac')->select('pac.nome_completo')
+                                -> where ('pac.segunda_feira','on')
+                                -> whereRaw("NOT EXISTS (select 1 from chamada as chamada where chamada.nome_completo = pac.nome_completo 
+                                            and 'chamada.created_at' = '".date('Y-m-d')."')")
+                                ->get();
 
-    } else if($dia == 2){
-        $pacFaltaram = \DB::table('pacientes as pac')->select('pac.nome_completo')
-                        -> where ('pac.terca_feira','on')
-                        -> whereRaw("NOT EXISTS (select 1 from chamada as chamada where chamada.nome_completo = pac.nome_completo 
-                                    and 'chamada.created_at' = '".date('Y-m-d')."')")
-                        ->get();
+            } else if($dia == 2){
+                $pacFaltaram = \DB::table('pacientes as pac')->select('pac.nome_completo')
+                                -> where ('pac.terca_feira','on')
+                                -> whereRaw("NOT EXISTS (select 1 from chamada as chamada where chamada.nome_completo = pac.nome_completo 
+                                            and 'chamada.created_at' = '".date('Y-m-d')."')")
+                                ->get();
 
-    } else if($dia == 3){
-        $pacFaltaram = \DB::table('pacientes as pac')->select('pac.nome_completo')
-                        -> where ('pac.quarta_feira','on')
-                        -> whereRaw("NOT EXISTS (select 1 from chamada as chamada where chamada.nome_completo = pac.nome_completo 
-                                    and 'chamada.created_at' = '".date('Y-m-d')."')")
-                        ->get();
+            } else if($dia == 3){
+                $pacFaltaram = \DB::table('pacientes as pac')->select('pac.nome_completo')
+                                -> where ('pac.quarta_feira','on')
+                                -> whereRaw("NOT EXISTS (select 1 from chamada as chamada where chamada.nome_completo = pac.nome_completo 
+                                            and 'chamada.created_at' = '".date('Y-m-d')."')")
+                                ->get();
 
-    } else if($dia == 4){
-        $pacFaltaram = \DB::table('pacientes as pac')->select('pac.nome_completo')
-                        -> where ('pac.quinta_feira','on')
-                        -> whereRaw("NOT EXISTS (select 1 from chamada as chamada where chamada.nome_completo = pac.nome_completo 
-                                    and 'chamada.created_at' = '".date('Y-m-d')."')")
-                        ->get();
+            } else if($dia == 4){
+                $pacFaltaram = \DB::table('pacientes as pac')->select('pac.nome_completo')
+                                -> where ('pac.quinta_feira','on')
+                                -> whereRaw("NOT EXISTS (select 1 from chamada as chamada where chamada.nome_completo = pac.nome_completo 
+                                            and 'chamada.created_at' = '".date('Y-m-d')."')")
+                                ->get();
 
-    } else if($dia == 5){
-        $pacFaltaram = \DB::table('pacientes as pac')->select('pac.nome_completo')
-                        -> where ('pac.sexta_feira','on')
-                        -> whereRaw("NOT EXISTS (select 1 from chamada as chamada where chamada.nome_completo = pac.nome_completo 
-                                    and 'chamada.created_at' = '".date('Y-m-d')."')")
-                        ->get();
+            } else if($dia == 5){
+                $pacFaltaram = \DB::table('pacientes as pac')->select('pac.nome_completo')
+                                -> where ('pac.sexta_feira','on')
+                                -> whereRaw("NOT EXISTS (select 1 from chamada as chamada where chamada.nome_completo = pac.nome_completo 
+                                            and 'chamada.created_at' = '".date('Y-m-d')."')")
+                                ->get();
 
-    } else if($dia == 6){
-        $pacFaltaram = \DB::table('pacientes as pac')->select('pac.nome_completo')
-                        -> where ('pac.sabado','on')
-                        -> whereRaw("NOT EXISTS (select 1 from chamada as chamada where chamada.nome_completo = pac.nome_completo 
-                                     and 'chamada.created_at' = '".date('Y-m-d')."')")
-                        ->get();
+            } else if($dia == 6){
+                $pacFaltaram = \DB::table('pacientes as pac')->select('pac.nome_completo')
+                                -> where ('pac.sabado','on')
+                                -> whereRaw("NOT EXISTS (select 1 from chamada as chamada where chamada.nome_completo = pac.nome_completo 
+                                            and 'chamada.created_at' = '".date('Y-m-d')."')")
+                                ->get();
 
-    } 
-
-   
-
+            } 
 
     }
 
 
-}
+
+
+
+    public function fetch(Request $request)
+     {
+        if($request->get('query'))
+        {
+            $query = $request->get('query');
+            $data = Pacientes::select('nome_completo')
+                    ->where('nome_completo', 'LIKE', "%{$query}%")->limit(3)
+                    ->get();
+            $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
+                foreach($data as $row)    {
+                    $output .= '
+                    <li><a href="#">'.$row->nome_completo.'</a></li>
+                    ';
+                }   
+            $output .= '</ul>';
+            echo $output;
+        }
+    }
+
+
+
+    }

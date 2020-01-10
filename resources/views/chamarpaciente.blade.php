@@ -20,8 +20,8 @@
       @csrf
 
           <label for="validationnomeCompleto"> Nome Completo </label>
-              <input name="nomeCompleto" id="nomeCompleto" class="form-control" placeholder="Nome" >
-            
+              <input autocomplete= "off"  name="nomeCompleto" id="nomeCompleto" class="form-control" placeholder="Nome" >
+              <div id="lista" > </div>
           <label> Sala </label>
               <input type="text" class="form-control" placeholder="Número da Sala" id="sala"  name = "sala" required><br>
 
@@ -35,13 +35,8 @@
     <button type="submit" id="botaoChamar" class="btn btn-block btn-primary" alt="botaoChamar"  onClick="som()">Chamar</button>
   
   </div>
-        
-     
+             
         <button type="submit" id="botaoLembrar" class="btn btn-info"   onClick="lembrarSom()"> Chamar Novamente </button>
-
-
-
-
 
 
       <div id = "botaoCorrigir">
@@ -50,53 +45,6 @@
                 <button type="submit" id="botaoCorrigr" class="btn btn-danger" onClick="corrigir()"> Corrigir </button>
           </form>
       </div>
-
-
-
-
-
-<script>
-    function som(){
-        var nome = chamarPainel.nomeCompleto.value;
-        var sala = chamarPainel.sala.value;
-        
-        if(nome ==""){
-            alert("Informe o Nome Completo");
-            return 0;
-        } else if(sala == ""){
-            alert("Informe a Sala");
-            return 0;
-         } else{
-
-      const form= document.querySelector('form');
-      const audio = new Audio('/alerta.mp3');
-
-    
-      console.log('som');
-      audio.play();
-      setTimeout(() => {
-        console.log('submete');
-        document.getElementById('chamarPainel').submit();
-      }, 4000);
-    }
-  }
-
-
-
-
-
-    function lembrarSom(){
-        const form= document.querySelector('form');
-        const audio = new Audio('/alerta.mp3');    
-        console.log('som');
-        audio.play();
-    }
-
-
-
-</script>
-
-
 
 
 <div class="table-wrapper-scroll-y my-custom-scrollbar">
@@ -127,6 +75,73 @@
 </div>
 
 
+<script src="/js/jquery.min.js"></script>
+
+
+
+<script>
+
+function som(){
+        var nome = chamarPainel.nomeCompleto.value;
+        var sala = chamarPainel.sala.value;
+        
+        if(nome ==""){
+            alert("Informe o Nome Completo");
+            return 0;
+        } else if(sala == ""){
+            alert("Informe a Sala");
+            return 0;
+         } else{
+
+      const form= document.querySelector('form');
+      const audio = new Audio('/alerta.mp3');
+
+    
+      console.log('som');
+      audio.play();
+      setTimeout(() => {
+        console.log('submete');
+        document.getElementById('chamarPainel').submit();
+      }, 4000);
+    }
+  }
+
+
+
+
+    function lembrarSom(){
+        const form= document.querySelector('form');
+        const audio = new Audio('/alerta.mp3');    
+        console.log('som');
+        audio.play();
+    }
+
+
+
+$('#nomeCompleto').keyup(function(){
+    var query = $(this).val();
+    if(query != '') {
+        var _token = $('input[name="_token"]').val();
+        $.ajax({
+            url:"{{ route('autocomp.fetch') }}",
+            method:"POST",
+            data:{query:query, _token:_token},
+            success:function(data){
+                $('#lista').fadeIn();  
+                $('#lista').html(data);
+            }
+        });
+    }
+});
+
+$('#lista').on('click', 'li', function(){  
+    $('#nomeCompleto').val($(this).text());  
+    $('#lista').fadeOut();  
+});
+
+</script>
+
+
 
 <br><br>
 
@@ -134,6 +149,9 @@
 
 
 <style>
+      #lista{
+        position:fixed;
+      }
   #dados{
     width:50%;
     margin-top:2%;
