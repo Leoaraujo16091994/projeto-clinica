@@ -197,7 +197,7 @@ class ChamadaController extends Controller
 
 
 
- 
+  
     public function fetch(Request $request)
      {
         if($request->get('query'))
