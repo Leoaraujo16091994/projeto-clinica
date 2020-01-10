@@ -4,7 +4,7 @@
 @section('titulodoNavegador')
    Chamar Paciente
 @endsection
-
+ 
 
 
 @section('body')

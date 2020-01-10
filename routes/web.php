@@ -10,7 +10,7 @@ Route::post('/autocomplete/fetch', 'ChegadaController@fetch')->name('autocomplet
 Route::post('/autocomp/fetch', 'ChamadaController@fetch')->name('autocomp.fetch');
 
 
-
+ 
 
 
 

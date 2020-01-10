@@ -48,7 +48,7 @@ class ChegadaController extends Controller
                         ->get();
         $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
         foreach($data as $row)
-        {
+        { 
             $output .= '<li><a href="#">'.$row->nome_completo.'</a></li>';
         }
         $output .= '</ul>';
