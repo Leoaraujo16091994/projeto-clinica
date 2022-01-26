@@ -44,4 +44,5 @@ Route::group(['middleware' => 'auth'], function () {
    Route::get('/relatoriospronto', 'RelatoriosController@relatorio');
    Route::resource('/relatorios','RelatoriosController');
 
+
 });

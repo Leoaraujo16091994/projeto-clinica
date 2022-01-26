@@ -149,5 +149,4 @@ class PacientesController extends Controller
     }        
    
 
-
  }

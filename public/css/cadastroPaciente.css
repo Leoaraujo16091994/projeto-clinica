@@ -1,0 +1,63 @@
+#tituloPagina{
+    border-bottom: 3px solid;
+    width:120%;
+}
+
+.formulario{
+   font-size:17px;
+}
+
+label{
+   font-weight: bold;
+   font-size:20px;
+}
+
+#segundaParte{
+    padding-left: 80px; 
+}
+
+.col-lg-6{
+    padding-left: 155px; 
+}
+
+#botaoCancelar{
+    margin-left:9rem;
+    margin-top:-4.4rem;
+}
+
+#botaoCadastrar{
+   padding-top:350px !important;
+}
+
+#alert-erro{
+  position:fixed; 
+    top: 0px; 
+    left: 30%; 
+    width: 40%;
+    z-index:9999; 
+    border-radius:0px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#alert-success{
+    position:fixed; 
+      top: 0px; 
+      left: 30%; 
+      width: 40%;
+      z-index:9999; 
+      border-radius:0px;
+      margin-left: auto;
+      margin-right: auto;
+}
+
+#lista li{
+    width:18rem !important;
+}
+
+html
+{
+  position:fixed;
+  width:100%;
+  height:100%;
+}
