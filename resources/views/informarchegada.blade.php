@@ -1,5 +1,11 @@
 @extends('layout')
 
+<link href="{{ asset('/css/informarChegada.css') }}" rel="stylesheet" type="text/css" >
+<!--<script type="text/javascript" src="{{ URL::asset('js/informarChegada.js') }}"></script> -->
+<script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+
+
 
 @section('titulodoNavegador')
     Informar Chegada
@@ -8,10 +14,146 @@
 
 @section('body')
 
-<div id = "titulopagina">
+<div id = "tituloPagina">
        <h1> Informar Chegada </h1>                
 </div>
 
+<br><br>
+
+<div id="informar">
+        <form method='post' action ='/chegada' name="formulario">
+            @csrf
+            <div class="col-12">
+                <div class="col-lg-6">
+                    <label for="validationnomeCompleto"> Nome Completo </label>
+                    <input autocomplete= "off" type="text" class="form-control" placeholder="Nome Completo" id="nomeCompleto"  name = "nomeCompleto" >
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="tableFixHead">
+                    <table>
+                        <caption class="text-center">Quadro de Pacientes de Hoje</caption>
+                        <thead>
+                            <tr>
+                                <th>Nome Completo</th>
+                                <th>Ação</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>Leonardo Amancio de Araujo</td>
+                                <td><button type="button" class="btn btn-primary">Primary</button></td>
+                            </tr>
+                            <tr>
+                                <td>Ingryd Rocha Saraiva de Araujo</td>
+                                <td><button type="button" class="btn btn-primary">Primary</button></td>
+                            </tr>
+                            <tr>
+                                <td>Olivia Rocha de Araujo</td>
+                                <td><button type="button" class="btn btn-primary">Primary</button></td>
+                            </tr>
+                            <tr>
+                                <td>Celia Cristina Amancio de Oliveira</td>
+                                <td><button type="button" class="btn btn-primary">Primary</button></td>
+                            </tr>
+                            <tr>
+                                <td>E1</td>
+                                <td><button type="button" class="btn btn-primary">Primary</button></td>
+                            </tr>
+                            <tr>
+                                <td>A1</td>
+                                <td><button type="button" class="btn btn-primary">Primary</button></td>
+                            </tr>
+                            <tr>
+                                <td>B1</td>
+                                <td>B2</td>
+                            </tr>
+                            <tr>
+                                <td>C1</td>
+                                <td>C2</td>
+                            </tr>
+                            <tr>
+                                <td>D1</td>
+                                <td>D2</td>
+                            </tr>
+                            <tr>
+                                <td>E1</td>
+                                <td>E2</td>
+                            </tr>
+                            <tr>
+                                <td>A1</td>
+                                <td>A2</td>
+                            </tr>
+                            <tr>
+                                <td>B1</td>
+                                <td>B2</td>
+                            </tr>
+                            <tr>
+                                <td>C1</td>
+                                <td>C2</td>
+                            </tr>
+                            <tr>
+                                <td>D1</td>
+                                <td>D2</td>
+                            </tr>
+                            <tr>
+                                <td>E1</td>
+                                <td>E2</td>
+                            </tr>
+                            <tr>
+                                <td>A1</td>
+                                <td>A2</td>
+                            </tr>
+                            <tr>
+                                <td>B1</td>
+                                <td>B2</td>
+                            </tr>
+                            <tr>
+                                <td>C1</td>
+                                <td>C2</td>
+                            </tr>
+                            <tr>
+                                <td>D1</td>
+                                <td>D2</td>
+                            </tr>
+                            <tr>
+                                <td>E1</td>
+                                <td>E2</td>
+                            </tr>
+                            <tr>
+                                <td>A1</td>
+                                <td>A2</td>
+                            </tr>
+                            <tr>
+                                <td>B1</td>
+                                <td>B2</td>
+                            </tr>
+                            <tr>
+                                <td>C1</td>
+                                <td>C2</td>
+                            </tr>
+                            <tr>
+                                <td>D1</td>
+                                <td>D2</td>
+                            </tr>
+                            <tr>
+                                <td>E1</td>
+                                <td>E2</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+          
+
+</div>
+
+
+
+<!--
     <br><br>
     <div id="informar">
         <form method='post' action ='/chegada' name="formulario">
@@ -44,8 +186,7 @@
         </div>
 
 </div>
-
-<script src="/js/jquery.min.js"></script>
+-->
 
 
 <script>
@@ -95,7 +236,7 @@ $('#lista').on('click', 'li', function(){
 
 
 <style>
-
+/*
    #botaoConcluir{
         margin-top:;
     }
@@ -114,6 +255,7 @@ $('#lista').on('click', 'li', function(){
         height:5%;
         width:50%;
     }
+    */
 
 
 </style>

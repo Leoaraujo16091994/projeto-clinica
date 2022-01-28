@@ -9,11 +9,6 @@ Route::get('/', function () {
 Route::post('/autocomplete/fetch', 'ChegadaController@fetch')->name('autocomplete.fetch');
 Route::post('/autocomp/fetch', 'ChamadaController@fetch')->name('autocomp.fetch');
 
-
- 
-
-
-
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {

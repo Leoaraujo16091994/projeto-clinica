@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Cadastrar') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form id="formulario" method="POST" action="{{ route('register') }}">
                         @csrf
 
                         <div class="form-group row">
@@ -61,9 +61,17 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="sala" class="col-md-4 col-form-label text-md-right">{{ __('Sala') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="sala" type="text" class="form-control" name="sala" required autocomplete="sala">
+                            </div>
+                        </div>
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="button" class="btn btn-primary" onClick="teste()">
                                     {{ __('Cadastrar') }}
                                 </button>
                             </div>
@@ -75,3 +83,23 @@
     </div>
 </div>
 @endsection
+
+
+
+<script>
+
+    function teste(){
+     /*
+        var valoresFormulario = formularioCadastro.name.value;
+        console.log("valores do formulario",valoresFormulario);
+*/
+        var form = document.getElementById('formulario');
+        console.log("form",form.value);
+
+
+        var input = document.querySelector("#formulario");
+        console.log("querySelector",input.value);
+
+}
+</script>
+
