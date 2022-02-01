@@ -40,4 +40,10 @@ Route::group(['middleware' => 'auth'], function () {
    Route::resource('/relatorios','RelatoriosController');
 
 
+
+    //PrincipalController
+    Route::resource('/principal','PrincipalController');
+    //Route::get('/principal','PrincipalController@teste');
+
+
 });
