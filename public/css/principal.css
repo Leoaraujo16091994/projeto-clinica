@@ -4,6 +4,9 @@
 .btn-toolbar{
     float:right;
 }   
+#btnCadastrar{
+  left:2%;
+}
 
 label{
    font-weight: bold;

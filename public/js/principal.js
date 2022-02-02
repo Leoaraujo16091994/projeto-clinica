@@ -1,4 +1,4 @@
-function validarCamposFormularioValendo(){
+function validarCamposFormulario(){
     var listaDeCamposInvalidos = [];
     var nome = formulario.nomeCompleto.value;
     var diasDaSemana = formulario.diasDaSemana.value;
@@ -35,15 +35,20 @@ function abrirModalConfirmacaoCadastroPaciente (){
 
 
 
-function abrirModalInformarChegadaPaciente (){
-    $('#modalChamada').modal('show');
+function abrirModalInformarChegadaPaciente (paciente){
+    console.log("paciente",paciente);
+    $('#modalChegada').modal('show');
 }
 
 
 function abrirModalChamadaPaciente (){
-    $('#modalConfirmacaoCadastro').modal('show');
+    $('#modalChamada').modal('show');
 }
 
+
+function abrirModalPacienteExtra (){
+    $('#modalPacienteExtra').modal('show');
+}
 
 
 
@@ -67,7 +72,7 @@ function alertDeSucesso(){
     
     setTimeout(
         function(){
-                document.getElementById('alert-success').style.display = 'none'}, 3000);
+                document.getElementById('alert-success').style.display = 'none'}, 2000);
 }
 
 
@@ -80,10 +85,19 @@ function confirmarCadastro(){
 }
 
 
-
-
 function limparCampos(){
-    document.getElementById("form").reset();
+    document.getElementById("nomeCompleto").value = "";
+    document.getElementById("diasDaSemana").value = "";
+    document.getElementById("turno").value = "";
+    document.getElementById("sala").value = "";
 }
+
+function buscarPaciente(){
+   formulario = formulario;
+   formulario.method = "get";
+   formulario.action = "principal";
+   formulario.submit();
+}
+
 
 

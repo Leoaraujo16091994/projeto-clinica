@@ -43,7 +43,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     //PrincipalController
     Route::resource('/principal','PrincipalController');
-    //Route::get('/principal','PrincipalController@teste');
+   // Route::get('/principal/filtro','PrincipalController@buscarPaciente');
 
 
 });

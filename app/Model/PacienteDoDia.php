@@ -4,15 +4,15 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Paciente extends Model
+class PacienteDoDia extends Model
 {
-  protected $table = 'paciente';
+  protected $table = 'paciente_do_dia';
 
   protected  $fillable =[
-      'nome_completo',
-      'dias_semana',
-      'turno',
-      'sala'
+      'paciente_pk',
+      'chegou',
+      'chamado',
+      'created_at'
   ];
 /*
   public function chamadas()
