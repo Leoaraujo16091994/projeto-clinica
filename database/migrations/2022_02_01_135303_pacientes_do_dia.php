@@ -19,6 +19,8 @@ class PacientesDoDia extends Migration
             $table->foreign('paciente_pk')->references('id')->on('paciente');
             $table->integer('chegou');
             $table->integer('chamado');
+            $table->string('observacao')->nullable();
+            $table->integer('sala_paciente_extra')->nullable();
             $table->timestamps();
         });
 

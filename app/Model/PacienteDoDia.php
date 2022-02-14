@@ -6,12 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class PacienteDoDia extends Model
 {
-  protected $table = 'paciente_do_dia';
+  protected $table = 'pacientes_do_dia';
 
   protected  $fillable =[
       'paciente_pk',
       'chegou',
       'chamado',
+      'observacao',
+      'sala_paciente_extra',
       'created_at'
   ];
 /*

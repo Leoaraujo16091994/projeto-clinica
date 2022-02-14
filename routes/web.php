@@ -29,8 +29,8 @@ Route::group(['middleware' => 'auth'], function () {
     
     //ChamadaController
     Route::resource('/chamarpainel','ChamadaController');
-    Route::get('/painel','ChamadaController@exibirpainel');
-    Route::get('/paineltelacheia','ChamadaController@paineltelacheia');
+   // Route::get('/painel','ChamadaController@exibirpainel');
+    //Route::get('/paineltelacheia','ChamadaController@paineltelacheia');
     Route::get('/home', 'HomeController@index')->name('home');
     
 
@@ -41,9 +41,18 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 
+
+
+
+
     //PrincipalController
     Route::resource('/principal','PrincipalController');
-   // Route::get('/principal/filtro','PrincipalController@buscarPaciente');
+    Route::post('/pacienteExtra','PrincipalController@storePacienteExtra');
+    Route::get('/todosPacientes','PrincipalController@todosPacientes')->name('autocompletePacientes.fetch');;
+   
+    //PainelController
+    Route::resource('/painel','PainelController');
+   
 
 
 });

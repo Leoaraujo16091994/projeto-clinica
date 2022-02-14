@@ -3,13 +3,52 @@
 
 
 <link href="{{ asset('/css/principal.css') }}" rel="stylesheet" type="text/css" >
-<script type="text/javascript" src="{{ URL::asset('js/principal.js') }}"></script>
 <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="{{ URL::asset('js/principal.js') }}"></script>
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
-
-
+<meta  charset =" UTF-8 " />
+<meta  name =" viewport " content =" largura=largura do dispositivo, escala inicial=1.0 " />
+<meta  http-equiv =" Compatível com X-UA " content =" ie=edge " />
 
 @section('titulodoNavegador', 'Cadastro de Paciente')
+
+<!-- MODAL PACIENTE EXTRA-->
+<div class="modal fade" id="modalPacienteExtra" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Qual o paciente você deseja adicionar hoje ?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <form id="formularioPacienteExtra" name ="formularioPacienteExtra" method= 'post' action="/pacienteExtra">
+      @csrf
+          <!--  <input type="hidden" name="_method" value="PUT"> -->
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Nome do Paciente:</label>
+            <select id="listaPacienteExtra"  name="paciente" class="form-select" size="4">
+              <select>
+          </div>
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">Sala:</label>
+            <select class="form-select" id="salaPacienteExtra" name="salaPacienteExtra">
+                      <option></option>
+                      <option value="1">Sala 1</option>
+                      <option value="2">Sala 2</option>
+                      <option value="3">Sala 3</option>
+                      <option value="4">Sala 4</option>
+                      <option value="5">Sala 5</option>
+                    </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" onClick="adicionarPacienteExtra()">Confirmar</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 @section('body')
 
@@ -18,7 +57,20 @@
 </div>
 
 <br>
-
+<!--
+<header>
+      <h1>Browser voices</h1>
+    </header>
+    <main>
+      <form class="input" id="voice-form">
+        <div class="field">Nome</label>
+          <input type="text" name="speech" id="speech" required />
+        </div>
+      
+        <button>FALAR</button>
+      </form>
+    </main>
+-->
     <div class="formulario">
         <form id="formulario" name ="formulario" method = 'post' action = '/principal'>
             @csrf
@@ -62,7 +114,7 @@
     </div>
 
     <div class="btn-group me-2" role="group">
-      <button id="btnCadastrar" type="button" onClick="abrirModalPacienteExtra()" class="btn btn-outline-warning btn-lg" alt="botaoPacienteExtra"> 
+      <button id="btnPacienteExtra" type="button" onClick="abrirModalPacienteExtra()" class="btn btn-outline-warning btn-lg" alt="botaoPacienteExtra"> 
          Paciente Extra </button>
     </div>
 
@@ -79,7 +131,7 @@
     </div>
   
     <div class="btn-group me-2" role="group" >
-      <button type="submit" class="btn btn-outline-success btn-lg" onClick="validarCamposFormulario()" alt="botaoCadastrar"> Cadastrar</button>       
+      <button type="submit" class="btn btn-outline-success btn-lg" onClick="validarCamposFormularioCadastrar()" alt="botaoCadastrar"> Cadastrar</button>       
     </div>
   </div>
 
@@ -96,10 +148,9 @@
                                 <th>Observação</th>
                             </tr>
                         </thead>
-
                         <tbody>
-                                @foreach($pacientesDoDia as $paciente)
-                                <tr>
+                          @foreach($pacientesDoDia as $paciente)
+                              <tr>
                                   <td> {{$paciente->nome_completo}} </td>
                                 @if($paciente->chegou == "1")
                                     <td><button type="button" class="btn btn-outline-danger" onClick="abrirModalInformarChegadaPaciente({{json_encode($paciente)}})"> Não Chegou</button></td>
@@ -109,24 +160,19 @@
                                 @endif
 
                                 @if($paciente->chamado == "1")
-                                  <td><button type="button" class="btn btn-outline-danger" onClick="informarChegadaPaciente()"> Não Chamado</button></td>
+                                  <td><button type="button" class="btn btn-outline-danger" onClick="abrirModalChamadaPaciente({{json_encode($paciente)}})"> Não Chamado</button></td>
                                 @else
                                   <td><button type="button" class="btn btn-outline-success" disabled>Chamado</button></td>
                                 
                                 @endif
-                                  <td id="colunaObservacao"></td>
+                                  <td id="colunaObservacao"> {{$paciente->observacao}}</td>
                                 </tr>
+                              </form>
                               @endforeach
                         </tbody>
                     </table>
                 </div>
             </div>
-
-
-
-
-            
-
 
 
 <!-- MODAL CONFIRMAÇÃO DE CADASTRO DE PACIENTE-->
@@ -155,12 +201,14 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form>
+      <form id="formularioChegada" name ="formularioChegada" method= 'post' >
+            @csrf
+            <input type="hidden" name="_method" value="PUT">
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Observação:</label>
-            <input type="text" class="form-control" id="recipient-name">
+            <input type="text" class="form-control" id="observacao" name="observacao">
           </div>
-         
+          <input type="hidden" class="form-control" value=true id="chegadaPaciente" name="chegadaPaciente">
         </form>
       </div>
       <div class="modal-footer">
@@ -183,35 +231,12 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-footer">
-          <button type="button" class="btn btn-primary" onClick="chamaPaciente()">Confirmar</button>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-
-<!-- MODAL PACIENTE EXTRA-->
-<div class="modal fade" id="modalPacienteExtra" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Qual o paciente você quer adicionar hoje ?</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Nome Completo:</label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>
-         
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" onClick="informaChegadaPaciente()">Confirmar</button>
+      <form id="formularioChamada" name ="formularioChamada" method= 'post' action="/principal/{{$paciente->id}}">
+      @csrf
+            <input type="hidden" name="_method" value="PUT">
+          <button type="button" class="btn btn-primary" onClick="chamarPaciente()">Confirmar</button>
+          <input type="hidden" class="form-control" value=true id="chamadaPaciente" name="chamadaPaciente">
+      <form>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
       </div>
     </div>
@@ -231,6 +256,10 @@
 <div class="alert alert-success" style='display:none' id='alert-success'>
    Paciente Cadastrado com sucesso! 
 </div>
+
+
+
+
 
 
 @endsection

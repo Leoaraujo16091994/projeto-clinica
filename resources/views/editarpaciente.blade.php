@@ -28,7 +28,6 @@
 
 @foreach($paciente as $pac)
 
-
     <div id="dados">
         <form name ="formulario" method = "post" action = '/pacientes/{{$pac->id}} '>
             @csrf

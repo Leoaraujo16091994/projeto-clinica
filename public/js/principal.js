@@ -1,4 +1,16 @@
-function validarCamposFormulario(){
+
+var pacienteSelecionadoChegada ;
+var pacienteSelecionadoChamada;
+
+function buscarPaciente(){
+    formulario = formulario;
+    formulario.method = "get";
+    formulario.action = "principal";
+    formulario.submit();
+ }
+
+
+function validarCamposFormularioCadastrar(){
     var listaDeCamposInvalidos = [];
     var nome = formulario.nomeCompleto.value;
     var diasDaSemana = formulario.diasDaSemana.value;
@@ -29,28 +41,39 @@ function validarCamposFormulario(){
     }
 }
 
+
+
 function abrirModalConfirmacaoCadastroPaciente (){
     $('#modalConfirmacaoCadastro').modal('show');
 }
 
-
-
 function abrirModalInformarChegadaPaciente (paciente){
-    console.log("paciente",paciente);
+    this.pacienteSelecionadoChegada = paciente;
     $('#modalChegada').modal('show');
+    
 }
 
 
-function abrirModalChamadaPaciente (){
+function abrirModalChamadaPaciente (paciente){
+    this.pacienteSelecionadoChamada = paciente
     $('#modalChamada').modal('show');
 }
 
-
 function abrirModalPacienteExtra (){
+    var _token = $('input[name="_token"]').val();
+        $.ajax({
+            url: '/todosPacientes',
+            type: 'get',
+            success: function (retorno) {
+                $('#listaPacienteExtra').fadeIn();  
+                $('#listaPacienteExtra').html(retorno);
+        
+            }, error: function () {
+                console.log(erro, er);
+            }
+         });
     $('#modalPacienteExtra').modal('show');
 }
-
-
 
 
 function alertDeErro(listaDeCamposInvalidos){
@@ -67,6 +90,8 @@ function alertDeErro(listaDeCamposInvalidos){
                 document.getElementById('alert-erro').style.display = 'none'}, 5000);
 }
 
+
+
 function alertDeSucesso(){
     document.getElementById('alert-success').style.display = 'block';
     
@@ -74,6 +99,7 @@ function alertDeSucesso(){
         function(){
                 document.getElementById('alert-success').style.display = 'none'}, 2000);
 }
+
 
 
 function confirmarCadastro(){
@@ -92,12 +118,74 @@ function limparCampos(){
     document.getElementById("sala").value = "";
 }
 
-function buscarPaciente(){
-   formulario = formulario;
-   formulario.method = "get";
-   formulario.action = "principal";
-   formulario.submit();
+
+function informaChegadaPaciente(){
+    document.getElementById("formularioChegada").setAttribute("action", "/principal/" + pacienteSelecionadoChegada.id);
+    document.formularioChegada.submit();
 }
 
+function chamarPaciente(){
+    document.getElementById("formularioChamada").setAttribute("action", "/principal/" + pacienteSelecionadoChamada.id);
+    document.formularioChamada.submit();
+}
+
+function adicionarPacienteExtra(){
 
 
+    var listaDeCamposInvalidos = [];
+    var nome = formularioPacienteExtra.paciente.value;
+    var sala = formularioPacienteExtra.salaPacienteExtra.value;
+   
+    if(nome ==""){
+         listaDeCamposInvalidos.push("É necessário selecionar um paciente");
+    }
+
+    if(sala ==""){
+        listaDeCamposInvalidos.push("É necessário selecionar uma sala");
+    }
+
+    if(listaDeCamposInvalidos.length > 0){
+        alertDeErro(listaDeCamposInvalidos);
+         return 0;
+     } else {
+        alertDeSucesso();
+
+        setTimeout(
+            function(){
+                document.formularioPacienteExtra.submit();;}, 1000);
+        
+     }
+    
+}
+
+/*
+
+
+$(document).ready(function(){
+    $("#myInput").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $(".dropdown-menu li").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
+*/
+
+
+
+/*
+MUITO IMPORTANTE
+window.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('voice-form');
+    const input = document.getElementById('speech');
+    
+
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      const toSay = input.value.trim();
+      const utterance = new SpeechSynthesisUtterance(toSay);
+      speechSynthesis.speak(utterance);
+      input.value = '';
+    });
+  });
+  */
