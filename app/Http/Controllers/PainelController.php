@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 use App\Model\Paciente;
 use App\Model\PacienteDoDia;
+use App\Model\UltimoPacienteChamado;
 use Illuminate\Http\Request;
 
 
@@ -80,9 +81,26 @@ class PainelController extends Controller
             ->orderByDesc('pacientes_do_dia.updated_at')
             ->limit(1)
             ->get();
-               
-            return view('/novoPainelTelaCheia',['pacientesDoDia' => $pacientesDoDia],['ultimoPacienteChamado' => $ultimoPacienteChamado]);             
-    
+
+            $ultimoPacienteChamadoSalvo= DB::table('ultimo_paciente_chamado')
+                ->select('ultimo_paciente_chamado.paciente_pk')
+                ->orderByDesc('ultimo_paciente_chamado.updated_at')
+                ->limit(1)
+                ->get();
+
+   
+              if($ultimoPacienteChamado[0]->idDoPaciente != $ultimoPacienteChamadoSalvo[0]->paciente_pk ){
+                        $paciente = new UltimoPacienteChamado([
+                                'paciente_pk' => $ultimoPacienteChamado[0]->idDoPaciente
+                        ]);
+                
+                        $paciente->save();
+
+                        return view('/novoPainelTelaCheia',['pacientesDoDia' => $pacientesDoDia],['ultimoPacienteChamado' => $ultimoPacienteChamado]);             
+                 } else {
+                        return view('/novoPainelTelaCheia',['pacientesDoDia' => $pacientesDoDia],['ultimoPacienteChamado' =>null]);             
+
+                }
         }              
   
 

@@ -1,4 +1,4 @@
-function alertDeErro(listaDeCamposInvalidos){
+/*function alertDeErro(listaDeCamposInvalidos){
     document.getElementById('alert-erro').style.display = 'block';
     var lista  = [];
     for(const item of listaDeCamposInvalidos){
@@ -20,11 +20,29 @@ function alertDeSucesso(){
                 document.getElementById('alert-success').style.display = 'none'}, 2000);
 }
 
-
-
-
-
-function chamarPaciente(){
-    console.log("caiu aquu")
+*/
+$( document ).ready(function() {
+    const input = document.getElementById('speech')? document.getElementById('speech'): null;
+    
+    if(input != null) {
+    const toSay = input.value.trim();
+    const utterance = new SpeechSynthesisUtterance(toSay);
+    speechSynthesis.speak(utterance);
+    input.value = '';
 }
+});
+/*
+window.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('voice-form');
+    const input = document.getElementById('speech');
+   
+    
 
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      const toSay = input.value.trim();
+      const utterance = new SpeechSynthesisUtterance(toSay);
+      speechSynthesis.speak(utterance);
+      input.value = '';
+    });
+  });*/
