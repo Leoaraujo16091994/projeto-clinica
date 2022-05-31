@@ -6,8 +6,8 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::post('/autocomplete/fetch', 'ChegadaController@fetch')->name('autocomplete.fetch');
-Route::post('/autocomp/fetch', 'ChamadaController@fetch')->name('autocomp.fetch');
+//Route::post('/autocomplete/fetch', 'ChegadaController@fetch')->name('autocomplete.fetch');
+//Route::post('/autocomp/fetch', 'ChamadaController@fetch')->name('autocomp.fetch');
 
 Auth::routes();
 
@@ -16,7 +16,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/register', ['as' => 'register', 'uses' => 'Auth\RegisterController@showRegistrationForm']);
     Route::post('/register', ['uses' => 'Auth\RegisterController@register']);
     
-    Route::get ('/paginainicial','PacientesController@inicio');
+  /*  Route::get ('/paginainicial','PacientesController@inicio');
     
     //PacientesController
     Route::resource('/pacientes','PacientesController');
@@ -39,7 +39,7 @@ Route::group(['middleware' => 'auth'], function () {
    Route::get('/relatoriospronto', 'RelatoriosController@relatorio');
    Route::resource('/relatorios','RelatoriosController');
 
-
+*/
 
 
 

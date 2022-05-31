@@ -6,79 +6,43 @@ label{
    font-weight: bold;
    font-size:20px;
 }
-
-.tableFixHead {
-  margin-top:0%;
-  overflow: auto; 
-  height: 71%;
-  width: 100%; 
-}
-
-.tableFixHead thead tr th { 
-  position: sticky;
-  top: 41;
-  z-index: 1;    
-}
-
-.tableFixHead caption { 
-  position: sticky;
-  top: 0;
-  z-index: 1;
-  background-color:#EEEEEE;
+.tableFixHead{
   border:solid;
-  border-width: 1 !important;
 }
-
-/* Just common table stuff. Really. */
 table  { 
   border-collapse: collapse; 
   width:100%;
   height: 91.3%;
 }
+.tableFixHead {
+  margin-top:0%;
+  overflow: auto; 
+ 
+}
 
-th, td { 
+td{
+  font-size:1.5em;
+  font-weight: bold;
+  color: #0B0B3B;
   padding: 8px 16px; 
   border:solid;
   border-width: 1 !important;
 }
 
-tr,th{
-  background:#eee;
-}
-
-td{
-  font-size:3em;
-  font-weight: bold;
-  color: #0B0B3B;
-}
-
-.tableFixHead{
-  border:solid;
-}
-
-caption{
-  font-weight: bold;
-  font-size:20px;
-  position:center;
-  caption-side: top; 
-  color: #FFFFFF !important;
-  background-color: #0B0B3B !important;
-  border: solid;
-  border-width: 1 !important;
-  border-color: #0B0B3B !important;
-}
 
 table{
   border-collapse: inherit !important;
   border-spacing: 0px;
+  height: 50%;
+  width: 100%; 
 }
 
 html {
   position:fixed;
   width:100%;
   height:100%;
-}
-
+} 
+/*
 #sala1{
   background-color: #F2CC68;
 }
@@ -94,3 +58,4 @@ html {
 #sala5{
   background-color: #9152F2;
 }
+

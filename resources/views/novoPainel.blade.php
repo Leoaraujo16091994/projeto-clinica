@@ -14,7 +14,7 @@
 @section('body')
 
 <div id = "tituloPagina">
-       <h1> Novo Layout de Painel </h1>                
+       <h1> Painel </h1>                
 </div>
 
 <br>
@@ -27,13 +27,12 @@
 <meta http-equiv="refresh" content=5 ; url="/painel">
 
 <div class="col-lg-12">
-                <div class="tableFixHead">
+                <div>
                     <table>
-                        <caption class="text-center">Clinica Prontorim</caption>
                         <tbody>
                             @foreach($pacientesDoDia as $paciente)
                             <tr>
-                              <td id="sala{{$paciente->sala}}"> Sala {{$paciente->sala}} : {{$paciente->nome_completo}}</td>
+                              <td id="sala{{$paciente->sala_do_dia}}"> Sala {{$paciente->sala_do_dia}} : {{$paciente->nome_completo}}</td>
                             </tr>
                             @endforeach
                           </tbody>

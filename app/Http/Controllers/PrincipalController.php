@@ -17,6 +17,9 @@ class PrincipalController extends Controller
 
     public function index (Request $request)
     {    
+        $idUser = auth()->user()->id;
+        
+
         $nomeCompleto = $request-> nomeCompleto ? $request-> nomeCompleto : "" ;
         $diasDaSemana = $request-> diasDaSemana ? $request-> diasDaSemana : null ;
         $turno = $request-> turno ? $request-> turno : "" ;
@@ -32,10 +35,11 @@ class PrincipalController extends Controller
         $pacientesDoDia = DB::table('paciente')
                     ->join('pacientes_do_dia', 'pacientes_do_dia.paciente_pk', '=', 'paciente.id')
                     ->select('paciente.*','pacientes_do_dia.*')
-                    ->whereDate('pacientes_do_dia.created_at', date('Y-m-d'));
+                    ->whereDate('pacientes_do_dia.created_at', date('Y-m-d'))
+                    ->where('pacientes_do_dia.sala_do_dia',$idUser);
 
         if($nomeCompleto){
-        $pacientesDoDia -> where('paciente.nome_completo','like','%'.$nomeCompleto.'%');
+            $pacientesDoDia -> where('paciente.nome_completo','like','%'.$nomeCompleto.'%');
         }
 
         if($diasDaSemana){
@@ -79,7 +83,9 @@ class PrincipalController extends Controller
     public function todosPacientes()
     {
         $todosPaciente = Paciente::all();
+        
         $output = '<select>';
+        
         foreach($todosPaciente as $paciente)
         { 
             $output .= '<option value =' .$paciente->id.' >'.$paciente->nome_completo.'</option>';
@@ -100,7 +106,7 @@ class PrincipalController extends Controller
             'paciente_pk' => $idPacienteExtra,
             'chegou' => 1,
             'chamado' => 1,
-            'sala_paciente_extra' => $salaDoPaciente
+            'sala_do_dia' => $salaDoPaciente
         ]);
 
         $paciente->save();
@@ -152,7 +158,7 @@ class PrincipalController extends Controller
 
 
 
-
+/*
     public function resultadoconsulta(Request $request){
               
         $nome = $request-> nomeCompleto;
@@ -165,7 +171,7 @@ class PrincipalController extends Controller
         return view('/resultadoconsultapaciente', ['paciente' => $paciente]);
 
     }        
-
+*/
 
    
 

@@ -1,5 +1,5 @@
 
-@extends ('layout')
+
 
 
 <link href="{{ asset('/css/novoPainelTelaCheia.css') }}" rel="stylesheet" type="text/css" >
@@ -8,17 +8,30 @@
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 
 
+<title> Painel</title>
 
-@section('titulodoNavegador', 'Cadastro de Paciente')
 
-@section('body')
+<meta http-equiv="refresh" content=5 ; url="/painel">
 
-<div id = "tituloPagina">
-       <h1> Painel Tela Cheia </h1>                
-</div>
+<div class="col-lg-12">
+                <div class="tableFixHead">
+                    <table>
+                        @if($pacientesDoDia !== null ) 
+                        <tbody>
+                            @foreach($pacientesDoDia as $paciente)
+                           
+                            <tr>
+                              <td id="sala{{$paciente->sala_do_dia}}"> Sala {{$paciente->sala_do_dia}} : {{$paciente->nome_completo}}</td>
+                            </tr>
+                            @endforeach
+                          </tbody>
+                          @endif
+                    </table>
+                </div>
+            </div>
+        
 
-<br>
-
+@if($ultimoPacienteChamado)
 <header>
       <h1>Browser voices</h1>
     </header>
@@ -32,32 +45,11 @@
         <button >FALAR</button>
       </form>
     </main>
+@endif
 
 <div id = "botaoTelaCheia">
   <form method = 'get' action = '/painel'>
-      <button class="btn btn-primary" type= "submit" >Tela Cheia </button>
+      <button class="btn btn-primary" type= "submit" >Voltar </button>
   </form>                
 </div>
 
-<meta http-equiv="refresh" content=5 ; url="/painel">
-
-<div class="col-lg-12">
-                <div class="tableFixHead">
-                    <table>
-                        <caption class="text-center">Clinica Prontorim</caption>
-                        <tbody>
-                            @foreach($pacientesDoDia as $paciente)
-                            <tr>
-                              <td id="sala{{$paciente->sala}}"> Sala {{$paciente->sala}} : {{$paciente->nome_completo}}</td>
-                            </tr>
-                            @endforeach
-                          </tbody>
-                    </table>
-                </div>
-            </div>
-        
-@endsection
-
-@section('extra_styles')
-
-@endsection

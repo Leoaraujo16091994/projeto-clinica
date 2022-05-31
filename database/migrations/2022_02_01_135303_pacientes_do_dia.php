@@ -20,7 +20,7 @@ class PacientesDoDia extends Migration
             $table->integer('chegou');
             $table->integer('chamado');
             $table->string('observacao')->nullable();
-            $table->integer('sala_paciente_extra')->nullable();
+            $table->integer('sala_do_dia')->nullable();
             $table->timestamps();
         });
 
@@ -30,8 +30,5 @@ class PacientesDoDia extends Migration
     {
         Schema::drop('pacientes_do_dia');
     }
-
-
-
 
 }

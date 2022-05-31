@@ -10,7 +10,7 @@
 <meta  name =" viewport " content =" largura=largura do dispositivo, escala inicial=1.0 " />
 <meta  http-equiv =" Compatível com X-UA " content =" ie=edge " />
 
-@section('titulodoNavegador', 'Cadastro de Paciente')
+
 
 <!-- MODAL PACIENTE EXTRA-->
 <div class="modal fade" id="modalPacienteExtra" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -149,6 +149,7 @@
                             </tr>
                         </thead>
                         <tbody>
+                        @if(sizeof($pacientesDoDia) > 0)
                           @foreach($pacientesDoDia as $paciente)
                               <tr>
                                   <td> {{$paciente->nome_completo}} </td>
@@ -169,6 +170,7 @@
                                 </tr>
                               </form>
                               @endforeach
+                        @endif 
                         </tbody>
                     </table>
                 </div>
@@ -221,6 +223,7 @@
 
 
 
+@if(count($pacientesDoDia) > 0) 
 
 <!-- MODAL DE CHAMADA DO PACIENTE --> 
 <div class="modal fade" id="modalChamada" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -242,7 +245,7 @@
     </div>
   </div>
 </div>
-
+@endif
 
 <!-- Alert de ERROS-->
 <div class="alert alert-danger" style='display:none' id='alert-erro'>

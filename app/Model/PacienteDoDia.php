@@ -13,18 +13,7 @@ class PacienteDoDia extends Model
       'chegou',
       'chamado',
       'observacao',
-      'sala_paciente_extra',
+      'sala_do_dia',
       'created_at'
   ];
-/*
-  public function chamadas()
-  {
-    return $this->hasMany('App\Model\Chamada', 'nome_completo', 'nome_completo');
-  }
-
-  public function carasDoDia($var)
-  {
-    # code...
-  }
-  */
 }
