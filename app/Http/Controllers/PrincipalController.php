@@ -156,23 +156,4 @@ class PrincipalController extends Controller
    
     }
 
-
-
-/*
-    public function resultadoconsulta(Request $request){
-              
-        $nome = $request-> nomeCompleto;
-        $data = $request-> dataNascimento;
-        $paciente = Pacientes::select('nome_completo','data_nascimento','convenio_paciente','soro_positivo','status_paciente',
-                                      'segunda_feira','terca_feira','quarta_feira','quinta_feira','sexta_feira','sabado','id')
-                                ->where('nome_completo',$nome)->where('data_nascimento',$data)
-                                ->get();
-       
-        return view('/resultadoconsultapaciente', ['paciente' => $paciente]);
-
-    }        
-*/
-
-   
-
  }
