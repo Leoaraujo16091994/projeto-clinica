@@ -132,44 +132,7 @@ class PainelController extends Controller
                         ->get();
 
 
-                        //dd(count($ultimoPacienteChamado)> 0); // FALSE
-                        //dd(count($ultimoPacienteChamadoSalvo)> 0); // FALSE
-
-
-/*
-if(count($ultimoPacienteChamado) > 0){
-        if(count($ultimoPacienteChamadoSalvo) ===0){
-                $paciente = new UltimoPacienteChamado([
-                        'paciente_pk' => $ultimoPacienteChamado[0]->idDoPaciente
-                ]);
-        
-                $paciente->save();
-
-                return view('/novoPainelTelaCheia',['pacientesDoDia' => $pacientesDoDia],['ultimoPacienteChamado' => $ultimoPacienteChamado]);             
-        
-        } else if($ultimoPacienteChamado[0]->idDoPaciente != $ultimoPacienteChamadoSalvo[0]->paciente_pk ){
-                $paciente = new UltimoPacienteChamado([
-                        'paciente_pk' => $ultimoPacienteChamado[0]->idDoPaciente
-                ]);
-        
-                $paciente->save();
-
-                return view('/novoPainelTelaCheia',['pacientesDoDia' => $pacientesDoDia],['ultimoPacienteChamado' => $ultimoPacienteChamado]);             
-        }   
-
-
-}else {
-        return view('/novoPainelTelaCheia',['pacientesDoDia' => $pacientesDoDia],['ultimoPacienteChamado' =>null]);
-
-}
-
-  */
-
-//dd(count($ultimoPacienteChamado) > 0 ); // TRUE
-//dd(count($ultimoPacienteChamadoSalvo) === 0); // FALSE ,pois ja existe
-//dd($ultimoPacienteChamado[0]->idDoPaciente != $ultimoPacienteChamadoSalvo[0]->paciente_pk);
-
-
+                       
         if(count($ultimoPacienteChamado) > 0 ){
                 if(count($ultimoPacienteChamadoSalvo) === 0 || $ultimoPacienteChamado[0]->idDoPaciente != $ultimoPacienteChamadoSalvo[0]->paciente_pk){
                         $paciente = new UltimoPacienteChamado([
