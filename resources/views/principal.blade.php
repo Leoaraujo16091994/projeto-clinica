@@ -33,11 +33,11 @@
             <label for="message-text" class="col-form-label">Sala:</label>
             <select class="form-select" id="salaPacienteExtra" name="salaPacienteExtra">
                       <option></option>
-                      <option value="1">Sala 1</option>
-                      <option value="2">Sala 2</option>
-                      <option value="3">Sala 3</option>
-                      <option value="4">Sala 4</option>
-                      <option value="5">Sala 5</option>
+                      <option value="1">Sala A</option>
+                      <option value="2">Sala B</option>
+                      <option value="3">Sala C</option>
+                      <option value="4">Sala D</option>
+                      <option value="5">Sala E</option>
                     </select>
           </div>
         </form>
@@ -101,11 +101,11 @@
                     <label for="validationnomeCompleto"> Sala </label>
                     <select class="form-select" value= "{{$requisicao->sala}}" id="sala" name = "sala">
                       <option></option>
-                      <option value="1" <?php echo $requisicao->sala =="1"?'selected':'';?> >Sala 1</option>
-                      <option value="2" <?php echo $requisicao->sala =="2"?'selected':'';?> >Sala 2</option>
-                      <option value="3" <?php echo $requisicao->sala =="3"?'selected':'';?> >Sala 3</option>
-                      <option value="4" <?php echo $requisicao->sala =="4"?'selected':'';?> >Sala 4</option>
-                      <option value="5" <?php echo $requisicao->sala =="5"?'selected':'';?> >Sala 5</option>
+                      <option value="1" <?php echo $requisicao->sala =="1"?'selected':'';?> >Sala A</option>
+                      <option value="2" <?php echo $requisicao->sala =="2"?'selected':'';?> >Sala B</option>
+                      <option value="3" <?php echo $requisicao->sala =="3"?'selected':'';?> >Sala C</option>
+                      <option value="4" <?php echo $requisicao->sala =="4"?'selected':'';?> >Sala D</option>
+                      <option value="5" <?php echo $requisicao->sala =="5"?'selected':'';?> >Sala E</option>
                     </select>
                 </div>
               
