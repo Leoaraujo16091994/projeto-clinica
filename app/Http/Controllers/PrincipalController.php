@@ -32,12 +32,19 @@ class PrincipalController extends Controller
             'sala'  => $sala
         ]);
 
-        $pacientesDoDia = DB::table('paciente')
-                    ->join('pacientes_do_dia', 'pacientes_do_dia.paciente_pk', '=', 'paciente.id')
-                    ->select('paciente.*','pacientes_do_dia.*')
-                    ->whereDate('pacientes_do_dia.created_at', date('Y-m-d'))
-                    ->where('pacientes_do_dia.sala_do_dia',$idUser);
-
+        if($idUser != 6) { // usuario diferente de recepcao
+            $pacientesDoDia = DB::table('paciente')
+                ->join('pacientes_do_dia', 'pacientes_do_dia.paciente_pk', '=', 'paciente.id')
+                ->select('paciente.*','pacientes_do_dia.*')
+                ->whereDate('pacientes_do_dia.created_at', date('Y-m-d'))
+                ->where('pacientes_do_dia.sala_do_dia',$idUser);
+        } else {
+            $pacientesDoDia = DB::table('paciente')
+                ->join('pacientes_do_dia', 'pacientes_do_dia.paciente_pk', '=', 'paciente.id')
+                ->select('paciente.*','pacientes_do_dia.*')
+                ->whereDate('pacientes_do_dia.created_at', date('Y-m-d'));
+                
+                }
 
         if($nomeCompleto){
             $pacientesDoDia -> where('paciente.nome_completo','like','%'.$nomeCompleto.'%');
