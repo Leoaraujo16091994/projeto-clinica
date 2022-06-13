@@ -16,10 +16,22 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/register', ['as' => 'register', 'uses' => 'Auth\RegisterController@showRegistrationForm']);
     Route::post('/register', ['uses' => 'Auth\RegisterController@register']);
     
+    Route::resource('/paciente','PacienteController');
+   
+     //PrincipalController
+     Route::resource('/principal','PrincipalController');
+     Route::post('/pacienteExtra','PrincipalController@storePacienteExtra');
+     // Route::get('/todosPacientes','PrincipalController@todosPacientes')->name('autocompletePacientes.fetch');;
+     Route::get('/chamarNovamente','PrincipalController@chamarNovamente');
+     
+     //PainelController
+         Route::resource('/painel','PainelController');
+   
+
+
   /*  Route::get ('/paginainicial','PacientesController@inicio');
     
     //PacientesController
-    Route::resource('/pacientes','PacientesController');
     Route::get ('/resultadopaciente','PacientesController@resultadoconsulta');
     Route::get('/deletar','ChamadaController@deletar');
 
@@ -45,14 +57,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 
-    //PrincipalController
-    Route::resource('/principal','PrincipalController');
-    Route::post('/pacienteExtra','PrincipalController@storePacienteExtra');
-    Route::get('/todosPacientes','PrincipalController@todosPacientes')->name('autocompletePacientes.fetch');;
    
-    //PainelController
-    Route::resource('/painel','PainelController');
    
-
 
 });

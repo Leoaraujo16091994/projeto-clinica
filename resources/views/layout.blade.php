@@ -49,14 +49,14 @@
               <!--  <h3>Geral</h3>-->
                 <ul class="nav side-menu">
                   
-                 <!-- <li><a><i class="fa fa-edit"></i> Paciente <span class="fa fa-chevron-down"></span></a>
+                 <li><a><i class="fa fa-edit"></i> Paciente <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="/pacientes/create">Novo Paciente</a></li>
-                      <li><a href="/chegada/create">Informar Chegada </a></li>
+                      <li><a href="/paciente">Pacientes</a></li>
+                 <!--      <li><a href="/chegada/create">Informar Chegada </a></li>
                       <li><a href="/pacientes">Consultar Paciente </a></li>
+                    -->
                     </ul>
                   </li>
--->
                   <li><a><i class="fa fa-desktop"></i> Painel <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
    <!--                   <li><a href="/chamarpainel/create"> Chamar Paciente </a></li>-->

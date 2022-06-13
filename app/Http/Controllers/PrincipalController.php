@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Model\Paciente;
 use App\Model\PacienteDoDia;
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\PainelController;
 
 class PrincipalController extends Controller
 {
@@ -159,9 +159,10 @@ class PrincipalController extends Controller
             ]);
         }
         
-       
-        return redirect('principal');
-   
+        return back()->withInput();
     }
 
- }
+    function chamarNovamente($id){
+        PainelController.chamarNovamente($id);
+    }
+}

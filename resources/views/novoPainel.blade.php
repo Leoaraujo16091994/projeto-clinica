@@ -29,13 +29,41 @@
 <div class="col-lg-12">
                 <div>
                     <table>
+                    @if($pacientesDoDia !== null ) 
                         <tbody>
                             @foreach($pacientesDoDia as $paciente)
+                           
                             <tr>
-                              <td id="sala{{$paciente->sala_do_dia}}"> Sala {{$paciente->sala_do_dia}} : {{$paciente->nome_completo}}</td>
+                              <td id="sala{{$paciente->sala_do_dia}}"> 
+                              @switch($paciente->sala_do_dia)
+                                  @case(1)
+                                    Sala A : {{$paciente->nome_completo}}</td>
+                                  @break
+
+                                  @case(2)
+                                    Sala B : {{$paciente->nome_completo}}</td>
+
+                                  @break
+
+                                  @case(3)
+                                  Sala C : {{$paciente->nome_completo}}</td>
+
+                                  @break
+
+                                  @case(4)
+                                  Sala D : {{$paciente->nome_completo}}</td>
+
+                                  @break
+
+                                  @case(5)
+                                  Sala E : {{$paciente->nome_completo}}</td>
+                                  @break
+
+                              @endswitch
                             </tr>
                             @endforeach
                           </tbody>
+                          @endif
                     </table>
                 </div>
             </div>
