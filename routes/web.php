@@ -21,9 +21,9 @@ Route::group(['middleware' => 'auth'], function () {
      //PrincipalController
      Route::resource('/principal','PrincipalController');
      Route::post('/pacienteExtra','PrincipalController@storePacienteExtra');
-     // Route::get('/todosPacientes','PrincipalController@todosPacientes')->name('autocompletePacientes.fetch');;
+     Route::get('/todosPacientes','PrincipalController@todosPacientes')->name('autocompletePacientes.fetch');;
      Route::get('/chamarNovamente','PrincipalController@chamarNovamente');
-     
+
      //PainelController
          Route::resource('/painel','PainelController');
    

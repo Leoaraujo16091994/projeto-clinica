@@ -34,15 +34,14 @@
             </div>
 
             <!-- NOME DO USUARIO LADO ESQUERDO -->
-            <!--<div class="profile clearfix">
+            <div class="profile clearfix">
               <div class="profile_info">
-                <span>Bem Vindo,</span>
-                <h2>@yield('usuarioLogado')</h2>
+                <span style="width:100%;color: #E7E7E7;"> <h2>Bem Vindo,
+               {{ Auth::user()->name }}</h2>
+                </span>
               </div>
-            </div> -->
+            </div> 
     
-            <br />
-
             <!-- MENUS DO LADO ESQUERDO -->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">

@@ -143,12 +143,7 @@
                                       </ul>
                                     </div>
                                   </td>
-
-
-
-                                  
                                 </tr>
-                              </form>
                               @endforeach
                         @endif 
                         </tbody>
@@ -173,7 +168,7 @@
   </div>
 </div>
 
-
+@if(sizeof($pacientes) > 0)
 <!-- MODAL EXCLUSAO DE PACIENTE-->
 <div class="modal fade" id="modalExcluirPaciente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
@@ -189,6 +184,7 @@
     </div>
   </div>
 </div>
+@endif
 
 
 

@@ -48,6 +48,7 @@ class PacienteController extends Controller
         }
 
         $pacientes =  $pacientes->get();
+       
             return view('paciente.index',['pacientes' => $pacientes],['requisicao' => $request]);
 
     }
