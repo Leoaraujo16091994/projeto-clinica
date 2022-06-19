@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 use App\Model\Paciente;
 use App\Model\PacienteDoDia;
+use App\Model\UltimoPacienteChamado;
 use Illuminate\Http\Request;
 use App\Http\Controllers\PainelController;
 
@@ -126,8 +127,6 @@ class PrincipalController extends Controller
     
     public function show(Request $request)
     {   
-
-        dd($request);
     }              
   
 
@@ -162,7 +161,21 @@ class PrincipalController extends Controller
         return back()->withInput();
     }
 
+
+
+
     function chamarNovamente($id){
-        PainelController.chamarNovamente($id);
+        
+        $pac = PacienteDoDia::where('paciente_pk','=',$id);
+
+        $paciente = $pac->update([
+            'chegou' => 2
+        ]);
+
+
+        $pac = UltimoPacienteChamado::where('paciente_pk','=',$id);
+        $pac->delete();
+        return back()->withInput();
+
     }
 }

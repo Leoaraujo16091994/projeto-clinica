@@ -22,7 +22,7 @@ Route::group(['middleware' => 'auth'], function () {
      Route::resource('/principal','PrincipalController');
      Route::post('/pacienteExtra','PrincipalController@storePacienteExtra');
      Route::get('/todosPacientes','PrincipalController@todosPacientes')->name('autocompletePacientes.fetch');;
-     Route::get('/chamarNovamente','PrincipalController@chamarNovamente');
+     Route::put('/chamarNovamente/{id}','PrincipalController@chamarNovamente');
 
      //PainelController
          Route::resource('/painel','PainelController');

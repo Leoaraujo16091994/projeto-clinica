@@ -1,5 +1,4 @@
-
-@extends ('layout')
+@extends ('layouts.layout')
 
 
 <link href="{{ asset('/css/novoPainel.css') }}" rel="stylesheet" type="text/css" >

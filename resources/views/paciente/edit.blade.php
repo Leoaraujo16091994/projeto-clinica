@@ -1,5 +1,5 @@
 
-@extends ('layout')
+@extends ('layouts.layout')
 
 
 <link href="{{ asset('/css/paciente.css') }}" rel="stylesheet" type="text/css" >

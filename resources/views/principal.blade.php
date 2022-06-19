@@ -1,5 +1,5 @@
 
-@extends ('layout')
+@extends ('layouts.layout')
 
 
 <link href="{{ asset('/css/principal.css') }}" rel="stylesheet" type="text/css" >
@@ -50,28 +50,18 @@
   </div>
 </div>
 
+
+
+
 @section('body')
+
 
 <div id = "tituloPagina">
        <h1> Tela Principal </h1>                
 </div>
 
 <br>
-<!--
-<header>
-      <h1>Browser voices</h1>
-    </header>
-    <main>
-      <form class="input" id="voice-form">
-        <div class="field">Nome</label>
-          <input type="text" name="speech" id="speech" required />
-        </div>
-      
-        <button>FALAR</button>
-      </form>
-    </main>
--->
-    <div class="formulario">
+  <div class="formulario">
         <form id="formulario" name ="formulario" method = 'post' action = '/principal'>
             @csrf
             <div class="col-12">
@@ -168,6 +158,15 @@
                                 
                                 @endif
                                   <td id="colunaObservacao"> {{$paciente->observacao}}</td>
+                                  @if($paciente->chamado == "1")
+                                    <td > 
+                                      <div class="dropdown" disabled>
+                                        <a role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                          <span aria-hidden="true" class="fa fa-ellipsis-v fa-2x fa-lg"></span>  
+                                        </a>
+                                      </div>
+                                    </td>
+                                  @else
                                   <td > 
                                     <div class="dropdown">
                                       <a role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
@@ -175,10 +174,13 @@
                                       </a>
                                       
                                       <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <li><a class="dropdown-item" href=""><h2>Chamar Novamente</h2></a></li>                                      
+                                        <li><a onClick="abrirModalChamadaPacienteNovamente({{json_encode($paciente)}})" class="dropdown-item"><h2>Chamar Novamente</h2></a></li>                                      
                                       </ul>
                                     </div>
                                   </td>
+                                  @endif
+
+                                
                                 </tr>
                               </form>
                               @endforeach
@@ -258,6 +260,45 @@
   </div>
 </div>
 @endif
+
+
+
+@if(count($pacientesDoDia) > 0) 
+
+<!-- MODAL DE CHAMADA DO PACIENTE NOVAMENTE --> 
+<div class="modal fade" id="modalChamadaNovamente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Tem certeza que deseja chamar o paciente novamente?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-footer">
+            <input type="hidden" name="_method" value="PUT">
+          <button type="button" class="btn btn-primary" onClick="chamarPacienteNovamente()">Confirmar</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+@endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <!-- Alert de ERROS-->
 <div class="alert alert-danger" style='display:none' id='alert-erro'>

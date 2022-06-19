@@ -53,11 +53,17 @@ function abrirModalInformarChegadaPaciente (paciente){
     
 }
 
-
 function abrirModalChamadaPaciente (paciente){
     this.pacienteSelecionadoChamada = paciente
     $('#modalChamada').modal('show');
 }
+
+function abrirModalChamadaPacienteNovamente(paciente){
+    this.pacienteSelecionadoChamada = paciente
+    $('#modalChamadaNovamente').modal('show');
+}
+
+
 
 function abrirModalPacienteExtra (){
     var _token = $('input[name="_token"]').val();
@@ -128,6 +134,13 @@ function chamarPaciente(){
     document.getElementById("formularioChamada").setAttribute("action", "/principal/" + pacienteSelecionadoChamada.id);
     document.formularioChamada.submit();
 }
+
+
+function chamarPacienteNovamente(){
+    document.getElementById("formularioChamada").setAttribute("action", "/chamarNovamente/" + pacienteSelecionadoChamada.paciente_pk);
+    document.formularioChamada.submit();
+}
+
 
 function adicionarPacienteExtra(){
 
