@@ -169,7 +169,7 @@ class PrincipalController extends Controller
         $pac = PacienteDoDia::where('paciente_pk','=',$id);
 
         $paciente = $pac->update([
-            'chegou' => 2
+            'chamado' => 2
         ]);
 
 
