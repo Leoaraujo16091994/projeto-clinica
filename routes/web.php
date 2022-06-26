@@ -18,14 +18,13 @@ Route::group(['middleware' => 'auth'], function () {
     
     Route::resource('/paciente','PacienteController');
    
-     //PrincipalController
-     Route::resource('/principal','PrincipalController');
-     Route::post('/pacienteExtra','PrincipalController@storePacienteExtra');
-     Route::get('/todosPacientes','PrincipalController@todosPacientes')->name('autocompletePacientes.fetch');;
-     Route::put('/chamarNovamente/{id}','PrincipalController@chamarNovamente');
-
+    //PrincipalController
+    Route::resource('/principal','PrincipalController');
+    Route::post('/pacienteExtra','PrincipalController@storePacienteExtra');
+    Route::get('/todosPacientes','PrincipalController@todosPacientes')->name('autocompletePacientes.fetch');;
+   
      //PainelController
-         Route::resource('/painel','PainelController');
+    Route::resource('/painel','PainelController');
    
 
 

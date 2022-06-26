@@ -112,10 +112,7 @@ function excluirPaciente(){
             formularioExclusao.appendChild(document.getElementById("sala")) ;
             document.getElementById("idPacienteExcluido").value = idPacienteASerExcluido;
            
-           
             formularioExclusao.setAttribute("action","");
-            //formularioExclusao.setAttribute("action","paciente/"+idPacienteASerExcluido)
-            console.log(formularioExclusao.value);
             formularioExclusao.action = "paciente/"+idPacienteASerExcluido ;
             formularioExclusao.submit();
         }, 1000);

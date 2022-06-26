@@ -4,12 +4,12 @@
 }
 
 .formulario{
-   font-size:17px;
+    font-size:17px;
 }
 
 label{
-   font-weight: bold;
-   font-size:20px;
+    font-weight: bold;
+    font-size:20px;
 }
 
 #segundaParte{
@@ -26,11 +26,11 @@ label{
 }
 
 #botaoCadastrar{
-   padding-top:350px !important;
+    padding-top:350px !important;
 }
 
 #alert-erro{
-  position:fixed; 
+    position:fixed; 
     top: 0px; 
     left: 30%; 
     width: 40%;
@@ -42,13 +42,13 @@ label{
 
 #alert-success{
     position:fixed; 
-      top: 0px; 
-      left: 30%; 
-      width: 40%;
-      z-index:9999; 
-      border-radius:0px;
-      margin-left: auto;
-      margin-right: auto;
+    top: 0px; 
+    left: 30%; 
+    width: 40%;
+    z-index:9999; 
+    border-radius:0px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #lista li{

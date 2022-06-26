@@ -284,29 +284,11 @@
 @endif
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!-- Alert de ERROS-->
 <div class="alert alert-danger" style='display:none' id='alert-erro'>
     <ul id="lista">
     </ul>
 </div>
-
-
 
 <!-- Alert de Sucesso -->
 <div class="alert alert-success" style='display:none' id='alert-success'>

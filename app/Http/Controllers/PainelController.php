@@ -226,43 +226,4 @@ class PainelController extends Controller
         {
         
         }  
-
-        
-        function chamarNovamente($id){
-        /*     
-                
-               $pacientesDoDia = DB::table('pacientes_do_dia as pacDia1')
-                        ->join('paciente as pac1', 'pacDia1.paciente_pk', '=', 'pac1.id')
-                        ->select('pacDia1.sala_do_dia', 
-                                (DB::raw('(
-                                        SELECT `pac2`.`id` 
-                                                FROM `paciente` AS `pac2` 
-                                            INNER JOIN `pacientes_do_dia` as `pacDia2` ON 
-                                                        `pac2`.`id` = `pacDia2`.`paciente_pk`
-                                             WHERE `pacDia2`.`updated_at` = MAX(`pacDia1`.`updated_at`) ) idDoPaciente')), 
-                                (DB::raw('MAX(pacDia1.updated_at) ultimoAtualizado')),
-                                (DB::raw('(
-                                        SELECT `pac3`.`nome_completo` 
-                                                FROM `paciente` AS `pac3` 
-                                        INNER JOIN `pacientes_do_dia` as `pacDia3` ON 
-                                                `pac3`.`id` = `pacDia3`.`paciente_pk`
-                                        WHERE `pacDia3`.`updated_at` = MAX(`pacDia1`.`updated_at`) ) nome_completo'))
-                                )
-                        ->where('pacDia1.chamado', '=', '2')
-                        ->whereDate('pacDia1.created_at',today())
-                        ->groupBy('pacDia1.sala_do_dia')
-                        ->get();
-                        
-                $ultimoPacienteChamado = $pacientesDoDia = DB::table('pacientes_do_dia')->where(`paciente_pk`,$id);
-                
-                
-                $ultimoPacienteChamadoSalvo= DB::table('ultimo_paciente_chamado')
-                        ->select('ultimo_paciente_chamado.paciente_pk')
-                        ->orderByDesc('ultimo_paciente_chamado.updated_at')
-                        ->limit(1)
-                        ->get();
-
-                return view('/painel.novoPainelTelaCheia',['pacientesDoDia' => $pacientesDoDia],['ultimoPacienteChamado' => $ultimoPacienteChamado]);             
-          */ 
-        }
  }
