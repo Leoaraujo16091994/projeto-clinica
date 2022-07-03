@@ -9,6 +9,117 @@ function buscarPaciente(){
     formulario.submit();
  }
 
+ //BOTAO LIMPAR CAMPOS
+ function limparCampos(){
+    document.getElementById("nomeCompleto").value = "";
+    document.getElementById("diasDaSemana").value = "";
+    document.getElementById("turno").value = "";
+    document.getElementById("sala").value = "";
+}
+
+
+
+// MODALS
+function abrirModalConfirmacaoCadastroPaciente (){
+    $('#modalConfirmacaoCadastro').modal('show');
+}
+
+function abrirModalInformarChegadaPaciente (paciente){
+    this.pacienteSelecionadoChegada = paciente;
+    $('#modalChegada').modal('show');
+}
+
+function abrirModalChamadaPaciente (paciente){
+    this.pacienteSelecionadoChamada = paciente
+    $('#modalChamada').modal('show');
+}
+
+function abrirModalChamadaPacienteNovamente(paciente){
+    this.pacienteSelecionadoChamada = paciente
+    $('#modalChamadaNovamente').modal('show');
+}
+
+
+function abrirModalPacienteExtra (){
+    var _token = $('input[name="_token"]').val();
+        $.ajax({
+            url: '/todosPacientes',
+            type: 'get',
+            success: function (retorno) {
+                $('#listaPacienteExtra').fadeIn();  
+                $('#listaPacienteExtra').html(retorno);
+        
+            }, error: function () {
+                console.log(erro, er);
+            }
+         });
+    $('#modalPacienteExtra').modal('show');
+}
+
+
+
+
+//ALERTS
+function alertDeErro(listaDeCamposInvalidos){
+    document.getElementById('alert-erro').style.display = 'block';
+    var lista  = [];
+    for(const item of listaDeCamposInvalidos){
+        lista =  lista + "<li>" + item +"</li>" ;
+    };
+
+    document.getElementById("lista").innerHTML = "Erro ao efetuar cadastro:" + lista;
+
+    setTimeout(
+        function(){
+                document.getElementById('alert-erro').style.display = 'none'}, 5000);
+}
+
+function alertDeSucesso(){
+    document.getElementById('alert-success').style.display = 'block';
+    
+    setTimeout(
+        function(){
+                document.getElementById('alert-success').style.display = 'none'}, 2000);
+}
+
+function confirmarCadastro(){
+    alertDeSucesso();
+    setTimeout(
+        function(){
+            document.formulario.submit();}, 1000);
+    return true;
+}
+
+
+
+
+//FORMS
+function informaChegadaPaciente(){
+    document.getElementById("formularioChegada").setAttribute("action", "/principal/" + pacienteSelecionadoChegada.id);
+    document.formularioChegada.submit();
+}
+
+function chamarPaciente(){
+    document.getElementById("formularioChamada").setAttribute("action", "/principal/" + pacienteSelecionadoChamada.id);
+    document.formularioChamada.submit();
+}
+
+
+function chamarPacienteNovamente(){
+    document.getElementById("formularioChamada").setAttribute("action", "/chamarNovamente/" + pacienteSelecionadoChamada.paciente_pk);
+    document.formularioChamada.submit();
+}
+
+//EVITAR O BOTAO ENTER
+function EnterKeyFilter()
+ {  
+   if (window.event.keyCode == 13)
+   {   
+       event.returnValue=false;
+       event.cancel = true;
+   }
+ }
+
 
 function validarCamposFormularioCadastrar(){
     var listaDeCamposInvalidos = [];
@@ -42,108 +153,7 @@ function validarCamposFormularioCadastrar(){
 }
 
 
-
-function abrirModalConfirmacaoCadastroPaciente (){
-    $('#modalConfirmacaoCadastro').modal('show');
-}
-
-function abrirModalInformarChegadaPaciente (paciente){
-    this.pacienteSelecionadoChegada = paciente;
-    $('#modalChegada').modal('show');
-    
-}
-
-function abrirModalChamadaPaciente (paciente){
-    this.pacienteSelecionadoChamada = paciente
-    $('#modalChamada').modal('show');
-}
-
-function abrirModalChamadaPacienteNovamente(paciente){
-    this.pacienteSelecionadoChamada = paciente
-    $('#modalChamadaNovamente').modal('show');
-}
-
-
-
-function abrirModalPacienteExtra (){
-    var _token = $('input[name="_token"]').val();
-        $.ajax({
-            url: '/todosPacientes',
-            type: 'get',
-            success: function (retorno) {
-                $('#listaPacienteExtra').fadeIn();  
-                $('#listaPacienteExtra').html(retorno);
-        
-            }, error: function () {
-                console.log(erro, er);
-            }
-         });
-    $('#modalPacienteExtra').modal('show');
-}
-
-
-function alertDeErro(listaDeCamposInvalidos){
-    document.getElementById('alert-erro').style.display = 'block';
-    var lista  = [];
-    for(const item of listaDeCamposInvalidos){
-        lista =  lista + "<li>" + item +"</li>" ;
-    };
-
-    document.getElementById("lista").innerHTML = "Erro ao efetuar cadastro:" + lista;
-
-    setTimeout(
-        function(){
-                document.getElementById('alert-erro').style.display = 'none'}, 5000);
-}
-
-
-
-function alertDeSucesso(){
-    document.getElementById('alert-success').style.display = 'block';
-    
-    setTimeout(
-        function(){
-                document.getElementById('alert-success').style.display = 'none'}, 2000);
-}
-
-
-
-function confirmarCadastro(){
-    alertDeSucesso();
-    setTimeout(
-        function(){
-            document.formulario.submit();}, 1000);
-    return true;
-}
-
-
-function limparCampos(){
-    document.getElementById("nomeCompleto").value = "";
-    document.getElementById("diasDaSemana").value = "";
-    document.getElementById("turno").value = "";
-    document.getElementById("sala").value = "";
-}
-
-
-function informaChegadaPaciente(){
-    document.getElementById("formularioChegada").setAttribute("action", "/principal/" + pacienteSelecionadoChegada.id);
-    document.formularioChegada.submit();
-}
-
-function chamarPaciente(){
-    document.getElementById("formularioChamada").setAttribute("action", "/principal/" + pacienteSelecionadoChamada.id);
-    document.formularioChamada.submit();
-}
-
-
-function chamarPacienteNovamente(){
-    document.getElementById("formularioChamada").setAttribute("action", "/chamarNovamente/" + pacienteSelecionadoChamada.paciente_pk);
-    document.formularioChamada.submit();
-}
-
-
 function adicionarPacienteExtra(){
-
 
     var listaDeCamposInvalidos = [];
     var nome = formularioPacienteExtra.paciente.value;
@@ -168,7 +178,6 @@ function adicionarPacienteExtra(){
                 document.formularioPacienteExtra.submit();;}, 1000);
         
      }
-    
 }
 
 /*

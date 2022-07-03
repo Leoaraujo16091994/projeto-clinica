@@ -73,6 +73,7 @@
               <div class="nav toggle">
                 <a id="menu_toggle"><i class="fa fa-bars"></i></a>
               </div>
+              <label> <h3> @yield('tituloPagina') </h3></label>
               <ul class="nav" style="float:right;">
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -104,20 +105,43 @@
    </body>
 </html>
 
- <!-- jQuery -->
-    <script src="/layout/vendors/jquery/dist/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+   <!-- <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script> --> 
+   <script type="text/javascript" src="{{ URL::asset('js/jquery.dataTables.js') }}"></script>
+   <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+  
+  
+  
     <!-- Bootstrap -->
     <script src="/layout/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- Custom Theme Scripts-->
     <script src="/layout/build/js/custom.min.js"></script> 
 
+    <script>
+        $(document).ready(function () {
+          $('#listar-usuario').DataTable({
+            scrollY: '22em',
+            scrollCollapse: false,
+            paging: false,
+            info: false
+          });
+        });
+       
+      
+          $(document).on("click","#menu_toggle",function() {
+            var table = $('#listar-usuario').DataTable();
+ 
+ table.draw();
+        });
+          
+      
 
+
+
+
+    </script>
 
 <style>
-
-  #titulopagina{
-    font-size:20px;
-  }
 
   .nav {
     display:  inline;
@@ -151,6 +175,8 @@
   .nav-md ul.nav.child_menu li:after {
     border-left:0px;
   }
+  
+
 
 </style>
 

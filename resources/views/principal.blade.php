@@ -3,13 +3,19 @@
 
 
 <link href="{{ asset('/css/principal.css') }}" rel="stylesheet" type="text/css" >
-<script src="https://code.jquery.com/jquery-1.9.1.js"></script>
 <script type="text/javascript" src="{{ URL::asset('js/principal.js') }}"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
+
+<!--
+
+<script src="https://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 <meta  charset =" UTF-8 " />
 <meta  name =" viewport " content =" largura=largura do dispositivo, escala inicial=1.0 " />
 <meta  http-equiv =" Compatível com X-UA " content =" ie=edge " />
-
+-->
 
 
 <!-- MODAL PACIENTE EXTRA-->
@@ -26,7 +32,7 @@
           <!--  <input type="hidden" name="_method" value="PUT"> -->
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Nome do Paciente:</label>
-            <select id="listaPacienteExtra"  name="paciente" class="form-select" size="4">
+            <select id="listaPacienteExtra"  name="paciente" class="form-select" size="10">
               <select>
           </div>
           <div class="mb-3">
@@ -43,8 +49,8 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
         <button type="button" class="btn btn-primary" onClick="adicionarPacienteExtra()">Confirmar</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
       </div>
     </div>
   </div>
@@ -52,17 +58,11 @@
 
 
 
-
+@section('tituloPagina', 'Pacientes de Hoje')
 @section('body')
 
-
-<div id = "tituloPagina">
-       <h1> Tela Principal </h1>                
-</div>
-
-<br>
   <div class="formulario">
-        <form id="formulario" name ="formulario" method = 'post' action = '/principal'>
+        <form id="formulario" name ="formulario" method = 'post' action = '/principal' onkeydown="EnterKeyFilter();">
             @csrf
             <div class="col-12">
                 <div class="col-lg-6">
@@ -103,93 +103,88 @@
         </form>
     </div>
 
-    <div class="btn-group me-2" role="group">
+    <div class="btn-group btn-group-sm me-2" role="group">
       <button id="btnPacienteExtra" type="button" onClick="abrirModalPacienteExtra()" class="btn btn-outline-warning btn-lg" alt="botaoPacienteExtra"> 
          Paciente Extra </button>
     </div>
 
 
   <div class="btn-toolbar" role="toolbar">
-    <div class="btn-group me-2" role="group">
+    <div class="btn-group btn-group-sm me-2" role="group">
       <button id="btnCadastrar" type="button" onClick="buscarPaciente()" class="btn btn-outline-primary btn-lg" alt="botaoPesquisar"> 
          Pesquisar </button>
     </div>
   
-    <div class="btn-group me-2" role="group">
+    <div class="btn-group btn-group-sm me-2" role="group">
       <button type="submit" class="btn btn-outline-danger btn-lg" onClick="limparCampos()" alt="botaoLimpar">
         Limpar</button>       
     </div>
   
-    <div class="btn-group me-2" role="group" >
+    <div class="btn-group btn-group-sm me-2" role="group" >
       <button type="submit" class="btn btn-outline-success btn-lg" onClick="validarCamposFormularioCadastrar()" alt="botaoCadastrar"> Cadastrar</button>       
     </div>
   </div>
+  <br><br>
 
+    <table id="listar-usuario" class="table table-hover display"  >
+        <thead>
+            <tr>
+              <th>Nome Completo</th>
+              <th>Chegada</th>
+              <th>Chamada</th>
+              <th>Observação</th>
+              <th>Opções</th>
+            </tr>
+          </thead>
+          <tbody>
+            @if(sizeof($pacientesDoDia) > 0)
+              @foreach($pacientesDoDia as $paciente)
+                  <tr>
+                      <td> {{$paciente->nome_completo}} </td>
+                    @if($paciente->chegou == "1")
+                        <td><button type="button" class="btn btn-outline-danger btn-sm" onClick="abrirModalInformarChegadaPaciente({{json_encode($paciente)}})"> Não Chegou</button></td>
+                    @else 
+                      <td><button type="button" class="btn btn-outline-success btn-sm" disabled> Chegou</button></td>
+                    
+                    @endif
 
-            <div class="col-lg-12">
-                <div class="tableFixHead">
-                    <table>
-                        <caption class="text-center">Quadro de Pacientes de Hoje</caption>
-                        <thead>
-                            <tr>
-                                <th>Nome Completo</th>
-                                <th>Chegada</th>
-                                <th>Chamada</th>
-                                <th>Observação</th>
-                                <th>Opções</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        @if(sizeof($pacientesDoDia) > 0)
-                          @foreach($pacientesDoDia as $paciente)
-                              <tr>
-                                  <td> {{$paciente->nome_completo}} </td>
-                                @if($paciente->chegou == "1")
-                                    <td><button type="button" class="btn btn-outline-danger" onClick="abrirModalInformarChegadaPaciente({{json_encode($paciente)}})"> Não Chegou</button></td>
-                                @else 
-                                  <td><button type="button" class="btn btn-outline-success" disabled> Chegou</button></td>
-                                
-                                @endif
+                    @if($paciente->chamado == "1")
+                      <td><button type="button" class="btn btn-outline-danger btn-sm" onClick="abrirModalChamadaPaciente({{json_encode($paciente)}})"> Não Chamado</button></td>
+                    @else
+                      <td><button type="button" class="btn btn-outline-success btn-sm" disabled>Chamado</button></td>
+                    
+                    @endif
+                      <td id="colunaObservacao"> {{$paciente->observacao}}</td>
+                      @if($paciente->chamado == "1")
+                        <td > 
+                          <div class="dropdown" disabled>
+                            <a role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                              <span aria-hidden="true" class="fa fa-ellipsis-v fa-2x fa-lg"></span>  
+                            </a>
+                          </div>
+                        </td>
+                      @else
+                      <td > 
+                        <div class="dropdown">
+                          <a role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span aria-hidden="true" class="fa fa-ellipsis-v fa-2x fa-lg"></span>  
+                          </a>
+                          
+                          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <li><a onClick="abrirModalChamadaPacienteNovamente({{json_encode($paciente)}})" class="dropdown-item"><h2>Chamar Novamente</h2></a></li>                                      
+                          </ul>
+                        </div>
+                      </td>
+                      @endif
 
-                                @if($paciente->chamado == "1")
-                                  <td><button type="button" class="btn btn-outline-danger" onClick="abrirModalChamadaPaciente({{json_encode($paciente)}})"> Não Chamado</button></td>
-                                @else
-                                  <td><button type="button" class="btn btn-outline-success" disabled>Chamado</button></td>
-                                
-                                @endif
-                                  <td id="colunaObservacao"> {{$paciente->observacao}}</td>
-                                  @if($paciente->chamado == "1")
-                                    <td > 
-                                      <div class="dropdown" disabled>
-                                        <a role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                          <span aria-hidden="true" class="fa fa-ellipsis-v fa-2x fa-lg"></span>  
-                                        </a>
-                                      </div>
-                                    </td>
-                                  @else
-                                  <td > 
-                                    <div class="dropdown">
-                                      <a role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <span aria-hidden="true" class="fa fa-ellipsis-v fa-2x fa-lg"></span>  
-                                      </a>
-                                      
-                                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <li><a onClick="abrirModalChamadaPacienteNovamente({{json_encode($paciente)}})" class="dropdown-item"><h2>Chamar Novamente</h2></a></li>                                      
-                                      </ul>
-                                    </div>
-                                  </td>
-                                  @endif
-
-                                
-                                </tr>
-                              </form>
-                              @endforeach
-                        @endif 
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
+                    
+                    </tr>
+                  </form>
+                  @endforeach
+            @endif     
+          </tbody>
+        </table>
+  
 
 <!-- MODAL CONFIRMAÇÃO DE CADASTRO DE PACIENTE-->
 <div class="modal fade" id="modalConfirmacaoCadastro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
