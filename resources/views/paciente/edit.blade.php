@@ -11,11 +11,13 @@
 <meta  http-equiv =" Compatível com X-UA " content =" ie=edge " />
 
 
-@section('body')
 
+@section('tituloPagina', 'Editar Paciente')
+@section('body')
+<!--
 <div id = "tituloPagina">
        <h1>Editar Paciente </h1>                
-</div>
+</div>-->
 
 <br>
     <div class="formulario">
@@ -63,10 +65,10 @@
     
     <div class="btn-toolbar" role="toolbar">
   
-      <div class="btn-group me-2" role="group" >
+      <div class="btn-group btn-group-sm me-2" role="group" >
         <button type="submit" class="btn btn-outline-success btn-lg" onClick="validarCamposFormularioCadastrar()" alt="botaoCadastrar"> Salvar</button>       
       </div>
-      <div class="btn-group me-2" role="group">
+      <div class="btn-group btn-group-sm me-2" role="group">
         <button type="submit" class="btn btn-outline-danger btn-lg"  alt="botaoCancelar">
         <a href="/paciente" style="color:inherit"> Cancelar </a>
           </button>       

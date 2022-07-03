@@ -130,3 +130,13 @@ function limparUrl(){
     formularioExclusao.action = "";
 }
 
+
+//EVITAR O BOTAO ENTER
+function EnterKeyFilter()
+ {  
+   if (window.event.keyCode == 13)
+   {   
+       event.returnValue=false;
+       event.cancel = true;
+   }
+ }

@@ -2,24 +2,26 @@
 @extends ('layouts.layout')
 
 
-<link href="{{ asset('/css/paciente.css') }}" rel="stylesheet" type="text/css" >
-<script src="https://code.jquery.com/jquery-1.9.1.js"></script>
 <script type="text/javascript" src="{{ URL::asset('js/paciente.js') }}"></script>
+<script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+<link href="{{ asset('/css/paciente.css') }}" rel="stylesheet" type="text/css" >
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
+<!--
+
+
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 <meta  charset =" UTF-8 " />
 <meta  name =" viewport " content =" largura=largura do dispositivo, escala inicial=1.0 " />
 <meta  http-equiv =" Compatível com X-UA " content =" ie=edge " />
+-->
 
 
+@section('tituloPagina', 'Pacientes')
 @section('body')
 
-<div id = "tituloPagina">
-       <h1>Pacientes </h1>                
-</div>
-
-<br>
     <div class="formulario">
-        <form id="formulario" name ="formulario" method = 'post' action = '/paciente'>
+        <form id="formulario" name ="formulario" method = 'post' action = '/paciente' onkeydown="EnterKeyFilter();">
             @csrf
             <div class="col-12">
                 <div class="col-lg-6">
@@ -61,23 +63,96 @@
     </div>
 
   <div class="btn-toolbar" role="toolbar">
-    <div class="btn-group me-2" role="group">
+    <div class="btn-group  btn-group-sm me-2" role="group">
       <button id="btnCadastrar" type="button" onClick="buscarPaciente()" class="btn btn-outline-primary btn-lg" alt="botaoPesquisar"> 
          Pesquisar </button>
     </div>
   
-    <div class="btn-group me-2" role="group">
+    <div class="btn-group  btn-group-sm me-2" role="group">
       <button type="submit" class="btn btn-outline-danger btn-lg" onClick="limparCampos()" alt="botaoLimpar">
         Limpar</button>       
     </div>
   
-    <div class="btn-group me-2" role="group" >
+    <div class="btn-group  btn-group-sm me-2" role="group" >
       <button type="submit" class="btn btn-outline-success btn-lg" onClick="validarCamposFormularioCadastrar()" alt="botaoCadastrar"> Cadastrar</button>       
     </div>
   </div>
 
   
-           <div class="col-lg-12">
+<br>
+<br>
+
+
+                  <table id="listar-usuario" class="table table-hover display"  >
+                        <thead>
+                            <tr>
+                                <th style="width:70%;">Nome Completo</th>
+                                <th style="width:20%;">Dias Da Semana</th>
+                                <th style="width:20%;">Turno</th>
+                                <th>Sala</th>
+                                <th>Opções</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @if(sizeof($pacientes) > 0)
+                          @foreach($pacientes as $paciente)
+                              <tr>
+                                  <td> {{$paciente->nome_completo}} </td>
+                                  <td> 
+                                      @if($paciente->dias_semana ==1)
+                                        Seg,Quar e Sex
+                                      @else
+                                        Ter,Qui e Sáb
+                                      @endif
+                                  </td>
+                                  <td>
+                                      @if($paciente->turno ==1)
+                                        Manhã
+                                      @elseif($paciente->turno ==2)
+                                        Tarde
+                                      @else
+                                        Noite
+                                      @endif
+                                  </td>
+                                  <td>
+                                      @switch($paciente->sala)
+                                        @case(1)
+                                          A 
+                                        @break
+                                        @case(2)
+                                          B
+                                        @break
+                                        @case(3)
+                                          C
+                                        @break
+                                        @case(4)
+                                          D
+                                        @break
+                                        @case(5)
+                                          E
+                                        @break
+                                    @endswitch
+                                  </td>
+                                  <td > 
+                                    <div class="dropdown">
+                                      <a role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <span aria-hidden="true" class="fa fa-ellipsis-v fa-2x fa-lg"></span>  
+                                      </a>
+                                      
+                                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        <li><a class="dropdown-item" href="/paciente/{{$paciente->id}}"><h2>Editar</h2></a></li>
+                                        <li><a class="dropdown-item" onclick="abrirModalExcluirPaciente({{$paciente->id}})"><h2>Excluir</h2></a></li>
+                                        
+                                      </ul>
+                                    </div>
+                                  </td>
+                                </tr>
+                              @endforeach
+                        @endif 
+                        </tbody>
+                    </table>
+             
+         <!--  <div class="col-lg-12">
                 <div class="tableFixHead">
                     <table>
                         <caption class="text-center">Quadro de Pacientes Cadastrados</caption>
@@ -151,7 +226,7 @@
                 </div>
             </div>
 
-
+-->
 <!-- MODAL CONFIRMAÇÃO DE CADASTRO DE PACIENTE-->
 <div class="modal fade" id="modalConfirmacaoCadastro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">

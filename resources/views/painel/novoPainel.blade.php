@@ -7,16 +7,9 @@
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 
 
-
-@section('titulodoNavegador', 'Cadastro de Paciente')
+@section('tituloPagina', 'Painel')
 
 @section('body')
-
-<div id = "tituloPagina">
-       <h1> Painel </h1>                
-</div>
-
-<br>
 
 <div id = "botaoTelaCheia">
   <form name="formulario" method = 'get' action = '/painel/{}'>
