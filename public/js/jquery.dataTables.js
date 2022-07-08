@@ -3551,7 +3551,7 @@ $jscomp.polyfill("Array.prototype.find", function (l) {
             sNext: "Próximo",
             sPrevious: "Anterior"
          },
-         sEmptyTable: "No data available in table",
+         sEmptyTable: "Sem Resultados",
          sInfo: "Exibindo _START_ de _END_ de _TOTAL_ resultados",
          sInfoEmpty: "Exibindo 0 de 0 de 0 resultados",
          sInfoFiltered: "(filtered from _MAX_ total entries)",
@@ -3564,7 +3564,7 @@ $jscomp.polyfill("Array.prototype.find", function (l) {
          sSearch: "Filtrar:",
          sSearchPlaceholder: "",
          sUrl: "",
-         sZeroRecords: "No matching records found"
+         sZeroRecords: "Sem Resultados"
       },
       oSearch: l.extend({}, u.models.oSearch),
       sAjaxDataProp: "data",

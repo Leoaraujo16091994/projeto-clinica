@@ -18,8 +18,7 @@ class PrincipalController extends Controller
 
     public function index (Request $request)
     {    
-        $idUser = auth()->user()->id;
-        
+        $idUser = auth()->user()->id;        
 
         $nomeCompleto = $request-> nomeCompleto ? $request-> nomeCompleto : "" ;
         $diasDaSemana = $request-> diasDaSemana ? $request-> diasDaSemana : null ;
@@ -44,7 +43,6 @@ class PrincipalController extends Controller
                 ->join('pacientes_do_dia', 'pacientes_do_dia.paciente_pk', '=', 'paciente.id')
                 ->select('paciente.*','pacientes_do_dia.*')
                 ->whereDate('pacientes_do_dia.created_at', date('Y-m-d'));
-                
                 }
 
         if($nomeCompleto){
@@ -56,11 +54,11 @@ class PrincipalController extends Controller
         }
 
         if($turno){
-            $pacientesDoDia ->where('paciente.turno','=',$turno);
+            $pacientesDoDia ->where('pacientes_do_dia.turno_do_dia','=',$turno);
         }
 
         if($sala){
-            $pacientesDoDia ->where('paciente.sala','=',$sala);
+            $pacientesDoDia ->where('pacientes_do_dia.sala_do_dia','=',$sala);
         }
 
         $pacientesDoDia =  $pacientesDoDia->get();
@@ -91,7 +89,7 @@ class PrincipalController extends Controller
 
     public function todosPacientes()
     {
-        $todosPaciente = Paciente::all();
+        $todosPaciente = Paciente::orderBy('nome_completo','ASC')->get();
         
         $output = '<select>';
         
@@ -110,17 +108,33 @@ class PrincipalController extends Controller
     {
         $idPacienteExtra = $request-> paciente;
         $salaDoPaciente = $request -> salaPacienteExtra;
-     
-        $paciente = new PacienteDoDia([
-            'paciente_pk' => $idPacienteExtra,
-            'chegou' => 1,
-            'chamado' => 1,
-            'sala_do_dia' => $salaDoPaciente
-        ]);
+        $turnoDoPaciente = $request -> turnoPacienteExtra;
 
-        $paciente->save();
-   
-        return redirect('principal');
+
+        
+        $pacienteJaCadastrado = DB::table('pacientes_do_dia')
+        ->whereDate('pacientes_do_dia.created_at', date('Y-m-d'))
+        ->where('pacientes_do_dia.paciente_pk',$idPacienteExtra)->exists();
+        
+        
+        if(!$pacienteJaCadastrado){
+
+            $paciente = new PacienteDoDia([
+                'paciente_pk' => $idPacienteExtra,
+                'chegou' => 1,
+                'chamado' => 1,
+                'sala_do_dia' => $salaDoPaciente,
+                'turno_do_dia' => $turnoDoPaciente
+            ]);
+
+            $paciente->save();
+            
+            return redirect('principal');
+        } else {
+           return redirect()->back()->withErrors(['name']);
+        
+        }
+
     }
 
     

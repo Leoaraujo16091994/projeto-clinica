@@ -11,10 +11,15 @@ function buscarPaciente(){
 
  //BOTAO LIMPAR CAMPOS
  function limparCampos(){
-    document.getElementById("nomeCompleto").value = "";
-    document.getElementById("diasDaSemana").value = "";
-    document.getElementById("turno").value = "";
-    document.getElementById("sala").value = "";
+    var nome = document.getElementById("nomeCompleto");
+    var diasDaSemana = document.getElementById("diasDaSemana");
+    var turno = document.getElementById("turno");
+    var sala = document.getElementById("sala"); 
+
+    nome ? document.getElementById("nomeCompleto").value = "":null;
+    diasDaSemana ? document.getElementById("diasDaSemana").value = "":null;
+    turno ? document.getElementById("turno").value = "":null;
+    sala ? document.getElementById("sala").value = "":null;
 }
 
 
@@ -61,6 +66,7 @@ function abrirModalPacienteExtra (){
 
 //ALERTS
 function alertDeErro(listaDeCamposInvalidos){
+    console.log("chegou")
     document.getElementById('alert-erro').style.display = 'block';
     var lista  = [];
     for(const item of listaDeCamposInvalidos){
@@ -81,6 +87,9 @@ function alertDeSucesso(){
         function(){
                 document.getElementById('alert-success').style.display = 'none'}, 2000);
 }
+
+
+
 
 function confirmarCadastro(){
     alertDeSucesso();
@@ -120,7 +129,7 @@ function EnterKeyFilter()
    }
  }
 
-
+/*
 function validarCamposFormularioCadastrar(){
     var listaDeCamposInvalidos = [];
     var nome = formulario.nomeCompleto.value;
@@ -151,13 +160,14 @@ function validarCamposFormularioCadastrar(){
         abrirModalConfirmacaoCadastroPaciente();
     }
 }
-
+*/
 
 function adicionarPacienteExtra(){
 
     var listaDeCamposInvalidos = [];
     var nome = formularioPacienteExtra.paciente.value;
     var sala = formularioPacienteExtra.salaPacienteExtra.value;
+    var turno = formularioPacienteExtra.turnoPacienteExtra.value;
    
     if(nome ==""){
          listaDeCamposInvalidos.push("É necessário selecionar um paciente");
@@ -165,6 +175,9 @@ function adicionarPacienteExtra(){
 
     if(sala ==""){
         listaDeCamposInvalidos.push("É necessário selecionar uma sala");
+    }
+    if(turno ==""){
+        listaDeCamposInvalidos.push("É necessário selecionar um turno");
     }
 
     if(listaDeCamposInvalidos.length > 0){

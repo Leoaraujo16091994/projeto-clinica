@@ -14,6 +14,8 @@ class PacienteDoDia extends Model
       'chamado',
       'observacao',
       'sala_do_dia',
-      'created_at'
+      'created_at',
+      'updated_at',
+      'turno_do_dia'
   ];
 }

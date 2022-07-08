@@ -24,6 +24,17 @@ label{
   margin-right: auto;
 }
   
+#alert-erro-extra{
+  position:fixed; 
+  top: 0px; 
+  left: 30%; 
+  width: 40%;
+  z-index:9999; 
+  border-radius:0px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 #alert-success{
   position:fixed; 
   top: 0px; 

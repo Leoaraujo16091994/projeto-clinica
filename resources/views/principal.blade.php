@@ -7,10 +7,10 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
+<script src="https://code.jquery.com/jquery-1.9.1.js"></script>
 
 <!--
 
-<script src="https://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 <meta  charset =" UTF-8 " />
 <meta  name =" viewport " content =" largura=largura do dispositivo, escala inicial=1.0 " />
@@ -46,6 +46,17 @@
                       <option value="5">Sala E</option>
                     </select>
           </div>
+
+          <div class="mb-3">
+                    <label for="validationnomeCompleto"> Turno </label>
+                    <select class="form-select"  id="turnoPacienteExtra" name = "turnoPacienteExtra">
+                      <option></option>
+                      <option value="1"> Manhã</option>
+                      <option value="2"> Tarde</option>
+                      <option value="3"> Noite</option>
+                    </select>
+                </div>
+
         </form>
       </div>
       <div class="modal-footer">
@@ -65,19 +76,12 @@
         <form id="formulario" name ="formulario" method = 'post' action = '/principal' onkeydown="EnterKeyFilter();">
             @csrf
             <div class="col-12">
-                <div class="col-lg-6">
+             @if( Auth::user()->id == "6" )
+              <div class="col-lg-6">
                     <label for="validationnomeCompleto"> Nome Completo </label>
                         <input type="text" class="form-control" value= "{{$requisicao->nomeCompleto}}" id="nomeCompleto" name = "nomeCompleto"> <br>
                 </div>
-                <div class="col-lg-2">
-                    <label for="validationnomeCompleto"> Dias da Semana </label>
-                    <select class="form-select" value= "{{$requisicao->diasDaSemana}}" id="diasDaSemana" name = "diasDaSemana">
-                      <option></option>
-                      
-                        <option value="1" <?php echo $requisicao->diasDaSemana=="1"?'selected':'';?> >Seg,Qua e Sex</option>
-                        <option value="2" <?php echo $requisicao->diasDaSemana=="2"?'selected':'';?>>Ter,Qui e Sáb</option>
-                    </select>
-                </div>
+              @endif
                 <div class="col-lg-2">
                     <label for="validationnomeCompleto"> Turno </label>
                     <select class="form-select" value= "{{$requisicao->turno}}" id="turno" name = "turno">
@@ -87,6 +91,8 @@
                       <option value="3" <?php echo $requisicao->turno =="3"?'selected':'';?> >Noite</option>
                     </select>
                 </div>
+                @if( Auth::user()->id == "6" )
+
                 <div class="col-lg-2">
                     <label for="validationnomeCompleto"> Sala </label>
                     <select class="form-select" value= "{{$requisicao->sala}}" id="sala" name = "sala">
@@ -98,18 +104,12 @@
                       <option value="5" <?php echo $requisicao->sala =="5"?'selected':'';?> >Sala E</option>
                     </select>
                 </div>
-              
+              @endif
             </div>
         </form>
     </div>
 
-    <div class="btn-group btn-group-sm me-2" role="group">
-      <button id="btnPacienteExtra" type="button" onClick="abrirModalPacienteExtra()" class="btn btn-outline-warning btn-lg" alt="botaoPacienteExtra"> 
-         Paciente Extra </button>
-    </div>
-
-
-  <div class="btn-toolbar" role="toolbar">
+    <div class="btn-toolbar" role="toolbar">
     <div class="btn-group btn-group-sm me-2" role="group">
       <button id="btnCadastrar" type="button" onClick="buscarPaciente()" class="btn btn-outline-primary btn-lg" alt="botaoPesquisar"> 
          Pesquisar </button>
@@ -121,14 +121,16 @@
     </div>
   
     <div class="btn-group btn-group-sm me-2" role="group" >
-      <button type="submit" class="btn btn-outline-success btn-lg" onClick="validarCamposFormularioCadastrar()" alt="botaoCadastrar"> Cadastrar</button>       
+    <button id="btnPacienteExtra" type="button" onClick="abrirModalPacienteExtra()" class="btn btn-outline-success btn-lg" alt="botaoPacienteExtra"> 
+         Incluir Paciente</button>  
     </div>
   </div>
   <br><br>
 
     <table id="listar-usuario" class="table table-hover display"  >
         <thead>
-            <tr>
+            <tr> 
+              <th>Id</th>
               <th>Nome Completo</th>
               <th>Chegada</th>
               <th>Chamada</th>
@@ -138,8 +140,9 @@
           </thead>
           <tbody>
             @if(sizeof($pacientesDoDia) > 0)
-              @foreach($pacientesDoDia as $paciente)
-                  <tr>
+              @foreach($pacientesDoDia as $key=>$paciente)
+              <tr>
+                      <td> {{$key+1}}</td>
                       <td> {{$paciente->nome_completo}} </td>
                     @if($paciente->chegou == "1")
                         <td><button type="button" class="btn btn-outline-danger btn-sm" onClick="abrirModalInformarChegadaPaciente({{json_encode($paciente)}})"> Não Chegou</button></td>
@@ -290,8 +293,17 @@
    Paciente Cadastrado com sucesso! 
 </div>
 
+<!-- Alert de Erro PACIENTE EXTRA -->
+@if(Session::has('errors'))
+  <script>
+    var erro = ["O paciente já esta cadastrado para hoje"]
+    $(document).ready(()=>{
+      alertDeErro(erro);
+    })
+</script>   
+@endif
 
-
+  
 @endsection
 
 @section('extra_styles')

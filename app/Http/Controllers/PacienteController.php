@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 
 use App\Model\Paciente;
+use App\Model\PacienteDoDia;
 use Illuminate\Http\Request;
 
 
@@ -104,12 +105,12 @@ class PacienteController extends Controller
 
     public function update(Request $request, $id)
     {
-   
+  
         $nomeCompleto = $request-> nomeCompleto;
-        $diasDaSemana = $request-> diasSemana;
+        $diasDaSemana = $request-> diasDaSemana;
         $turno = $request-> turno;
         $sala = $request-> sala;
-       
+     
         $pac = Paciente::find($id);
                 
         $paciente = $pac->update([
@@ -118,8 +119,83 @@ class PacienteController extends Controller
             'turno'  => $turno,
             'sala'  => $sala
         ]);
-
+        
+        $this->teste($pac);
+        
+        
         return redirect('/paciente');
+    }
+    
+    
+    
+    public function teste($paciente){
+        
+        $dia = date('w'); 
+        $pacienteExiste = DB::table('pacientes_do_dia')
+                            ->whereDate('pacientes_do_dia.created_at', date('Y-m-d'))
+                            ->where('pacientes_do_dia.paciente_pk',$paciente->id)->exists();
+        
+
+        if($paciente->dias_semana == 1 && ($dia == 1 || $dia == 3 || $dia == 5)){ // paciente é de segunda e hoje é segunda
+            if(!$pacienteExiste){  // crio paciente hoje pq paciente era de terça e nao existe 
+                $paciente = new PacienteDoDia([
+                    'paciente_pk' => $paciente->id,
+                    'chegou' => 1,
+                    'chamado' => 1,
+                    'sala_do_dia' => $paciente->sala,
+                    'turno_do_dia' => $paciente->turno
+                ]);
+        
+                $paciente->save();
+            }else { // caso tenha alterado somente a o nome,turno ou sala
+                $pacienteJaCadastrado = PacienteDoDia::whereDate('pacientes_do_dia.created_at', date('Y-m-d'))
+                                                        ->where('pacientes_do_dia.paciente_pk',$paciente->id)
+                                                            ->update([
+                                                                    'turno_do_dia'  => $paciente->turno,
+                                                                    'sala_do_dia'  => $paciente->sala,
+                                                                ]);
+                                                              
+            }
+        }
+
+        if($paciente->dias_semana == 2 && ($dia == 1 || $dia == 3 || $dia == 5)){ // caso o paciente tenha mudado de dia
+           DB::table('pacientes_do_dia')->where('paciente_pk', $paciente->id)->delete();
+        }
+
+
+
+
+
+
+
+
+
+        if($paciente->dias_semana == 2 && ($dia == 2 || $dia == 4 || $dia == 6)){
+           
+            if(!$pacienteExiste){  // crio paciente hoje pq paciente era de terça e nao existe 
+                $paciente = new PacienteDoDia([
+                    'paciente_pk' => $paciente->id,
+                    'chegou' => 1,
+                    'chamado' => 1,
+                    'sala_do_dia' => $paciente->sala,
+                    'turno_do_dia' => $paciente->turno
+                ]);
+        
+                $paciente->save();
+            }else { // caso tenha alterado somente a o nome,turno ou sala
+                    $pacienteJaCadastrado = PacienteDoDia::whereDate('pacientes_do_dia.created_at', date('Y-m-d'))
+                                                            ->where('pacientes_do_dia.paciente_pk',$paciente->id)
+                                                            ->update([
+                                                                    'turno_do_dia'  => $paciente-> turno,
+                                                                    'sala_do_dia'  => $paciente-> sala
+                                                                ]);
+                }
+        }
+        
+        if($paciente->dias_semana == 1 && ($dia == 2 || $dia == 4 || $dia == 6)){// caso o paciente tenha mudado de dia
+           DB::table('pacientes_do_dia')->where('paciente_pk', $paciente->id)->delete();
+        }
+   
     }
 
 
