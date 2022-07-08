@@ -45,12 +45,12 @@ class pacientesDoDia extends Command
 
          // Buscando Pacientes do Dia SEG,QUA E SEX = TER,QUI E SAB
         if ($dia == 1 || $dia == 3 || $dia == 5){
-            $pacientesDoDiaDeHoje = \DB::table('paciente as pac')->select('pac.id','pac.sala')
+            $pacientesDoDiaDeHoje = \DB::table('paciente as pac')->select('pac.id','pac.sala','pac.turno')
                                     -> where ('pac.dias_semana','1')
                                     ->get();
     
         } else {
-            $pacientesDoDiaDeHoje = \DB::table('paciente as pac')->select('pac.id','pac.sala')
+            $pacientesDoDiaDeHoje = \DB::table('paciente as pac')->select('pac.id','pac.sala','pac.turno')
                                     -> where ('pac.dias_semana','2')
                                     ->get();
 
@@ -64,6 +64,7 @@ class pacientesDoDia extends Command
                 'chamado' => '1' ,
                 'observacao' => '',
                 'sala_do_dia' => $value->sala ,
+                'turno_do_dia' => $value->turno ,
             ]);
         }
     
