@@ -2,9 +2,16 @@
 
 
 
+
 Route::get('/', function () {
-    return view('auth.login');
+  $guard = null;
+  if (Auth::guard($guard)->check()) {
+    return redirect('/pacienteDoDia');
+}
+  return view('auth.login');
 });
+
+
 
 //Route::post('/autocomplete/fetch', 'ChegadaController@fetch')->name('autocomplete.fetch');
 //Route::post('/autocomp/fetch', 'ChamadaController@fetch')->name('autocomp.fetch');
@@ -12,7 +19,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
-    
+ 
     Route::get('/register', ['as' => 'register', 'uses' => 'Auth\RegisterController@showRegistrationForm']);
     Route::post('/register', ['uses' => 'Auth\RegisterController@register']);
     
@@ -28,6 +35,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/painel','PainelController');
    
 
+  });
 
   /*  Route::get ('/paginainicial','PacientesController@inicio');
     
@@ -59,5 +67,3 @@ Route::group(['middleware' => 'auth'], function () {
 
    
    
-
-});

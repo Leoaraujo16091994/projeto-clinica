@@ -4,6 +4,7 @@ $( document ).ready(function() {
     if(input != null) {
     const toSay = input.value.trim();
     const utterance = new SpeechSynthesisUtterance(toSay);
+    utterance.lang = 'pt-BR';
     speechSynthesis.speak(utterance);
     input.value = '';
 }
