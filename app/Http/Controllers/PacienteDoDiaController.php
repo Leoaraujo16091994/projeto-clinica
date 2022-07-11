@@ -213,4 +213,16 @@ class PacienteDoDiaController extends Controller
         $pac->delete();
         return back()->withInput();
     }
+
+
+
+    public function destroy(Request $request){
+              
+        $pacienteDoDiaExcluido = PacienteDoDia::find($request->idPacienteExcluido);
+ 
+        $pacienteDoDiaExcluido->delete();
+
+        return back()->withInput();
+    }
+  
 }

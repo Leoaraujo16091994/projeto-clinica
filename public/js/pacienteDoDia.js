@@ -133,6 +133,46 @@ function EnterKeyFilter()
    }
  }
 
+
+
+
+
+
+ var idPacienteASerExcluido ;
+
+
+ function abrirModalExcluirPacienteDoDia(idPaciente){
+ 
+     idPacienteASerExcluido = idPaciente;
+     $('#modalExcluirPacienteDoDia').modal('show');
+ }
+ 
+ 
+ function excluirPacienteDoDia(){
+ 
+    alertExclusaoDeSucesso();
+ 
+     setTimeout(
+         function(){
+             
+             document.getElementById("idPacienteExcluido").value = idPacienteASerExcluido;
+            
+             formularioExclusao.setAttribute("action","");
+             formularioExclusao.action = "pacienteDoDia/"+idPacienteASerExcluido ;
+             formularioExclusao.submit();
+         }, 1000);
+ }
+    
+ function alertExclusaoDeSucesso(){
+     document.getElementById('alert-exclusao-success').style.display = 'block';
+     
+     setTimeout(
+         function(){
+                 document.getElementById('alert-success').style.display = 'none'}, 2000);
+ }
+ 
+
+ 
 /*
 function validarCamposFormularioCadastrar(){
     var listaDeCamposInvalidos = [];

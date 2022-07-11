@@ -46,6 +46,18 @@ label{
   margin-right: auto;
 }
 
+
+#alert-exclusao-success{
+  position:fixed; 
+  top: 0px; 
+  left: 30%; 
+  width: 40%;
+  z-index:9999; 
+  border-radius:0px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 tr,th{
   background:#eee; 
   text-align: center;
@@ -70,6 +82,11 @@ thead{
   height: 10%;
   border-collapse: inherit !important;
   border-spacing: 0px;
+}
+
+ 
+#formularioExclusao{
+  display:none !important;
 }
 
 

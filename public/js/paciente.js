@@ -126,9 +126,7 @@ function alertExclusaoDeSucesso(){
                 document.getElementById('alert-success').style.display = 'none'}, 2000);
 }
 
-function limparUrl(){
-    formularioExclusao.action = "";
-}
+
 
 
 //EVITAR O BOTAO ENTER

@@ -159,6 +159,7 @@
                             
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                               <li><a class="dropdown-item" href="/pacienteDoDia/{{$paciente->id}}"><h2>Editar</h2></a></li>
+                              <li><a class="dropdown-item" onclick="abrirModalExcluirPacienteDoDia({{$paciente->id}})"><h2>Excluir</h2></a></li>
                             </ul>
                           </div>
                         </td>
@@ -183,7 +184,13 @@
             @endif     
           </tbody>
         </table>
-  
+
+<!-- FORMULARIO DE EXLUSAO DO PACIENTE HOJE -->
+<form id="formularioExclusao" name ="formularioExclusao" method="post">
+  @method('DELETE')
+  @csrf
+  <input type="text" class="form-control" id="idPacienteExcluido" name="idPacienteExcluido"class="btn btn-light" type="submit">
+</form>
 
 <!-- MODAL CONFIRMAÇÃO DE CADASTRO DE PACIENTE-->
 <div class="modal fade" id="modalConfirmacaoCadastro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -278,6 +285,29 @@
 @endif
 
 
+
+
+@if(count($pacientesDoDia) > 0) 
+<!-- MODAL EXCLUSAO DE PACIENTE DO DIA-->
+<div class="modal fade" id="modalExcluirPacienteDoDia" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Tem certeza que deseja excluir o paciente HOJE?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-primary" onClick="excluirPacienteDoDia({{$paciente->id}})">Confirmar</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+@endif
+
+
+
+
 <!-- Alert de ERROS-->
 <div class="alert alert-danger" style='display:none' id='alert-erro'>
     <ul id="lista">
@@ -289,6 +319,12 @@
    Paciente Cadastrado com sucesso! 
 </div>
 
+<!-- Alert Paciente Excluido com Sucesso-->
+<div class="alert alert-success" style='display:none' id='alert-exclusao-success'>
+   Paciente Excluido com sucesso! 
+</div>
+
+
 <!-- Alert de Erro PACIENTE EXTRA -->
 @if(Session::has('errors'))
   <script>
@@ -298,6 +334,10 @@
     })
 </script>   
 @endif
+
+
+
+
 
   
 @endsection
