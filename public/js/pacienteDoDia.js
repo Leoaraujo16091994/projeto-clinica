@@ -2,10 +2,11 @@
 var pacienteSelecionadoChegada ;
 var pacienteSelecionadoChamada;
 
+
 function buscarPaciente(){
     formulario = formulario;
     formulario.method = "get";
-    formulario.action = "principal";
+    formulario.action = "pacienteDoDia";
     formulario.submit();
  }
 
@@ -104,12 +105,12 @@ function confirmarCadastro(){
 
 //FORMS
 function informaChegadaPaciente(){
-    document.getElementById("formularioChegada").setAttribute("action", "/principal/" + pacienteSelecionadoChegada.id);
+    document.getElementById("formularioChegada").setAttribute("action", "/pacienteDoDia/" + pacienteSelecionadoChegada.id);
     document.formularioChegada.submit();
 }
 
 function chamarPaciente(){
-    document.getElementById("formularioChamada").setAttribute("action", "/principal/" + pacienteSelecionadoChamada.id);
+    document.getElementById("formularioChamada").setAttribute("action", "/pacienteDoDia/" + pacienteSelecionadoChamada.id);
     document.formularioChamada.submit();
 }
 
@@ -119,6 +120,9 @@ function chamarPacienteNovamente(){
     document.formularioChamada.submit();
 }
 
+function alterarPaciente(){
+    document.formularioEdicao.submit();
+}
 //EVITAR O BOTAO ENTER
 function EnterKeyFilter()
  {  

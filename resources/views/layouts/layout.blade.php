@@ -31,7 +31,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-            <a href="principal" class="site_title"><i class="fa fa-home"></i> <span> Clínica Prontorim</span></a>
+            <a href="pacienteDoDia" class="site_title"><i class="fa fa-home"></i> <span> Clínica Prontorim</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -118,25 +118,49 @@
     <script src="/layout/build/js/custom.min.js"></script> 
 
     <script>
+      // tabela de pacientes do hoje
         $(document).ready(function () {
-          $('#listar-usuario').DataTable({
+          var t =   $('#lista-pacientes-hoje').DataTable({
             scrollY: '22em',
             scrollCollapse: false,
             paging: false,
-            info: false
+            info: false,
+            columnDefs: [
+              {
+                searchable: false,
+                orderable: false,
+                targets: 0,
+              },
+            ],
           });
+
+
+          t.on('order.dt search.dt', function () {    
+            let i = 1;
+ 
+              t.cells(null, 0, { search: 'applied', order: 'applied' }).every(function (cell) {
+                  this.data(i++);
+              });
+          }).draw();
+        
         });
        
-      
-          $(document).on("click","#menu_toggle",function() {
-            var table = $('#listar-usuario').DataTable();
- 
- table.draw();
+      //ajustar tabela ao clicar no ajuste do menu dinamico do lado esquerdo
+        $(document).on("click","#menu_toggle",function() {
+          var table = $('#listar-usuario').DataTable();
+          table.draw();
         });
           
-      
-
-
+      //tabela de pacientes
+        $(document).ready(function () {
+          var t =   $('#lista-pacientes').DataTable({
+            scrollY: '22em',
+            scrollCollapse: false,
+            paging: false,
+            info: false,
+            
+          });
+        });
 
 
     </script>

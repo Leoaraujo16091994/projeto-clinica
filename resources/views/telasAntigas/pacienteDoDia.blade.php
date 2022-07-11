@@ -2,8 +2,8 @@
 @extends ('layouts.layout')
 
 
-<link href="{{ asset('/css/principal.css') }}" rel="stylesheet" type="text/css" >
-<script type="text/javascript" src="{{ URL::asset('js/principal.js') }}"></script>
+<link href="{{ asset('/css/pacienteDoDia.css') }}" rel="stylesheet" type="text/css" >
+<script type="text/javascript" src="{{ URL::asset('js/pacienteDoDia.js') }}"></script>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
@@ -73,7 +73,7 @@
 @section('body')
 
   <div class="formulario">
-        <form id="formulario" name ="formulario" method = 'post' action = '/principal' onkeydown="EnterKeyFilter();">
+        <form id="formulario" name ="formulario" method = 'post' action = '/pacienteDoDia' onkeydown="EnterKeyFilter();">
             @csrf
             <div class="col-12">
              @if( Auth::user()->id == "6" )
@@ -127,7 +127,7 @@
   </div>
   <br><br>
 
-    <table id="listar-usuario" class="table table-hover display"  >
+    <table id="lista-pacientes-hoje" class="table table-hover display"  >
         <thead>
             <tr> 
               <th>Id</th>
@@ -140,9 +140,9 @@
           </thead>
           <tbody>
             @if(sizeof($pacientesDoDia) > 0)
-              @foreach($pacientesDoDia as $key=>$paciente)
+              @foreach($pacientesDoDia as $paciente)
               <tr>
-                      <td> {{$key+1}}</td>
+                      <td></td>
                       <td> {{$paciente->nome_completo}} </td>
                     @if($paciente->chegou == "1")
                         <td><button type="button" class="btn btn-outline-danger btn-sm" onClick="abrirModalInformarChegadaPaciente({{json_encode($paciente)}})"> Não Chegou</button></td>
@@ -158,27 +158,62 @@
                     
                     @endif
                       <td id="colunaObservacao"> {{$paciente->observacao}}</td>
+                      
                       @if($paciente->chamado == "1")
                         <td > 
-                          <div class="dropdown" disabled>
+                          <div class="dropdown">
                             <a role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                               <span aria-hidden="true" class="fa fa-ellipsis-v fa-2x fa-lg"></span>  
                             </a>
+                            
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                              <li><a class="dropdown-item" href="/pacienteDoDia/{{$paciente->id}}"><h2>Editar</h2></a></li>
+                            </ul>
                           </div>
                         </td>
-                      @else
-                      <td > 
-                        <div class="dropdown">
-                          <a role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                            <span aria-hidden="true" class="fa fa-ellipsis-v fa-2x fa-lg"></span>  
-                          </a>
-                          
-                          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <li><a onClick="abrirModalChamadaPacienteNovamente({{json_encode($paciente)}})" class="dropdown-item"><h2>Chamar Novamente</h2></a></li>                                      
-                          </ul>
-                        </div>
-                      </td>
+                        @else
+
+                        <td > 
+                          <div class="dropdown">
+                            <a role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                              <span aria-hidden="true" class="fa fa-ellipsis-v fa-2x fa-lg"></span>  
+                            </a>
+                            
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                              <li><a class="dropdown-item" href="/pacienteDoDia/{{$paciente->id}}"><h2>Editar</h2></a></li>
+                              <li><a onClick="abrirModalChamadaPacienteNovamente({{json_encode($paciente)}})" class="dropdown-item"><h2>Chamar Novamente</h2></a></li>                                      
+                            </ul>
+                          </div>
+                        </td>
                       @endif
+
+                    <!--  @if($paciente->chamado == "1")
+                        <td > 
+                          <div class="dropdown">
+                            <a role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                              <span aria-hidden="true" class="fa fa-ellipsis-v fa-2x fa-lg"></span>  
+                            </a>
+                            
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                              <li><a class="dropdown-item" href="/pacienteDoDia/{{$paciente->id}}"><h2>Editar</h2></a></li>
+                            </ul>
+                          </div>
+                        </td>
+   
+                        @else
+                        <td > 
+                          <div class="dropdown">
+                            <a role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                              <span aria-hidden="true" class="fa fa-ellipsis-v fa-2x fa-lg"></span>  
+                            </a>
+                            
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                              <li><a onClick="abrirModalChamadaPacienteNovamente({{json_encode($paciente)}})" class="dropdown-item"><h2>Chamar Novamente</h2></a></li>                                      
+                            </ul>
+                          </div>
+                        </td>
+                      @endif
+-->
 
                     
                     </tr>
@@ -246,7 +281,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-footer">
-      <form id="formularioChamada" name ="formularioChamada" method= 'post' action="/principal/{{$paciente->id}}">
+      <form id="formularioChamada" name ="formularioChamada" method= 'post' action="/pacienteDoDia/{{$paciente->id}}">
       @csrf
             <input type="hidden" name="_method" value="PUT">
           <button type="button" class="btn btn-primary" onClick="chamarPaciente()">Confirmar</button>

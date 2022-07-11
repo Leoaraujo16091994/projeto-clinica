@@ -21,7 +21,7 @@
 
 <br>
     <div class="formulario">
-        <form id="formulario" name ="formulario" method = 'post' action = '/paciente/{{$pacienteSelecionado[0]->id}} '>
+        <form id="formulario" name ="formulario" method = 'post' action = '/paciente/{{$pacienteSelecionado[0]->id}}'>
             @csrf
             <input type="hidden" name="_method" value="PUT">
             <div class="col-12">
@@ -32,8 +32,6 @@
                 <div class="col-lg-2">
                     <label for="validationnomeCompleto"> Dias da Semana </label>
                     <select class="form-select" value= "{{$pacienteSelecionado[0]->diasDaSemana}}" id="diasDaSemana" name = "diasDaSemana">
-                      <option></option>
-                      
                         <option value="1" <?php echo $pacienteSelecionado[0]->dias_semana=="1"?'selected':'';?> >Seg,Qua e Sex</option>
                         <option value="2" <?php echo $pacienteSelecionado[0]->dias_semana=="2"?'selected':'';?>>Ter,Qui e Sáb</option>
                     </select>
@@ -41,7 +39,6 @@
                 <div class="col-lg-2">
                     <label for="validationnomeCompleto"> Turno </label>
                     <select class="form-select" value= "{{$pacienteSelecionado[0]->turno}}" id="turno" name = "turno">
-                      <option></option>
                       <option value="1" <?php echo $pacienteSelecionado[0]->turno =="1"?'selected':'';?> >Manhã</option>
                       <option value="2" <?php echo $pacienteSelecionado[0]->turno =="2"?'selected':'';?> >Tarde</option>
                       <option value="3" <?php echo $pacienteSelecionado[0]->turno =="3"?'selected':'';?> >Noite</option>
@@ -50,7 +47,6 @@
                 <div class="col-lg-2">
                     <label for="validationnomeCompleto"> Sala </label>
                     <select class="form-select" value= "{{$pacienteSelecionado[0]->sala}}" id="sala" name = "sala">
-                      <option></option>
                       <option value="1" <?php echo $pacienteSelecionado[0]->sala =="1"?'selected':'';?> >Sala A</option>
                       <option value="2" <?php echo $pacienteSelecionado[0]->sala =="2"?'selected':'';?> >Sala B</option>
                       <option value="3" <?php echo $pacienteSelecionado[0]->sala =="3"?'selected':'';?> >Sala C</option>

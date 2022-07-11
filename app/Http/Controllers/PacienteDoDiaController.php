@@ -11,7 +11,7 @@ use App\Model\UltimoPacienteChamado;
 use Illuminate\Http\Request;
 use App\Http\Controllers\PainelController;
 
-class PrincipalController extends Controller
+class PacienteDoDiaController extends Controller
 {
 
   
@@ -63,7 +63,7 @@ class PrincipalController extends Controller
 
         $pacientesDoDia =  $pacientesDoDia->get();
 
-        return view('/principal', ['pacientesDoDia' => $pacientesDoDia],['requisicao' => $request]);
+        return view('pacienteDoDia.index', ['pacientesDoDia' => $pacientesDoDia],['requisicao' => $request]);
     }
 
   
@@ -83,10 +83,10 @@ class PrincipalController extends Controller
 
         $paciente->save();
    
-        return redirect('principal');
+        return redirect('/pacienteDoDia');
     }
 
-
+//Exibir a lista de todos pacientes no cadastro de paciente extra
     public function todosPacientes()
     {
         $todosPaciente = Paciente::orderBy('nome_completo','ASC')->get();
@@ -110,8 +110,6 @@ class PrincipalController extends Controller
         $salaDoPaciente = $request -> salaPacienteExtra;
         $turnoDoPaciente = $request -> turnoPacienteExtra;
 
-
-        
         $pacienteJaCadastrado = DB::table('pacientes_do_dia')
         ->whereDate('pacientes_do_dia.created_at', date('Y-m-d'))
         ->where('pacientes_do_dia.paciente_pk',$idPacienteExtra)->exists();
@@ -129,7 +127,7 @@ class PrincipalController extends Controller
 
             $paciente->save();
             
-            return redirect('principal');
+            return redirect('/pacienteDoDia');
         } else {
            return redirect()->back()->withErrors(['name']);
         
@@ -139,25 +137,36 @@ class PrincipalController extends Controller
 
     
     
-    public function show(Request $request)
-    {   
+    public function show($id)
+    {  
+        
+        $paciente = DB::table('paciente')
+                    ->join('pacientes_do_dia', 'pacientes_do_dia.paciente_pk', '=', 'paciente.id')
+                    ->select('paciente.*','pacientes_do_dia.*')
+                    ->where('pacientes_do_dia.id',$id)->get();
+   
+        return view('pacienteDoDia.edit',['pacienteSelecionado' => $paciente]); 
     }              
   
 
   
     public function edit($id)
     {
+        
+       
     }
 
 
     public function update(Request $request, $id)
     {
         $observacao = $request->observacao;
-      
+     
         $pac = PacienteDoDia::find($id);
        
         $pacienteChegou = $request -> chegadaPaciente;
         $pacienteChamado = $request -> chamadaPaciente;
+
+        $pacienteAlterado = $request -> pacienteAlterado;
 
         if($pacienteChegou){
             $paciente = $pac->update([
@@ -171,8 +180,21 @@ class PrincipalController extends Controller
                 'chamado' => 2
             ]);
         }
+
+
+        if($pacienteAlterado){
+
+            $paciente = $pac->update([
+                'chegou' => $request->chegou,
+                'chamado' => $request->chamado,
+                'observacao' => $request->observacao,
+                'sala_do_dia' => $request->sala_do_dia,
+                'turno_do_dia' => $request->turno_do_dia,
+            ]);
+
+        }
         
-        return back()->withInput();
+        return redirect('/pacienteDoDia');
     }
 
 
@@ -190,6 +212,5 @@ class PrincipalController extends Controller
         $pac = UltimoPacienteChamado::where('paciente_pk','=',$id);
         $pac->delete();
         return back()->withInput();
-
     }
 }

@@ -83,7 +83,7 @@
 <br>
 
 
-                  <table id="listar-usuario" class="table table-hover display"  >
+                  <table id="lista-pacientes" class="table table-hover display"  >
                         <thead>
                             <tr>
                                 <th style="width:70%;">Nome Completo</th>

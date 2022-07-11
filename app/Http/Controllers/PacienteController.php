@@ -120,7 +120,7 @@ class PacienteController extends Controller
             'sala'  => $sala
         ]);
         
-        $this->teste($pac);
+        $this->ajustarPacienteNaListaPacientesDoDia($pac);
         
         
         return redirect('/paciente');
@@ -128,7 +128,7 @@ class PacienteController extends Controller
     
     
     
-    public function teste($paciente){
+    public function ajustarPacienteNaListaPacientesDoDia($paciente){
         
         $dia = date('w'); 
         $pacienteExiste = DB::table('pacientes_do_dia')

@@ -63,19 +63,13 @@ thead{
   caption-side: top; 
   color: #73879c !important;
 }
-/*
-*/
-#listar-usuario{
 
-  border-collapse: inherit !important;
-  border-spacing: 0px;
-}
-
-
-#listar-usuario {
+#lista-pacientes-hoje {
   margin-top:2%;
   overflow: auto; 
   height: 10%;
+  border-collapse: inherit !important;
+  border-spacing: 0px;
 }
 
 

@@ -78,9 +78,8 @@ class PainelController extends Controller
                                 ->orderByDesc('ultimoAtualizado')
                                 ->limit(1)
                                 ->get();
-                                
-                
-                
+                             
+                                             
                 $ultimoPacienteChamadoSalvo= DB::table('ultimo_paciente_chamado')
                                                 ->select('ultimo_paciente_chamado.paciente_pk')
                                                 ->orderByDesc('ultimo_paciente_chamado.updated_at')
@@ -91,11 +90,11 @@ class PainelController extends Controller
                 
                 if(count($ultimoPacienteChamado) > 0 ){
                         if(count($ultimoPacienteChamadoSalvo) === 0 || $ultimoPacienteChamado[0]->idDoPaciente != $ultimoPacienteChamadoSalvo[0]->paciente_pk){
-                                $paciente = new UltimoPacienteChamado([
+                               $paciente = new UltimoPacienteChamado([
                                         'paciente_pk' => $ultimoPacienteChamado[0]->idDoPaciente
                                 ]);
+                                $paciente->save();
                                 
-                                        $paciente->save();
                                 return view('/painel.novoPainel',['pacientesDoDia' => $pacientesDoDia],['ultimoPacienteChamado' => $ultimoPacienteChamado]);             
                         }  else {
                         
