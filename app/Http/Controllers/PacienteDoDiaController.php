@@ -14,55 +14,9 @@ use App\Http\Controllers\PainelController;
 class PacienteDoDiaController extends Controller
 {
 
-  
-
     public function index (Request $request)
-    {    
-        $idUser = auth()->user()->id;        
-
-        $nomeCompleto = $request-> nomeCompleto ? $request-> nomeCompleto : "" ;
-        $diasDaSemana = $request-> diasDaSemana ? $request-> diasDaSemana : null ;
-        $turno = $request-> turno ? $request-> turno : "" ;
-        $sala  = $request-> sala ? $request-> sala : "" ;
-
-        $pacientesDoDia = new Paciente([
-            'nome_completo' => $nomeCompleto,
-            'dias_semana' => $diasDaSemana,
-            'turno' => $turno,
-            'sala'  => $sala
-        ]);
-
-        if($idUser != 6) { // usuario diferente de recepcao
-            $pacientesDoDia = DB::table('paciente')
-                ->join('pacientes_do_dia', 'pacientes_do_dia.paciente_pk', '=', 'paciente.id')
-                ->select('paciente.*','pacientes_do_dia.*')
-                ->whereDate('pacientes_do_dia.created_at', date('Y-m-d'))
-                ->where('pacientes_do_dia.sala_do_dia',$idUser);
-        } else {
-            $pacientesDoDia = DB::table('paciente')
-                ->join('pacientes_do_dia', 'pacientes_do_dia.paciente_pk', '=', 'paciente.id')
-                ->select('paciente.*','pacientes_do_dia.*')
-                ->whereDate('pacientes_do_dia.created_at', date('Y-m-d'));
-                }
-
-        if($nomeCompleto){
-            $pacientesDoDia -> where('paciente.nome_completo','like','%'.$nomeCompleto.'%');
-        }
-
-        if($diasDaSemana){
-            $pacientesDoDia ->where('paciente.dias_semana','=',$diasDaSemana);
-        }
-
-        if($turno){
-            $pacientesDoDia ->where('pacientes_do_dia.turno_do_dia','=',$turno);
-        }
-
-        if($sala){
-            $pacientesDoDia ->where('pacientes_do_dia.sala_do_dia','=',$sala);
-        }
-
-        $pacientesDoDia =  $pacientesDoDia->get();
-
+    {   
+        $pacientesDoDia= PacienteDoDia::getBuscarPacientesDoDia($request);
         return view('pacienteDoDia.index', ['pacientesDoDia' => $pacientesDoDia],['requisicao' => $request]);
     }
 
@@ -194,7 +148,7 @@ class PacienteDoDiaController extends Controller
 
         }
         
-        return redirect('/pacienteDoDia');
+       return back()->withInput();
     }
 
 
