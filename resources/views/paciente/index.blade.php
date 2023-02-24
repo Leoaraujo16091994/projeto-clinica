@@ -72,10 +72,11 @@
       <button type="submit" class="btn btn-outline-danger btn-lg" onClick="limparCampos()" alt="botaoLimpar">
         Limpar</button>       
     </div>
-  
+    @if( Auth::user()->id == "6" )
     <div class="btn-group  btn-group-sm me-2" role="group" >
       <button type="submit" class="btn btn-outline-success btn-lg" onClick="validarCamposFormularioCadastrar()" alt="botaoCadastrar"> Cadastrar</button>       
     </div>
+    @endif
   </div>
 
   
