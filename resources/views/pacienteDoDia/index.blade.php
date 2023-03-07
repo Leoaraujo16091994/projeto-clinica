@@ -158,7 +158,10 @@
                             </a>
                             
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+
+                            @if( Auth::user()->id == "6" )
                               <li><a class="dropdown-item" href="/pacienteDoDia/{{$paciente->id}}"><h2>Editar</h2></a></li>
+                            @endif
                               <li><a class="dropdown-item" onclick="abrirModalExcluirPacienteDoDia({{$paciente->id}})"><h2>Excluir</h2></a></li>
                             </ul>
                           </div>
@@ -172,7 +175,10 @@
                             </a>
                             
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+
+                            @if( Auth::user()->id == "6" )
                               <li><a class="dropdown-item" href="/pacienteDoDia/{{$paciente->id}}"><h2>Editar</h2></a></li>
+                            @endif
                               <li><a onClick="abrirModalChamadaPacienteNovamente({{json_encode($paciente)}})" class="dropdown-item"><h2>Chamar Novamente</h2></a></li>                                      
                             </ul>
                           </div>
