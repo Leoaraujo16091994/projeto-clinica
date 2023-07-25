@@ -45,6 +45,10 @@ function abrirModalChamadaPacienteNovamente(paciente){
     $('#modalChamadaNovamente').modal('show');
 }
 
+function abrirModalChamadaAcompanhante(paciente){
+    this.pacienteSelecionadoChamada = paciente
+    $('#modalChamadaAcompanhante').modal('show');
+}
 
 function abrirModalPacienteExtra (){
     var _token = $('input[name="_token"]').val();
@@ -120,9 +124,18 @@ function chamarPacienteNovamente(){
     document.formularioChamada.submit();
 }
 
+function chamarAcompanhante(){
+    console.log("teste",pacienteSelecionadoChamada.paciente_pk);
+    document.getElementById("formularioChamada").setAttribute("action", "/chamarAcompanhante/" + pacienteSelecionadoChamada.paciente_pk);
+    document.formularioChamada.submit();
+}
+
 function alterarPaciente(){
     document.formularioEdicao.submit();
 }
+
+
+
 //EVITAR O BOTAO ENTER
 function EnterKeyFilter()
  {  
@@ -173,38 +186,7 @@ function EnterKeyFilter()
  
 
  
-/*
-function validarCamposFormularioCadastrar(){
-    var listaDeCamposInvalidos = [];
-    var nome = formulario.nomeCompleto.value;
-    var diasDaSemana = formulario.diasDaSemana.value;
-    var turno = formulario.turno.value;
-    var sala = formulario.sala.value;
-   
-    if(nome ==""){
-         listaDeCamposInvalidos.push("O campo Nome Completo é obrigatório");
-    }
 
-    if(diasDaSemana ==""){
-        listaDeCamposInvalidos.push("O campo Dias da Semana é obrigatório");
-    }
-
-    if(turno ==""){
-    listaDeCamposInvalidos.push("O campo  Turno é obrigatório");
-    }
-
-    if(sala ==""){
-        listaDeCamposInvalidos.push("O campo  Sala é obrigatório");
-    }
-
-    if(listaDeCamposInvalidos.length > 0){
-       alertDeErro(listaDeCamposInvalidos);
-        return 0;
-    } else {
-        abrirModalConfirmacaoCadastroPaciente();
-    }
-}
-*/
 
 function adicionarPacienteExtra(){
 

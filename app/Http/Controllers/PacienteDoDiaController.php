@@ -88,8 +88,6 @@ class PacienteDoDiaController extends Controller
         }
 
     }
-
-    
     
     public function show($id)
     {  
@@ -102,14 +100,6 @@ class PacienteDoDiaController extends Controller
         return view('pacienteDoDia.edit',['pacienteSelecionado' => $paciente]); 
     }              
   
-
-  
-    public function edit($id)
-    {
-        
-       
-    }
-
 
     public function update(Request $request, $id)
     {
@@ -147,8 +137,8 @@ class PacienteDoDiaController extends Controller
             ]);
 
         }
-        
-       return back()->withInput();
+       
+       return redirect('/pacienteDoDia');
     }
 
 
@@ -162,6 +152,21 @@ class PacienteDoDiaController extends Controller
             'chamado' => 2
         ]);
 
+        $pac = UltimoPacienteChamado::where('paciente_pk','=',$id);
+        $pac->delete();
+        return back()->withInput();
+    }
+
+    
+    
+    function chamarAcompanhante($id){
+        
+        $pac = PacienteDoDia::where('paciente_pk','=',$id);
+
+        $paciente = $pac->update([
+            'chamar_acompanhante' => 1
+        ]);
+
 
         $pac = UltimoPacienteChamado::where('paciente_pk','=',$id);
         $pac->delete();
@@ -169,13 +174,9 @@ class PacienteDoDiaController extends Controller
     }
 
 
-
     public function destroy(Request $request){
-              
         $pacienteDoDiaExcluido = PacienteDoDia::find($request->idPacienteExcluido);
- 
-        $pacienteDoDiaExcluido->delete();
-
+         $pacienteDoDiaExcluido->delete();
         return back()->withInput();
     }
   

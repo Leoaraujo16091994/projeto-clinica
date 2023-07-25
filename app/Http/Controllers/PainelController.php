@@ -15,7 +15,7 @@ class PainelController extends Controller
 {
 
         public function index ()
-        {    
+        {    $textoAcompanhante = "'ACOMPANHANTE '";
                 $pacientesDoDia = DB::table('pacientes_do_dia as pacDia1')
                                 ->join('paciente as pac1', 'pacDia1.paciente_pk', '=', 'pac1.id')
                                 ->select('pacDia1.sala_do_dia', 
@@ -31,7 +31,11 @@ class PainelController extends Controller
                                         (DB::raw('MAX(pacDia1.updated_at) ultimoAtualizado')),
                                         (DB::raw('
                                                 (
-                                                        SELECT `pac3`.`nome_completo` 
+                                                        SELECT 
+                                                        CASE 
+                                                        WHEN `pacDia3`.`chamar_acompanhante` IS NOT NULL THEN concat('.$textoAcompanhante. ', `pac3`.`nome_completo`)
+                                                                ELSE `pac3`.`nome_completo` 
+                                                                END AS nome_completo
                                                         FROM `paciente` AS `pac3` 
                                                         INNER JOIN `pacientes_do_dia` as `pacDia3` ON 
                                                                 `pac3`.`id` = `pacDia3`.`paciente_pk`
@@ -107,18 +111,10 @@ class PainelController extends Controller
                         
         }
 
-        public function create()
-        {
-        }
-        
-        public function store(Request $request)
-        {
-        }
-
-        
+              
         
         public function show()
-        {                   
+        {                   $textoAcompanhante = "'ACOMPANHANTE '";
                 $pacientesDoDia = DB::table('pacientes_do_dia as pacDia1')
                         ->join('paciente as pac1', 'pacDia1.paciente_pk', '=', 'pac1.id')
                         ->select('pacDia1.sala_do_dia', 
@@ -136,7 +132,10 @@ class PainelController extends Controller
                                 (DB::raw('MAX(pacDia1.updated_at) ultimoAtualizado')),
                                 (DB::raw('
                                                 (
-                                                        SELECT `pac3`.`nome_completo` 
+                                                        SELECT CASE 
+                                                        WHEN `pacDia3`.`chamar_acompanhante` IS NOT NULL THEN concat('.$textoAcompanhante. ', `pac3`.`nome_completo`)
+                                                                ELSE `pac3`.`nome_completo` 
+                                                                END AS nome_completo
                                                                 FROM `paciente` AS `pac3` 
                                                         INNER JOIN `pacientes_do_dia` as `pacDia3` ON 
                                                                 `pac3`.`id` = `pacDia3`.`paciente_pk`
@@ -169,7 +168,10 @@ class PainelController extends Controller
                                         (DB::raw('MAX(pacDia1.updated_at) ultimoAtualizado')),
                                         (DB::raw('
                                                 (
-                                                        SELECT `pac3`.`nome_completo` 
+                                                        SELECT CASE 
+                                                        WHEN `pacDia3`.`chamar_acompanhante` IS NOT NULL THEN concat('.$textoAcompanhante. ', `pac3`.`nome_completo`)
+                                                                ELSE `pac3`.`nome_completo` 
+                                                                END AS nome_completo 
                                                                 FROM `paciente` AS `pac3` 
                                                         INNER JOIN `pacientes_do_dia` as `pacDia3` ON 
                                                                 `pac3`.`id` = `pacDia3`.`paciente_pk`
@@ -214,15 +216,4 @@ class PainelController extends Controller
                 }    
         }
 
-        
-        public function edit($id)
-        {
-
-        }
-
-
-        public function update(Request $request, $id)
-        {
-        
-        }  
  }

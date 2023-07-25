@@ -142,6 +142,10 @@
                     
                     @endif
 
+
+
+
+
                     @if($paciente->chamado == "1")
                       <td><button type="button" class="btn btn-outline-danger btn-sm" onClick="abrirModalChamadaPaciente({{json_encode($paciente)}})"> Não Chamado</button></td>
                     @else
@@ -180,6 +184,8 @@
                               <li><a class="dropdown-item" href="/pacienteDoDia/{{$paciente->id}}"><h2>Editar</h2></a></li>
                             @endif
                               <li><a onClick="abrirModalChamadaPacienteNovamente({{json_encode($paciente)}})" class="dropdown-item"><h2>Chamar Novamente</h2></a></li>                                      
+                              <li><a onClick="abrirModalChamadaAcompanhante({{json_encode($paciente)}})" class="dropdown-item"><h2>Chamar Acompanhante</h2></a></li>                                      
+                            
                             </ul>
                           </div>
                         </td>
@@ -290,6 +296,26 @@
 </div>
 @endif
 
+
+@if(count($pacientesDoDia) > 0) 
+
+<!-- MODAL DE CHAMADA DO ACOMPANHANTE DO PACIENTE --> 
+<div class="modal fade" id="modalChamadaAcompanhante" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Tem certeza que deseja chamar o acompanhante do paciente ?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-footer">
+            <input type="hidden" name="_method" value="PUT">
+          <button type="button" class="btn btn-primary" onClick="chamarAcompanhante()">Confirmar</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+@endif
 
 
 
