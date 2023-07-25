@@ -192,8 +192,8 @@
   }
 
   .top_nav .dropdown-menu li a {
-    float: right;
-    width: 50%;
+    float: left;
+    width: 100%;
   }
 
   .nav-md ul.nav.child_menu li:after {
