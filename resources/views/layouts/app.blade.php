@@ -19,11 +19,11 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
+<body style="background: #0B0B3B;">
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ url('/') }}" style="margin-left:27em;">
                    <!-- {{ config('app.name', 'Laravel') }} -->
                    Clinica Prontorim
                 </a>
@@ -37,9 +37,8 @@
 
                     </ul>
 
-                    <!-- Right Side Of Navbar -->
+                    <!-- 
                     <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -67,6 +66,7 @@
                             </li>
                         @endguest
                     </ul>
+-->
                 </div>
             </div>
         </nav>
