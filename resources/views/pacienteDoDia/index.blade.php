@@ -8,27 +8,6 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
 <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
 
-@if(count($pacientesDoDia) > 0) 
-
-<!-- MODAL DE CHAMADA DO ACOMPANHANTE DO PACIENTE --> 
-<div class="modal fade" id="modalChamadaAcompanhante" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Tem certeza que deseja chamar o acompanhante do paciente ?</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-footer">
-            <input type="hidden" name="_method" value="PUT">
-          <button type="button" class="btn btn-primary" onClick="chamarAcompanhante()">Confirmar</button>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-      </div>
-    </div>
-  </div>
-</div>
-@endif
-
-
 
 <!-- MODAL PACIENTE EXTRA-->
 <div class="modal fade" id="modalPacienteExtra" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -318,6 +297,25 @@
 @endif
 
 
+@if(count($pacientesDoDia) > 0) 
+
+<!-- MODAL DE CHAMADA DO ACOMPANHANTE DO PACIENTE --> 
+<div class="modal fade" id="modalChamadaAcompanhante" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Tem certeza que deseja chamar o acompanhante do paciente ?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-footer">
+            <input type="hidden" name="_method" value="PUT">
+          <button type="button" class="btn btn-primary" onClick="chamarAcompanhante()">Confirmar</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+@endif
 
 
 
