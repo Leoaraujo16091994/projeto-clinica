@@ -26,6 +26,10 @@ function buscarPaciente(){
 
 
 // MODALS
+function abrirModalChamadaAcompanhante(paciente){
+    this.pacienteSelecionadoChamada = paciente
+    $('#modalChamadaAcompanhante').modal('show');
+}
 function abrirModalConfirmacaoCadastroPaciente (){
     $('#modalConfirmacaoCadastro').modal('show');
 }
@@ -45,10 +49,7 @@ function abrirModalChamadaPacienteNovamente(paciente){
     $('#modalChamadaNovamente').modal('show');
 }
 
-function abrirModalChamadaAcompanhante(paciente){
-    this.pacienteSelecionadoChamada = paciente
-    $('#modalChamadaAcompanhante').modal('show');
-}
+
 
 function abrirModalPacienteExtra (){
     var _token = $('input[name="_token"]').val();
