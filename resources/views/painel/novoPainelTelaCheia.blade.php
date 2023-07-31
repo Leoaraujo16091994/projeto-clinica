@@ -11,7 +11,7 @@
 <title> Painel</title>
 
 
-<meta http-equiv="refresh" content=5 ; url="/painel">
+<meta http-equiv="refresh" content=10 ; url="/painel">
 
 <div class="col-lg-12">
                 <div class="tableFixHead">
