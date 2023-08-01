@@ -137,7 +137,7 @@ class PainelController extends Controller
                                 'chamado_painel' => 2
                         ]);
                 }
-
+/*
                 $pacientesDoDia = DB::table('pacientes_do_dia as pacDia')
                         ->select('pac.id', 'pacDia.sala_do_dia','pac.nome_completo')
                         ->join('paciente as pac', 'pacDia.paciente_pk', '=', 'pac.id')
@@ -145,21 +145,48 @@ class PainelController extends Controller
                         ->where('pacDia.chamado_painel', '=', '2')
                         ->whereDate('pacDia.created_at', today())
                         ->groupBy('pacDia.sala_do_dia')
-                        ->toSql();
-                        //->get();
+                        ->get();
 
-dd($pacientesDoDia);
-               
+*/
+                      
+
+                        $pacientesDoDia = DB::table('pacientes_do_dia as pacDia')
+                        ->select('sala_do_dia', 'nome_completo')
+                        ->join('paciente as pac', 'pacDia.paciente_pk', '=', 'pac.id')
+                        ->whereIn('pacDia.id',function($query){
+
+                                $query->select(DB::raw(' 
+                                max(pacDia1.id)
+                        from `pacientes_do_dia` as `pacDia1` 
+                        inner join `paciente` as `pac1` on 
+                                `pacDia1`.`paciente_pk` = `pac1`.`id` 
+                        where `pacDia1`.`chamado` = 2 
+                        and `pacDia1`.`chamado_painel` = 2 
+                        and date(`pacDia1`.`created_at`) = (SELECT CURDATE()) 
+                        group by  `pacDia1`.`sala_do_dia`'));
+                                                  
+                                
+                        })
+                        ->groupBy('sala_do_dia','nome_completo')
+                        ->get();
+/*               
 select 
-	 `pacDia`.`sala_do_dia`, 
-     `pac`.`nome_completo` 
+	sala_do_dia,nome_completo
+from `pacientes_do_dia` as `pacDia1` 
+inner join `paciente` as `pac1` on 
+	`pacDia1`.`paciente_pk` = `pac1`.`id` 
+WHERE pacDia1.id in (
+(select 
+	max(pacDia.id)
 from `pacientes_do_dia` as `pacDia` 
- inner join `paciente` as `pac` on 
+inner join `paciente` as `pac` on 
 	`pacDia`.`paciente_pk` = `pac`.`id` 
 where `pacDia`.`chamado` = 2 
 and `pacDia`.`chamado_painel` = 2 
-and date(`pacDia`.`created_at`) = '2023-07-31' 
-group by  `pacDia`.`sala_do_dia`, `pac`.`nome_completo` 
+and date(`pacDia`.`created_at`) = '2023-08-01' 
+group by  `pacDia`.`sala_do_dia`))
+ORDER by sala_do_dia asc
+*/
                 if ($ultimoPacienteChamado->isNotEmpty()) {
                         return view(
                                 '/painel.novoPainelTelaCheia',
@@ -169,9 +196,9 @@ group by  `pacDia`.`sala_do_dia`, `pac`.`nome_completo`
                 } else {
                         return view('/painel.novoPainelTelaCheia', ['pacientesDoDia' => $pacientesDoDia], ['ultimoPacienteChamado' => null]);
                 }
-               /* if ($pacientesDoDia->isEmpty()) {
+               if ($pacientesDoDia->isEmpty()) {
                         return view('/painel.novoPainelTelaCheia', ['pacientesDoDia' => null], ['ultimoPacienteChamado' => null]);
-                }*/
+                }
 
 
 
