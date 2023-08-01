@@ -14,6 +14,7 @@ class Paciente extends Model
       'turno',
       'sala'
   ];
+  
 /*
   public function chamadas()
   {

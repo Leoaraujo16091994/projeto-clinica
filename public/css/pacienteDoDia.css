@@ -1,0 +1,101 @@
+#tituloPagina{
+    border-bottom: 3px solid;
+}
+.btn-toolbar{
+    float:right;
+}   
+#btnCadastrar{
+  left:2%;
+}
+
+label{
+  font-weight: bold;
+  font-size:15px;
+}
+
+#alert-erro{
+  position:fixed; 
+  top: 0px; 
+  left: 30%; 
+  width: 40%;
+  z-index:9999; 
+  border-radius:0px;
+  margin-left: auto;
+  margin-right: auto;
+}
+  
+#alert-erro-extra{
+  position:fixed; 
+  top: 0px; 
+  left: 30%; 
+  width: 40%;
+  z-index:9999; 
+  border-radius:0px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#alert-success{
+  position:fixed; 
+  top: 0px; 
+  left: 30%; 
+  width: 40%;
+  z-index:9999; 
+  border-radius:0px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+#alert-exclusao-success{
+  position:fixed; 
+  top: 0px; 
+  left: 30%; 
+  width: 40%;
+  z-index:9999; 
+  border-radius:0px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+tr,th{
+  background:#eee; 
+  text-align: center;
+  color: #73879c !important;
+}
+
+html {
+  position:fixed;
+  width:100%;
+  height:110%;
+}
+
+thead{
+  position:center;
+  caption-side: top; 
+  color: #73879c !important;
+}
+
+#lista-pacientes-hoje {
+  margin-top:2%;
+  overflow: auto; 
+  height: 10%;
+  border-collapse: inherit !important;
+  border-spacing: 0px;
+}
+
+ 
+#formularioExclusao{
+  display:none !important;
+}
+
+
+
+
+
+
+
+
+
+
+

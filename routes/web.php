@@ -1,9 +1,12 @@
 <?php
 
 
-
 Route::get('/', function () {
-    return view('auth.login');
+  $guard = null;
+  if (Auth::guard($guard)->check()) {
+    return redirect('/pacienteDoDia');
+}
+  return view('auth.login');
 });
 
 //Route::post('/autocomplete/fetch', 'ChegadaController@fetch')->name('autocomplete.fetch');
@@ -12,47 +15,21 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
-    
+ 
     Route::get('/register', ['as' => 'register', 'uses' => 'Auth\RegisterController@showRegistrationForm']);
     Route::post('/register', ['uses' => 'Auth\RegisterController@register']);
     
-  /*  Route::get ('/paginainicial','PacientesController@inicio');
-    
-    //PacientesController
-    Route::resource('/pacientes','PacientesController');
-    Route::get ('/resultadopaciente','PacientesController@resultadoconsulta');
-    Route::get('/deletar','ChamadaController@deletar');
-
-    //ChegadaController
-    Route::resource ('/chegada','ChegadaController');
-    Route::post('/chegada/fetch', 'ChegadaController@fetch')->name('autocomplete.fetch');
-    
-    //ChamadaController
-    Route::resource('/chamarpainel','ChamadaController');
-   // Route::get('/painel','ChamadaController@exibirpainel');
-    //Route::get('/paineltelacheia','ChamadaController@paineltelacheia');
-    Route::get('/home', 'HomeController@index')->name('home');
-    
-
-
-//RelatorioController
-   Route::get('/relatoriospronto', 'RelatoriosController@relatorio');
-   Route::resource('/relatorios','RelatoriosController');
-
-*/
-
-
-
-
-
-    //PrincipalController
-    Route::resource('/principal','PrincipalController');
-    Route::post('/pacienteExtra','PrincipalController@storePacienteExtra');
-    Route::get('/todosPacientes','PrincipalController@todosPacientes')->name('autocompletePacientes.fetch');;
+    Route::resource('/paciente','PacienteController');
    
-    //PainelController
+    //pacienteDoDiaController
+    Route::resource('/pacienteDoDia','PacienteDoDiaController');
+    Route::post('/pacienteExtra','PacienteDoDiaController@storePacienteExtra');
+    Route::get('/todosPacientes','PacienteDoDiaController@todosPacientes')->name('autocompletePacientes.fetch');
+    Route::put('/chamarNovamente/{id}','PacienteDoDiaController@chamarNovamente');
+    Route::put('/chamarAcompanhante/{id}','PacienteDoDiaController@chamarAcompanhante');
+
+     //PainelController
     Route::resource('/painel','PainelController');
    
 
-
-});
+  });   
