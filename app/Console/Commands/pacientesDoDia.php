@@ -65,6 +65,7 @@ class pacientesDoDia extends Command
                 'observacao' => '',
                 'sala_do_dia' => $value->sala ,
                 'turno_do_dia' => $value->turno ,
+                'chamado_painel' => '1',
             ]);
         }
     

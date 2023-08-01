@@ -149,9 +149,10 @@ class PacienteDoDiaController extends Controller
         $pac = PacienteDoDia::where('paciente_pk','=',$id);
 
         $paciente = $pac->update([
-            'chamado' => 2
+            'chamado' => 2,
+            'chamado_painel' => 1
         ]);
-
+        
         $pac = UltimoPacienteChamado::where('paciente_pk','=',$id);
         $pac->delete();
         return back()->withInput();
@@ -164,7 +165,8 @@ class PacienteDoDiaController extends Controller
         $pac = PacienteDoDia::where('paciente_pk','=',$id);
 
         $paciente = $pac->update([
-            'chamar_acompanhante' => 1
+            'chamar_acompanhante' => 2,
+            'chamado_painel' => 1
         ]);
 
 

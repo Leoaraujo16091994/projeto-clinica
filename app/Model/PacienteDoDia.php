@@ -16,6 +16,7 @@ class PacienteDoDia extends Model
       'observacao',
       'sala_do_dia',
       'chamar_acompanhante',
+      'chamado_painel',
       'created_at',
       'updated_at',
       'turno_do_dia'
