@@ -18,6 +18,7 @@ class PacienteDoDiaController extends Controller
     {   
         $pacientesDoDia= PacienteDoDia::getBuscarPacientesDoDia($request);
         return view('pacienteDoDia.index', ['pacientesDoDia' => $pacientesDoDia],['requisicao' => $request]);
+
     }
 
   
@@ -146,15 +147,15 @@ class PacienteDoDiaController extends Controller
 
     function chamarNovamente($id){
         
-        $pac = PacienteDoDia::where('paciente_pk','=',$id);
+        $pac = PacienteDoDia::where('id','=',$id);
 
         $paciente = $pac->update([
             'chamado' => 2,
             'chamado_painel' => 1
         ]);
         
-        $pac = UltimoPacienteChamado::where('paciente_pk','=',$id);
-        $pac->delete();
+       // $pac = UltimoPacienteChamado::where('id','=',$id);
+       // $pac->delete();
         return back()->withInput();
     }
 
@@ -162,7 +163,7 @@ class PacienteDoDiaController extends Controller
     
     function chamarAcompanhante($id){
         
-        $pac = PacienteDoDia::where('paciente_pk','=',$id);
+        $pac = PacienteDoDia::where('id','=',$id);
 
         $paciente = $pac->update([
             'chamar_acompanhante' => 2,
@@ -170,8 +171,8 @@ class PacienteDoDiaController extends Controller
         ]);
 
 
-        $pac = UltimoPacienteChamado::where('paciente_pk','=',$id);
-        $pac->delete();
+        //$pac = UltimoPacienteChamado::where('paciente_pk','=',$id);
+        //$pac->delete();
         return back()->withInput();
     }
 

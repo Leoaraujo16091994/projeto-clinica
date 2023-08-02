@@ -121,13 +121,12 @@ function chamarPaciente(){
 
 
 function chamarPacienteNovamente(){
-    document.getElementById("formularioChamada").setAttribute("action", "/chamarNovamente/" + pacienteSelecionadoChamada.paciente_pk);
+    document.getElementById("formularioChamada").setAttribute("action", "/chamarNovamente/" + pacienteSelecionadoChamada.id);
     document.formularioChamada.submit();
 }
 
 function chamarAcompanhante(){
-    console.log("teste",pacienteSelecionadoChamada.paciente_pk);
-    document.getElementById("formularioChamada").setAttribute("action", "/chamarAcompanhante/" + pacienteSelecionadoChamada.paciente_pk);
+    document.getElementById("formularioChamada").setAttribute("action", "/chamarAcompanhante/" + pacienteSelecionadoChamada.id);
     document.formularioChamada.submit();
 }
 
