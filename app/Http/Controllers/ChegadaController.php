@@ -55,12 +55,6 @@ class ChegadaController extends Controller
         echo $output;
         }
         }
-
-     
-
-
-
-
     }
 
 

@@ -16,7 +16,7 @@
       <button class="btn btn-primary" type= "submit" >Tela Cheia </button>
   </form>                
 </div>
-<meta http-equiv="refresh" content=5 ; url="/painel">
+<meta http-equiv="refresh" content=10 ; url="/painel">
 
 <div class="col-lg-12">
                 <div>

@@ -154,8 +154,6 @@ class PacienteDoDiaController extends Controller
             'chamado_painel' => 1
         ]);
         
-       // $pac = UltimoPacienteChamado::where('id','=',$id);
-       // $pac->delete();
         return back()->withInput();
     }
 
@@ -170,9 +168,6 @@ class PacienteDoDiaController extends Controller
             'chamado_painel' => 1
         ]);
 
-
-        //$pac = UltimoPacienteChamado::where('paciente_pk','=',$id);
-        //$pac->delete();
         return back()->withInput();
     }
 
