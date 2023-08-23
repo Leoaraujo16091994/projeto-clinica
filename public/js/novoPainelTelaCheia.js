@@ -1,5 +1,6 @@
-$( document ).ready(function() {
-    const input = document.getElementById('speech')? document.getElementById('speech'): null;
+
+$(window).on("load", function(){
+  const input = document.getElementById('speech')? document.getElementById('speech'): null;
     
     if(input != null) {
     const toSay = input.value.trim();
