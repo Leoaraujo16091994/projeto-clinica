@@ -20,7 +20,6 @@
       <div class="modal-body">
       <form id="formularioPacienteExtra" name ="formularioPacienteExtra" method= 'post' action="/pacienteExtra">
       @csrf
-          <!--  <input type="hidden" name="_method" value="PUT"> -->
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Nome do Paciente:</label>
             <select id="listaPacienteExtra"  name="paciente" class="form-select" size="10">
@@ -35,6 +34,7 @@
                       <option value="3">Sala C</option>
                       <option value="4">Sala D</option>
                       <option value="5">Sala E</option>
+                      <option value="6">Sala F</option>
                     </select>
           </div>
 
@@ -57,8 +57,6 @@
     </div>
   </div>
 </div>
-
-
 
 @section('tituloPagina', 'Pacientes de Hoje')
 @section('body')
@@ -93,6 +91,7 @@
                       <option value="3" <?php echo $requisicao->sala =="3"?'selected':'';?> >Sala C</option>
                       <option value="4" <?php echo $requisicao->sala =="4"?'selected':'';?> >Sala D</option>
                       <option value="5" <?php echo $requisicao->sala =="5"?'selected':'';?> >Sala E</option>
+                      <option value="6" <?php echo $requisicao->sala =="6"?'selected':'';?> >Sala F</option>
                     </select>
                 </div>
               @endif
@@ -141,10 +140,6 @@
                       <td><button type="button" class="btn btn-outline-success btn-sm" disabled> Chegou</button></td>
                     
                     @endif
-
-
-
-
 
                     @if($paciente->chamado == "1")
                       <td><button type="button" class="btn btn-outline-danger btn-sm" onClick="abrirModalChamadaPaciente({{json_encode($paciente)}})"> Não Chamado</button></td>

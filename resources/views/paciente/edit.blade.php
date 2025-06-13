@@ -1,7 +1,6 @@
 
 @extends ('layouts.layout')
 
-
 <link href="{{ asset('/css/paciente.css') }}" rel="stylesheet" type="text/css" >
 <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
 <script type="text/javascript" src="{{ URL::asset('js/paciente.js') }}"></script>
@@ -10,14 +9,8 @@
 <meta  name =" viewport " content =" largura=largura do dispositivo, escala inicial=1.0 " />
 <meta  http-equiv =" Compatível com X-UA " content =" ie=edge " />
 
-
-
 @section('tituloPagina', 'Editar Paciente')
 @section('body')
-<!--
-<div id = "tituloPagina">
-       <h1>Editar Paciente </h1>                
-</div>-->
 
 <br>
     <div class="formulario">
@@ -52,6 +45,7 @@
                       <option value="3" <?php echo $pacienteSelecionado[0]->sala =="3"?'selected':'';?> >Sala C</option>
                       <option value="4" <?php echo $pacienteSelecionado[0]->sala =="4"?'selected':'';?> >Sala D</option>
                       <option value="5" <?php echo $pacienteSelecionado[0]->sala =="5"?'selected':'';?> >Sala E</option>
+                      <option value="6" <?php echo $pacienteSelecionado[0]->sala =="6"?'selected':'';?> >Sala F</option>
                     </select>
                 </div>
               
@@ -87,16 +81,11 @@
   </div>
 </div>
 
-
-
-
 <!-- Alert de ERROS-->
 <div class="alert alert-danger" style='display:none' id='alert-erro'>
     <ul id="lista">
     </ul>
 </div>
-
-
 
 <!-- Alert Paciente Cadastrado com Sucesso-->
 <div class="alert alert-success" style='display:none' id='alert-success'>
