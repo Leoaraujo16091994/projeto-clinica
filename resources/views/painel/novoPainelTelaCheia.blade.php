@@ -37,7 +37,7 @@
                     Sala E : {{$paciente->nome_completo}}</td>
                   @break
 
-                  @case(6)
+                  @case(7)
                     Sala F : {{$paciente->nome_completo}}</td>
                   @break
 

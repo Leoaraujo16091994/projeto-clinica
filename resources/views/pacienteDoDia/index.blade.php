@@ -34,7 +34,7 @@
                       <option value="3">Sala C</option>
                       <option value="4">Sala D</option>
                       <option value="5">Sala E</option>
-                      <option value="6">Sala F</option>
+                      <option value="7">Sala F</option>
                     </select>
           </div>
 
@@ -91,7 +91,7 @@
                       <option value="3" <?php echo $requisicao->sala =="3"?'selected':'';?> >Sala C</option>
                       <option value="4" <?php echo $requisicao->sala =="4"?'selected':'';?> >Sala D</option>
                       <option value="5" <?php echo $requisicao->sala =="5"?'selected':'';?> >Sala E</option>
-                      <option value="6" <?php echo $requisicao->sala =="6"?'selected':'';?> >Sala F</option>
+                      <option value="7" <?php echo $requisicao->sala =="7"?'selected':'';?> >Sala F</option>
                     </select>
                 </div>
               @endif

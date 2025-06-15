@@ -42,7 +42,7 @@
                       <option value="3" <?php echo $pacienteSelecionado[0]->sala_do_dia =="3"?'selected':'';?> >Sala C</option>
                       <option value="4" <?php echo $pacienteSelecionado[0]->sala_do_dia =="4"?'selected':'';?> >Sala D</option>
                       <option value="5" <?php echo $pacienteSelecionado[0]->sala_do_dia =="5"?'selected':'';?> >Sala E</option>
-                      <option value="6" <?php echo $pacienteSelecionado[0]->sala_do_dia =="6"?'selected':'';?> >Sala F</option>
+                      <option value="7" <?php echo $pacienteSelecionado[0]->sala_do_dia =="7"?'selected':'';?> >Sala F</option>
                     </select>
                     <br>
                 </div>
