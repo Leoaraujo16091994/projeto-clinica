@@ -124,6 +124,9 @@
                                         @case(5)
                                           E
                                         @break
+                                         @case(7)
+                                          F
+                                        @break
                                     @endswitch
                                   </td>
                                   <td > 
