@@ -201,7 +201,7 @@ class PacienteController extends Controller
 
     public function destroy(Request $request){
         DB::table('pacientes_do_dia')->where('paciente_pk', $request->idPacienteExcluido)->delete();
-        DB::table('ultimo_paciente_chamado')->where('paciente_pk', $request->idPacienteExcluido)->delete();
+        // DB::table('ultimo_paciente_chamado')->where('paciente_pk', $request->idPacienteExcluido)->delete();
         DB::table('paciente')->where('id', $request->idPacienteExcluido)->delete();
         
         $pacientes = DB::table('paciente')->orderBy('nome_completo', 'ASC')->get();
